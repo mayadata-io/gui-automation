@@ -10,5 +10,6 @@ class Platform(BasePage):
 
     @allure.step("Open '{1}' application")
     def launch(self, url):
+        print("Open '%s' application"%url)
         self.driver.get(url)
         return LoginPage(self.driver)

@@ -1,6 +1,9 @@
 import time
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+
+ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.alert-danger")
 
 
 class BasePage(object):
@@ -32,3 +35,10 @@ class BasePage(object):
 
     def navigate_to(self, page):
         self.driver.get(page)
+
+    def verify_cluster_present(self, message):
+        print("Make sure validation message equals to '%s'" % message)
+        text = self.wait_element_visible(ALERT_CONTAINER).text
+        is_message_correct = message in text
+
+        assert is_message_correct is True, "Validation message is wrong"

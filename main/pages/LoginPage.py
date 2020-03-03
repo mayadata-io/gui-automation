@@ -15,27 +15,27 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step("Enter '{1}' into 'Email' field")
     def enter_email(self, email):
+        print("Enter '%s' into 'Email' field" % email)
         self.wait_element_present(EMAIL_FIELD).send_keys(email)
         return LoginPage(self.driver)
 
-    @allure.step("Verify 'Email' field is present")
     def verify_email_field_present(self):
+        print("Verify 'Email' field is present")
         self.wait_element_present(EMAIL_FIELD)
         return LoginPage(self.driver)
 
-    @allure.step("Enter '{1}' into 'Password' field")
     def enter_password(self, password):
+        print("Enter '%s' into 'Email' field" % password)
         self.wait_element_present(PASSWORD_FIELD).send_keys(password)
         return LoginPage(self.driver)
 
-    @allure.step("Click 'Login' button")
     def click_login_button(self):
+        print("Click 'Login' button")
         self.wait_element_present(LOGIN_BUTTON).click()
         return PortalHomePage(self.driver)
 
-    @allure.step("Click 'Create account' link")
     def click_create_account_link(self):
+        print("Click 'Create account' link")
         self.wait_element_present(CREATE_ACCOUNT_BUTTON).click()
         return CreateAccountPage(self.driver)

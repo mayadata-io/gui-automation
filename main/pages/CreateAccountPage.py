@@ -17,25 +17,30 @@ class CreateAccountPage(BasePage):
 
     @allure.step("Enter '{1}' into 'First name' field")
     def enter_first_name(self, firstname):
+        print("Enter '%s' into 'First name' field" % firstname)
         self.wait_element_present(FIRST_NAME_FIELD).send_keys(firstname)
         return CreateAccountPage(self.driver)
 
     @allure.step("Enter '{1}' into 'Last name' field")
     def enter_last_name(self, lastname):
+        print("Enter '%s' into 'Last name' field" % lastname)
         self.wait_element_present(LAST_NAME_FIELD).send_keys(lastname)
         return CreateAccountPage(self.driver)
 
     @allure.step("Enter '{1}' into 'Email' field")
     def enter_email(self, email):
+        print("Enter '%s' into 'Email' field" % email)
         self.wait_element_present(EMAIL_FIELD).send_keys(email)
         return CreateAccountPage(self.driver)
 
     @allure.step("Enter '{1}' into 'Password' field")
     def enter_password(self, password):
+        print("Enter '%s' into 'Password' field" % password)
         self.wait_element_present(PASSWORD_FIELD).send_keys(password)
         return CreateAccountPage(self.driver)
 
     @allure.step("Click 'Signup' button")
     def click_signup_button(self):
+        print("Click 'Signup' link")
         self.wait_element_present(SIGNUP_BUTTON).click()
         return PortalHomePage(self.driver)
