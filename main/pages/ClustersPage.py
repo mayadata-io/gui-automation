@@ -1,24 +1,32 @@
-import allure
-
 from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
+from main.pages.ConnectClusterPage import ConnectClusterPage
 
-FIRST_NAME_FIELD = (By.XPATH, "//label[text()='First Name']/following-sibling::input")
-LAST_NAME_FIELD = (By.XPATH, "//label[text()='Last Name']/following-sibling::input")
-EMAIL_FIELD = (By.XPATH, "//label[text()='Email']/following-sibling::input")
-COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
-ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
-PHONE_FIELD = (By.XPATH, "//label[text()='Phone']/following-sibling::input")
-CHANGE_PASSWORD_BUTTON = (By.XPATH, "//button[text()='Change Password']")
+CONNECT_NEW_CLUSTER = (By.XPATH, "//button[text()='Connect a new cluster']")
+AVAILABLE_CLUSTERS = (By.CSS_SELECTOR, ".app-contents table tbody tr")
+SORT_CLUSTERS_BUTTON = (By.CSS_SELECTOR, ".mi-arrow-up-down")
 
-COMPANY_FIELD = (By.XPATH, "//div[text()='Current password']/input")
-COMPANY_FIELD = (By.XPATH, "//div[text()='Current password']/input")
-COMPANY_FIELD = (By.XPATH, "//div[text()='Current password']/input")
 
-class UserProfilePage(BasePage):
+class ClustersPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step("Make sure 'First name' equals to '{1}'")
-    def verify_first_name_equals(self, first_name):
-        actual_first_name = self.wait_element_present(FIRST_
+    def click_connect_new_cluster_button(self):
+        print("Click 'Connect a new cluster' button")
+        self.wait_element_present(CONNECT_NEW_CLUSTER).click()
+        return ConnectClusterPage(self.driver)
+
+    def verify_cluster_present(self, name, status):
+        print("Make sure cluster '%s' present" % name)
+        is_exists = False
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for my_cluster in my_clusters:
+            text = my_cluster.text
+            if name in text and status in text:
+                is_exists = True
+                break
+
+        assert is_exists is True, "Cluster is absent"
+        return ClustersPage(self.driver)
