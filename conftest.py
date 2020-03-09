@@ -8,7 +8,7 @@ from selenium import webdriver
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
-    parser.addoption("--url", action="store", default="https://account.mayadata.io/login", help="url")
+    parser.addoption("--url", action="store", default="http://35.194.37.169/login", help="url")
 
 
 @pytest.fixture(scope="function")
@@ -41,36 +41,37 @@ def driver(request):
     return browser
 
 
-@pytest.mark.hookwrapper
-def pytest_runtest_makereport(item):
-    """
-    Extends the PyTest Plugin to take and embed screenshot in html report, whenever test fails.
-    :param item:
-    """
-    pytest_html = item.config.pluginmanager.getplugin('html')
-    outcome = yield
-    report = outcome.get_result()
-    extra = getattr(report, 'extra', [])
-
-    if report.when == 'call' or report.when == "setup":
-        xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
-            path = Path(__file__)
-            root_dir = path.parent
-            report_dir = os.path.join(root_dir, "results", "screenshots")
-
-            name = _get_formatted_test_name(report.nodeid)
-            file_name = os.path.join(report_dir, name)
-
-            if 'driver' in item.fixturenames:
-                driver = item.funcargs['driver']
-                _capture_screenshot(driver, report_dir, name)
-
-            if file_name:
-                html = '<a><img src="screenshots/%s.png" alt="screenshot" style="width:600px;height:228px;" ' \
-                       'onclick="window.open(this.src)" align="right"/></a>'%name
-                extra.append(pytest_html.extras.html(html))
-        report.extra = extra
+# @pytest.mark.hookwrapper
+# def pytest_runtest_makereport(item):
+#     """
+#     Extends the PyTest Plugin to take and embed screenshot in html report, whenever test fails.
+#     :param item:
+#     """
+#     pytest_html = item.config.pluginmanager.getplugin('html')
+#     outcome = yield
+#     report = outcome.get_result()
+#     report.title = "tetetststs"
+#     extra = getattr(report, 'extra', [])
+#
+#     if report.when == 'call' or report.when == "setup":
+#         xfail = hasattr(report, 'wasxfail')
+#         if (report.skipped and xfail) or (report.failed and not xfail):
+#             path = Path(__file__)
+#             root_dir = path.parent
+#             report_dir = os.path.join(root_dir, "results", "screenshots")
+#
+#             name = _get_formatted_test_name(report.nodeid)
+#             file_name = os.path.join(report_dir, name)
+#
+#             if 'driver' in item.fixturenames:
+#                 driver = item.funcargs['driver']
+#                 _capture_screenshot(driver, report_dir, name)
+#
+#             if file_name:
+#                 html = '<a><img src="screenshots/%s.png" alt="screenshot" style="width:600px;height:228px;" ' \
+#                        'onclick="window.open(this.src)" align="right"/></a>'%name
+#                 extra.append(pytest_html.extras.html(html))
+#         report.extra = extra
 
 
 def _get_formatted_test_name(name):

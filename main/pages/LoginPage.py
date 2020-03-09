@@ -1,14 +1,13 @@
-import allure
 from selenium.webdriver.common.by import By
 
 from main.pages.BasePage import BasePage
 from main.pages.CreateAccountPage import CreateAccountPage
-from main.pages.PortalHomePage import PortalHomePage
+from main.pages.SidePanel import SidePanel
 
-EMAIL_FIELD = (By.CSS_SELECTOR, "input[autocomplete='username']")
-PASSWORD_FIELD = (By.CSS_SELECTOR, "input[autocomplete='current-password']")
-LOGIN_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary.btn-lg.btn-block")
-CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-sm.btn-secondary")
+EMAIL_FIELD = (By.ID, "signinEmail")
+PASSWORD_FIELD = (By.ID, "signinPassword")
+LOGIN_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-login-2.btn-lg.btn-block")
+CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "a.login-signup-link")
 
 
 class LoginPage(BasePage):
@@ -33,7 +32,14 @@ class LoginPage(BasePage):
     def click_login_button(self):
         print("Click 'Login' button")
         self.wait_element_present(LOGIN_BUTTON).click()
-        return PortalHomePage(self.driver)
+        return SidePanel(self.driver)
+
+    def login(self, email, password):
+        print("Click 'Login' button")
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login_button()
+        return SidePanel(self.driver)
 
     def click_create_account_link(self):
         print("Click 'Create account' link")
