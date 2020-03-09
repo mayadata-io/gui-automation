@@ -11,7 +11,7 @@ class Platform(BasePage):
     def launch(self, url):
         print("Open '%s' application" % url)
         time.sleep(2)
-        self.driver.get("http://" + url + "/login")
+        self.driver.get(url + "/login")
         time.sleep(10)
         self.driver.refresh()
         time.sleep(5)
