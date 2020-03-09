@@ -8,7 +8,7 @@ from selenium import webdriver
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
-    parser.addoption("--url", action="store", default="35.194.37.169", help="url")
+    parser.addoption("--url", action="store", default="http://35.194.37.169", help="url")
 
 
 @pytest.fixture(scope="function")
