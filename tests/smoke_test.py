@@ -5,7 +5,7 @@ from main.Platform import Platform
 
 
 class TestSmoke:
-    @pytest.mark.smoke
+    # @pytest.mark.smoke
     @allure.testcase("Ability to Log in with valid credentials")
     def test_ability_login_with_valid_credentials(self, driver, url):
         Platform(driver).launch(url) \

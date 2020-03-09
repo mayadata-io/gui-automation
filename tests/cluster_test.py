@@ -4,7 +4,7 @@ import pytest
 from main.Platform import Platform
 
 
-class TestSmoke:
+class TestCluster:
     @pytest.mark.cluster
     @allure.testcase("To verify self connected cluster is shown for Admin user")
     def test_verify_self_connected_cluster_shown_admin_user(self, driver, url):
