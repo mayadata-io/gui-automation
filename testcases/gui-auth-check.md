@@ -1,4 +1,4 @@
-# Running Selenium authentication test cases for DOP**
+# Running Selenium authentication test cases for DOP
 
 ### Prerequisites
     • DOP should be installed in the cluster.
@@ -63,7 +63,7 @@
 *  Provide wrong email and correct password
 
 #### &nbsp;&nbsp;&nbsp;Expected Output
-		Error message should be shown that either username or password is incorrect
+	 Error message should be shown that either username or password is incorrect
 	
 ### Test Case 6: 
 #### &nbsp;&nbsp;&nbsp;Details
