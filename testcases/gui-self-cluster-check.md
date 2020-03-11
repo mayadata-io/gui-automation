@@ -1,6 +1,6 @@
 # DOP Self Connected Cluster Check
 <b>tcid:</b> gacc01 <br>
-<b>name:</b> "Running Selenium cluster test cases for DOP"<br>
+<b>name:</b> "DOP Self Connected Cluster Check"<br>
 
 ### Prerequisites
 

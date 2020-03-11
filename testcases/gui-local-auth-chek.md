@@ -1,6 +1,6 @@
 # Local Authentication Testcases Using Browser
 <b>tcid:</b> gaau01 <br>
-<b>name:</b> "Running Selenium authentication test cases for DOP"<br>
+<b>name:</b> "Local Authentication Testcases Using Browser"<br>
 
 ### Prerequisites
     • DOP should be installed in the cluster.
