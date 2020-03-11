@@ -33,7 +33,7 @@
 #### &nbsp;&nbsp;&nbsp;Details
 	 Test case to verify the change password functionality for local auth account.
 #### &nbsp;&nbsp;&nbsp;Steps Performed in the test
-* Ins tall DOP
+* Open DOP URL in browser
 * Login using local auth credentials
 * Click on name on the left panel
 * Click on profile 
@@ -83,7 +83,7 @@
 #### &nbsp;&nbsp;&nbsp;Details
 	 Test case to verify unique Email ID for each user.
 #### &nbsp;&nbsp;&nbsp;Steps Performed in the test
-* Open DOP URL 
+* Open DOP URL in browser
 * Click on signup option
 * Provide First name
 * Provide the Email ID of an existing user
