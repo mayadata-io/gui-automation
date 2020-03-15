@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from main.pages.BasePage import BasePage
-from main.pages.CreateAccountPage import CreateAccountPage
+from main.pages.register.CreateAccountPage import CreateAccountPage
 from main.pages.SidePanel import SidePanel
 
 EMAIL_FIELD = (By.ID, "signinEmail")
