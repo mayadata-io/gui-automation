@@ -1,0 +1,111 @@
+from selenium.webdriver.common.by import By
+from main.pages.BasePage import BasePage
+from main.pages.clusters.ClusterOverviewPage import ClusterOverviewPage
+from main.pages.clusters.ConnectClusterPage import ConnectClusterPage
+
+CONNECT_NEW_CLUSTER = (By.XPATH, "//button[text()='Connect a new cluster']")
+AVAILABLE_CLUSTERS = (By.CSS_SELECTOR, ".app-contents table tbody tr")
+CLUSTER_NAME_LABEL = ".table-avatar-label"
+SORT_CLUSTERS_BUTTON = (By.CSS_SELECTOR, ".mi-arrow-up-down")
+SEARCH_FIELD = (By.CSS_SELECTOR, ".section-header input")
+ALERT_LINK = ".cluster-name"
+DISCONNECT_ICON = ".table-action_link"
+
+
+class ClustersPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+
+    def click_connect_new_cluster_button(self):
+        print("Click 'Connect a new cluster' button")
+        self.wait_element_present(CONNECT_NEW_CLUSTER).click()
+        return ConnectClusterPage(self.driver)
+
+    def open_cluster_details(self, name, status):
+        print("Open cluster '%s' details" % name)
+        is_exists = False
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for my_cluster in my_clusters:
+            text = my_cluster.text
+            if name in text and status in text:
+                is_exists = True
+                my_cluster.find_element_by_css_selector(CLUSTER_NAME_LABEL).click()
+                break
+
+        assert is_exists is True, "Cluster is absent"
+        return ClusterOverviewPage(self.driver)
+
+    def verify_cluster_present(self, name, status):
+        print("Make sure cluster '%s' present" % name)
+        is_exists = False
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for my_cluster in my_clusters:
+            text = my_cluster.text
+            if name in text and status in text:
+                is_exists = True
+                break
+
+        assert is_exists is True, "Cluster is absent"
+        return ClustersPage(self.driver)
+
+    def verify_number_of_clusters_equals(self, number):
+        print("Make sure number of clusters equals to '%s'" % number)
+        is_exists = False
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+        size = len(my_clusters)
+
+        assert size == number, "Number of clusters is wrong"
+        return ClustersPage(self.driver)
+
+    def verify_status_shown_for_each_cluster(self):
+        print("Verify status is shown for each cluster")
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for cluster in my_clusters:
+            status = cluster.find_element_by_css_selector(ALERT_LINK)
+            is_displayed = status.is_displayed()
+            status_text = status.text
+            is_status_correct = "Active" in status_text or "Inactive" in status_text or "Offline" in status_text
+
+            assert is_status_correct is True, "Status text is wrong"
+            assert is_displayed is True, "Status is not shown"
+
+        return ClustersPage(self.driver)
+
+    def verify_delete_text_shown_for_each_disconnect_icon(self):
+        print("Verify delete text is shown for each disconnect icon")
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for cluster in my_clusters:
+            status = cluster.find_element_by_css_selector(DISCONNECT_ICON)
+            title = status.get_attribute("title")
+            is_title_correct = "Disconnect" in title
+
+            assert is_title_correct is True, "Title text is wrong"
+
+        return ClustersPage(self.driver)
+
+    def click_delete_icon_for_cluster(self, name):
+        print("Click 'Delete' icon for '%s' cluster" % name)
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for my_cluster in my_clusters:
+            text = my_cluster.text
+            if name in text:
+                my_cluster.find_element_by_css_selector(DISCONNECT_ICON).click()
+                break
+
+        return ClustersPage(self.driver)
+
+    def enter_cluster_name(self, password):
+        print("Enter '%s' into 'Search' field" % password)
+        self.wait_element_present(SEARCH_FIELD).send_keys(password)
+        return ClustersPage(self.driver)

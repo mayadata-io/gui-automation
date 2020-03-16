@@ -11,7 +11,7 @@ class TestCluster:
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
-            .verify_cluster_present("OpenEBSDirector", "Active")
+            .verify_cluster_present("DemoCluster", "Active")
 
     @pytest.mark.cluster
     @allure.testcase("To verify cluster name should not be less than 6 character and special characters not allowed")

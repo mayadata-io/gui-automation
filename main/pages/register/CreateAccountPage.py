@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage, ALERT_CONTAINER
-from main.pages.OnboardingPage import OnboardingPage
+from main.pages.register.OnboardingPage import OnboardingPage
 
 FIRST_NAME_FIELD = (By.ID, "signupFirstName")
 LAST_NAME_FIELD = (By.ID, "signupLastName")
