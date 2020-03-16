@@ -44,13 +44,12 @@ class ClustersPage(BasePage):
         is_exists = False
         self.wait_element_visible(SORT_CLUSTERS_BUTTON)
         my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
-
         for my_cluster in my_clusters:
             text = my_cluster.text
             if name in text and status in text:
                 is_exists = True
                 break
-            assert is_exists is True, "Cluster is absent"
+        assert is_exists is True, "Cluster is absent"
         return ClustersPage(self.driver)
 
     def verify_cluster_absent(self, name):

@@ -50,10 +50,17 @@ class TestCluster:
     @pytest.mark.cluster
     @allure.testcase("To verify cluster disconnect functionality")
     def test_verify_cluster_disconnect_function(self, driver, url):
+        prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
-            .click_delete_icon_for_cluster("deleteCluster-770ix") \
+            .click_connect_new_cluster_button() \
+            .enter_cluster_name(prefix + "Test") \
+            .click_connect_button() \
+            .verify_cluster_connection_link_present() \
+            .click_disconnect_cluster_link() \
+            .open_clusters_page() \
+            .click_delete_icon_for_cluster(prefix + "Test") \
             .verify_cluster_delete_warning_message() \
             .click_disconnect_button_for_cluster() \
-            .verify_cluster_absent("deleteCluster-770ix")
+            .verify_cluster_absent(prefix + "Test")
