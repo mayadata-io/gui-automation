@@ -10,6 +10,8 @@ SORT_CLUSTERS_BUTTON = (By.CSS_SELECTOR, ".mi-arrow-up-down")
 SEARCH_FIELD = (By.CSS_SELECTOR, ".section-header input")
 ALERT_LINK = ".cluster-name"
 DISCONNECT_ICON = ".table-action_link"
+DISCONNECT_WARNING_MESSAGE = (By.XPATH, "//div[@class='modal-header']")
+DISCONNECT_BUTTON = (By.XPATH, "//button[@class='btn btn-danger']")
 
 
 class ClustersPage(BasePage):
@@ -48,8 +50,20 @@ class ClustersPage(BasePage):
             if name in text and status in text:
                 is_exists = True
                 break
+            assert is_exists is True, "Cluster is absent"
+        return ClustersPage(self.driver)
 
-        assert is_exists is True, "Cluster is absent"
+    def verify_cluster_absent(self, name):
+        print("Make sure cluster '%s' absent" % name)
+        is_exists = False
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for my_cluster in my_clusters:
+            text = my_cluster.text
+            if name in text:
+                is_exists = True
+                break
+            assert is_exists is False, "Cluster is present"
         return ClustersPage(self.driver)
 
     def verify_number_of_clusters_equals(self, number):
@@ -103,6 +117,20 @@ class ClustersPage(BasePage):
                 my_cluster.find_element_by_css_selector(DISCONNECT_ICON).click()
                 break
 
+        return ClustersPage(self.driver)
+
+    def click_disconnect_button_for_cluster(self):
+        print("Click 'Disconnect' button to remove cluster")
+        self.wait_element_present(DISCONNECT_BUTTON).click()
+        self.sleep(10)
+        return ClustersPage(self.driver)
+
+    def verify_cluster_delete_warning_message(self):
+        print("Warning message to be displayed")
+        text = self.wait_element_visible(DISCONNECT_WARNING_MESSAGE).text
+        message = "Disconnect cluster"
+        is_message_correct = message in text
+        assert is_message_correct is True, "Warning message is wrong"
         return ClustersPage(self.driver)
 
     def enter_cluster_name(self, password):

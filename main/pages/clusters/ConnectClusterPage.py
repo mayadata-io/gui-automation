@@ -4,6 +4,7 @@ from main.pages.BasePage import BasePage
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 VALIDATION_MESSAGE = (By.CSS_SELECTOR, ".font-italic.text-danger")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
+CONNECT_CLUSTER_LINK = (By.XPATH, "//textarea[@class='ember-text-area form-control copy-block-text ember-view']")
 
 
 class ConnectClusterPage(BasePage):
@@ -26,4 +27,8 @@ class ConnectClusterPage(BasePage):
         is_message_correct = message in text
 
         assert is_message_correct is True, "Validation message is wrong"
+        return ConnectClusterPage(self.driver)
+
+    def verify_cluster_connection_link_present(self):
+        self.wait_element_visible(CONNECT_CLUSTER_LINK)
         return ConnectClusterPage(self.driver)
