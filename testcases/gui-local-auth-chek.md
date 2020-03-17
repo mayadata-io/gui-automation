@@ -94,3 +94,19 @@
 #### &nbsp;&nbsp;&nbsp;Expected Output
 * Error message should be shown that this email id is already been taken
 * Once unique email Id is provided signup should be successful
+
+### Test Case 7: 
+#### &nbsp;&nbsp;&nbsp;Details
+	 Test case to verify the Change password functionality for Administrator account.
+#### &nbsp;&nbsp;&nbsp;Steps Performed in the test
+* Open DOP URL in browser
+* Login using credentails( Administrator/password)
+* Click on name on the left panel
+* Click on profile 
+* Click on change password
+* Provide old password and new password
+* Logout of Admin account
+* Login using Admin account with new password
+
+#### &nbsp;&nbsp;&nbsp;Expected Output
+ 	 Login should be successfull.

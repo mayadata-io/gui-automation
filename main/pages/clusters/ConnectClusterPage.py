@@ -4,6 +4,8 @@ from main.pages.BasePage import BasePage
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 VALIDATION_MESSAGE = (By.CSS_SELECTOR, ".font-italic.text-danger")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
+CONNECT_CLUSTER_LINK = (By.XPATH, "//textarea[@class='ember-text-area form-control copy-block-text ember-view']")
+DISCONNECT_CLUSTER_LINK = (By.XPATH, "//span[@class='mi mi-x mi-1x float-right text-white']")
 
 
 class ConnectClusterPage(BasePage):
@@ -27,3 +29,13 @@ class ConnectClusterPage(BasePage):
 
         assert is_message_correct is True, "Validation message is wrong"
         return ConnectClusterPage(self.driver)
+
+    def verify_cluster_connection_link_present(self):
+        self.wait_element_visible(CONNECT_CLUSTER_LINK)
+        return ConnectClusterPage(self.driver)
+
+    def click_disconnect_cluster_link(self):
+        print("Click 'Disconnect' button to disconnect generated link")
+        self.wait_element_present(DISCONNECT_CLUSTER_LINK).click()
+        from main.pages.SidePanel import SidePanel
+        return SidePanel(self.driver)

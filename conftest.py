@@ -28,7 +28,6 @@ def driver(request):
             desired_capabilities={
                 "browserName": request.config.getoption("--driver")
             })
-
     browser.implicitly_wait(30)
     browser.maximize_window()
 
