@@ -126,3 +126,71 @@ class TestDashboard:
             .open_applications_page() \
             .verify_applications_present()
 
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Pools dashboard")
+    def test_verify_pools_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_pools_page() \
+            .verify_pools_page_loaded()
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Volumes dashboard")
+    def test_verify_volumes_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_volumes_page() \
+            .verify_volumes_present() \
+            .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Topology dashboard")
+    def test_verify_topology_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_topology_page() \
+            .switch_to_topology_container() \
+            .verify_connectivity_diagram_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Monitor dashboard")
+    def test_verify_monitor_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_monitor_page() \
+            .verify_volumes_present() \
+            .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva") \
+            .switch_to_metrics_frame() \
+            .verify_graph_present("Storage capacity") \
+            .verify_graph_present("Total capacity of all volumes") \
+            .verify_graph_present("IOPS of all volumes") \
+            .verify_graph_present("Throughput of all volumes")
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Logs dashboard")
+    def test_verify_logs_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_logs_page() \
+            .switch_to_logs_frame() \
+            .verify_logs_diagram_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify Alerts dashboard")
+    def test_verify_alerts_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_alerts_page() \
+            .verify_alerts_present()

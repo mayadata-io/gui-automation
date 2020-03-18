@@ -34,6 +34,7 @@ class ClustersPage(BasePage):
             if name in text and status in text:
                 is_exists = True
                 my_cluster.find_element_by_css_selector(CLUSTER_NAME_LABEL).click()
+                self.sleep(10)
                 break
 
         assert is_exists is True, "Cluster is absent"
