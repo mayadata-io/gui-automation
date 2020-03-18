@@ -17,6 +17,8 @@ TOPOLOGY_LINK = (By.CSS_SELECTOR, "a[href*='/viewtopology']")
 MONITOR_LINK = (By.CSS_SELECTOR, "a[href*='/monitor']")
 LOGS_LINK = (By.CSS_SELECTOR, "a[href$='/logging']")
 CLUSTER_ALERTS_LINK = (By.CSS_SELECTOR, "a[href$='/alerts']")
+OPEN_EBS_LINK = (By.CSS_SELECTOR, "a[href$='/openebs']")
+DMAAS_LINK = (By.CSS_SELECTOR, "a[href='/dmaas']")
 
 
 class SidePanel(BasePage):
@@ -77,11 +79,23 @@ class SidePanel(BasePage):
         from main.pages.clusters.AlertsPage import AlertsPage
         return AlertsPage(self.driver)
 
+    def open_ebs_page(self):
+        print("Open 'OpenEbs' page")
+        self.wait_element_present(OPEN_EBS_LINK).click()
+        from main.pages.clusters.OpenEbsPage import OpenEbsPage
+        return OpenEbsPage(self.driver)
+
     def open_clusters_page(self):
         print("Open 'Clusters' page")
         self.wait_element_present(CLUSTERS_LINK).click()
         from main.pages.clusters.ClustersPage import ClustersPage
         return ClustersPage(self.driver)
+
+    def open_dmaas_page(self):
+        print("Open 'Dmaas' page")
+        self.wait_element_present(DMAAS_LINK).click()
+        from main.pages.DmaasPage import DmaasPage
+        return DmaasPage(self.driver)
 
     def open_user_roles_page(self):
         print("Open 'User and Roles' page")

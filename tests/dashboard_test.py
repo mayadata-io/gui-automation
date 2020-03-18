@@ -194,3 +194,28 @@ class TestDashboard:
             .open_cluster_details("DemoCluster", "Active") \
             .open_alerts_page() \
             .verify_alerts_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify OpenEBS dashboard")
+    def test_verify_openebs_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("DemoCluster", "Active") \
+            .open_ebs_page() \
+            .click_control_plane_button() \
+            .verify_header_text_equals("Control Plane") \
+            .verify_records_present() \
+            .click_pools_button() \
+            .verify_header_text_equals("cStor Pool Clusters (CSPC)") \
+            .click_volumes_button() \
+            .verify_header_text_equals("Volumes grouped by applications") \
+            .verify_records_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("Dmaas dashboard should show list of schedules and list of restores")
+    def test_verify_dmaas_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_dmaas_page() \
+            .verify_header_text_equals("Data-Motion schedules")
