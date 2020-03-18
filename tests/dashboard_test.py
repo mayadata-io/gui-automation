@@ -5,7 +5,7 @@ from main.Platform import Platform
 
 
 class TestDashboard:
-    @pytest.mark.dashboard
+    @pytest.mark.gada01
     @allure.testcase("To verify graphs are shown in Home dashboards")
     def test_verify_graphs_shown_home_dashboards(self, driver, url):
         Platform(driver).launch(url) \
@@ -97,7 +97,7 @@ class TestDashboard:
             .switch_to_filter_tab("Pending invites") \
             .verify_user_present("mykola.rus@putsbox.com", "ProjectMember")
 
-    @pytest.mark.dashboard
+    @pytest.mark.gada02
     @allure.testcase("To verify Overview dashboard")
     def test_verify_overview_dashboard(self, driver, url):
         Platform(driver).launch(url) \
@@ -147,7 +147,7 @@ class TestDashboard:
             .verify_volumes_present() \
             .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
 
-    @pytest.mark.dashboard
+    @pytest.mark.gato01
     @allure.testcase("To verify Topology dashboard")
     def test_verify_topology_dashboard(self, driver, url):
         Platform(driver).launch(url) \
@@ -174,7 +174,7 @@ class TestDashboard:
             .verify_graph_present("IOPS of all volumes") \
             .verify_graph_present("Throughput of all volumes")
 
-    @pytest.mark.dashboard
+    @pytest.mark.galo01
     @allure.testcase("To verify Logs dashboard")
     def test_verify_logs_dashboard(self, driver, url):
         Platform(driver).launch(url) \
@@ -185,7 +185,7 @@ class TestDashboard:
             .switch_to_logs_frame() \
             .verify_logs_diagram_present()
 
-    @pytest.mark.dashboard
+    @pytest.mark.gaal01
     @allure.testcase("To verify Alerts dashboard")
     def test_verify_alerts_dashboard(self, driver, url):
         Platform(driver).launch(url) \

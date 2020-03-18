@@ -6,14 +6,14 @@ from main.common.Utils import Utils
 
 
 class TestAuth:
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify Administrator login")
     def test_verify_admin_login(self, driver, url):
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .verify_user_profile_item_present()
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify signup functionality in Local Auth")
     def test_verify_signup_func_in_local_auth(self, driver, url):
         prefix = Utils.random_string(5)
@@ -27,7 +27,7 @@ class TestAuth:
             .wait_onboarding_page_loaded() \
             .verify_onboarding_page_title_equals("Update your profile")
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify error message is shown if wrong password is provided")
     def test_verify_error_message_shown_for_wrong_password(self, driver, url):
         Platform(driver).launch(url) \
@@ -36,7 +36,7 @@ class TestAuth:
             .click_login_button() \
             .verify_alert_present("The email address or password you entered is incorrect.")
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify error message is shown if wrong email ID is provided")
     def test_verify_error_message_shown_for_wrong_email(self, driver, url):
         Platform(driver).launch(url) \
@@ -45,7 +45,7 @@ class TestAuth:
             .click_login_button() \
             .verify_alert_present("The email address or password you entered is incorrect.")
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("Password for local authentication should be alpha numeric supported")
     def test_password_field(self, driver, url):
         prefix = Utils.random_string(5)
@@ -58,7 +58,7 @@ class TestAuth:
             .click_signup_button() \
             .verify_alert_present("Password must be a mix of letters of different case, numbers and symbols of atleast 8 and utmost 20 characters")
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify unique Email ID for each user")
     def test_verify_unique_email_for_each_user(self, driver, url):
         prefix = Utils.random_string(5)
@@ -75,7 +75,7 @@ class TestAuth:
             .wait_onboarding_page_loaded() \
             .verify_onboarding_page_title_equals("Update your profile")
 
-    @pytest.mark.auth
+    @pytest.mark.gaau01
     @allure.testcase("To verify the Change password functionality for local auth account")
     def test_verify_change_pwd_local_auth_account(self, driver, url):
         prefix = Utils.random_string(6)
