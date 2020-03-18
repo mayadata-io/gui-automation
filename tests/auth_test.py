@@ -107,7 +107,7 @@ class TestAuth:
 
     # TODO:below test case is marked as 'authentication' because it will change admin password which is used
     # in multiple test cases as entry point
-    @pytest.mark.authentication
+    @pytest.mark.auth
     @allure.testcase("To verify the Change password functionality for Administrator account")
     def test_verify_change_pwd_admin_auth_account(self, driver, url):
         Platform(driver).launch(url) \
