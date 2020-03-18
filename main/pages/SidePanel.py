@@ -11,6 +11,12 @@ USER_PROFILE_ITEM = (By.CSS_SELECTOR, ".sidebar-links img[src*='https://ui-avata
 PROFILE_LINK = (By.CSS_SELECTOR, "a[href='/settings/profile']")
 LOGOUT_LINK = (By.CSS_SELECTOR, "a[href='/logout']")
 APPLICATIONS_LINK = (By.CSS_SELECTOR, "a[href*='/applications']")
+POOLS_LINK = (By.CSS_SELECTOR, "a[href*='/pools']")
+VOLUMES_LINK = (By.CSS_SELECTOR, "a[href*='/volumes']")
+TOPOLOGY_LINK = (By.CSS_SELECTOR, "a[href*='/viewtopology']")
+MONITOR_LINK = (By.CSS_SELECTOR, "a[href*='/monitor']")
+LOGS_LINK = (By.CSS_SELECTOR, "a[href$='/logging']")
+CLUSTER_ALERTS_LINK = (By.CSS_SELECTOR, "a[href$='/alerts']")
 
 
 class SidePanel(BasePage):
@@ -34,6 +40,42 @@ class SidePanel(BasePage):
         self.wait_element_present(APPLICATIONS_LINK).click()
         from main.pages.clusters.ApplicationsPage import ApplicationsPage
         return ApplicationsPage(self.driver)
+
+    def open_pools_page(self):
+        print("Open 'Pools' page")
+        self.wait_element_present(POOLS_LINK).click()
+        from main.pages.clusters.PoolsPage import PoolsPage
+        return PoolsPage(self.driver)
+
+    def open_volumes_page(self):
+        print("Open 'Volumes' page")
+        self.wait_element_present(POOLS_LINK).click()
+        from main.pages.clusters.VolumesPage import VolumesPage
+        return VolumesPage(self.driver)
+
+    def open_topology_page(self):
+        print("Open 'Topology' page")
+        self.wait_element_present(TOPOLOGY_LINK).click()
+        from main.pages.clusters.TopologyPage import TopologyPage
+        return TopologyPage(self.driver)
+
+    def open_monitor_page(self):
+        print("Open 'Monitor' page")
+        self.wait_element_present(MONITOR_LINK).click()
+        from main.pages.clusters.MonitorPage import MonitorPage
+        return MonitorPage(self.driver)
+
+    def open_logs_page(self):
+        print("Open 'Logs' page")
+        self.wait_element_present(LOGS_LINK).click()
+        from main.pages.clusters.LogsPage import LogsPage
+        return LogsPage(self.driver)
+
+    def open_alerts_page(self):
+        print("Open 'Alerts' page")
+        self.wait_element_present(CLUSTER_ALERTS_LINK).click()
+        from main.pages.clusters.AlertsPage import AlertsPage
+        return AlertsPage(self.driver)
 
     def open_clusters_page(self):
         print("Open 'Clusters' page")

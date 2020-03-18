@@ -28,6 +28,11 @@ class BasePage(object):
         WebDriverWait(self.driver, 30).until(ec.presence_of_element_located(*locator))
         return WebDriverWait(self.driver, 30).until(ec.presence_of_all_elements_located(*locator))
 
+    def wait_element_invisible(self, *locator):
+        self.driver.implicitly_wait(10)
+        WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
+        return WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(*locator))
+
     def switch_to_frame(self, *locator):
         self.driver.implicitly_wait(10)
         iframe = self.driver.find_element_by_css_selector(*locator)
