@@ -6,7 +6,7 @@ from main.pages.SidePanel import SidePanel
 
 EMAIL_FIELD = (By.ID, "signinEmail")
 PASSWORD_FIELD = (By.ID, "signinPassword")
-LOGIN_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-login-2.btn-lg.btn-block")
+LOGIN_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary.btn-block.btn-lg")
 CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "a.login-signup-link")
 
 

@@ -6,7 +6,7 @@ FIRST_NAME_FIELD = (By.ID, "signupFirstName")
 LAST_NAME_FIELD = (By.ID, "signupLastName")
 EMAIL_FIELD = (By.ID, "signupEmail")
 PASSWORD_FIELD = (By.ID, "signupPassword")
-SIGNUP_BUTTON = (By.CSS_SELECTOR, "button.btn-login-2.btn-block.btn-lg")
+SIGNUP_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary.btn-block.btn-lg")
 
 
 class CreateAccountPage(BasePage):
