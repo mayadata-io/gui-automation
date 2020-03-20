@@ -17,6 +17,7 @@ TOPOLOGY_LINK = (By.CSS_SELECTOR, "a[href*='/viewtopology']")
 MONITOR_LINK = (By.CSS_SELECTOR, "a[href*='/monitor']")
 LOGS_LINK = (By.CSS_SELECTOR, "a[href$='/logging']")
 CLUSTER_ALERTS_LINK = (By.CSS_SELECTOR, "a[href$='/alerts']")
+CLUSTER_MONITOR_LINK = (By.CSS_SELECTOR, "a[href*='/clusters/'][href*='/monitor']")
 
 
 class SidePanel(BasePage):
@@ -26,6 +27,7 @@ class SidePanel(BasePage):
     def open_dashboard_page(self):
         print("Open 'Dashboard' page")
         self.wait_element_present(DASHBOARD_LINK).click()
+        self.sleep(15)
         from main.pages.DashboardPage import DashboardPage
         return DashboardPage(self.driver)
 
@@ -49,7 +51,7 @@ class SidePanel(BasePage):
 
     def open_volumes_page(self):
         print("Open 'Volumes' page")
-        self.wait_element_present(POOLS_LINK).click()
+        self.wait_element_present(VOLUMES_LINK).click()
         from main.pages.clusters.VolumesPage import VolumesPage
         return VolumesPage(self.driver)
 
@@ -61,7 +63,7 @@ class SidePanel(BasePage):
 
     def open_monitor_page(self):
         print("Open 'Monitor' page")
-        self.wait_element_present(MONITOR_LINK).click()
+        self.wait_element_present(CLUSTER_MONITOR_LINK).click()
         from main.pages.clusters.MonitorPage import MonitorPage
         return MonitorPage(self.driver)
 
