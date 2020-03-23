@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+from main.common import Config
 from main.pages.BasePage import BasePage
 from main.pages.register.CreateAccountPage import CreateAccountPage
 from main.pages.SidePanel import SidePanel
@@ -38,6 +39,13 @@ class LoginPage(BasePage):
         print("Click 'Login' button")
         self.enter_email(email)
         self.enter_password(password)
+        self.click_login_button()
+        return SidePanel(self.driver)
+
+    def login_as_admin(self):
+        print("Click 'Login' button")
+        self.enter_email(Config.get("app", "admin_user"))
+        self.enter_password(Config.get("app", "admin_pwd"))
         self.click_login_button()
         return SidePanel(self.driver)
 
