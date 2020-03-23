@@ -12,7 +12,7 @@ class TestCluster:
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
-            .verify_cluster_present("DemoCluster", "Active")
+            .verify_cluster_present("OpenEBSDirector", "Active")
 
     @pytest.mark.gacc01
     @allure.testcase("To verify cluster name should not be less than 6 character and special characters not allowed")
@@ -45,7 +45,7 @@ class TestCluster:
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
-            .click_delete_icon_for_cluster("DemoCluster-qlyuw") \
+            .click_delete_icon_for_cluster("OpenEBSDirector") \
             .verify_cluster_delete_warning_message()
 
     @pytest.mark.gacc01
