@@ -1,13 +1,9 @@
 import configparser
-import os
+
+from conftest import CONFIG_PATH
 
 
 def get(section, value):
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(root_dir, 'common.ini')
-
     config = configparser.ConfigParser()
-    config.read(config_path)
-    test = config.get(section, value)
-
-    return test
+    config.read(CONFIG_PATH)
+    return config.get(section, value)

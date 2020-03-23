@@ -6,6 +6,7 @@ PROJECT_LINK = (By.CSS_SELECTOR, ".sidebar-header-item-project_name")
 DASHBOARD_LINK = (By.CSS_SELECTOR, "a[href='/dashboard']")
 PROJECTS_LINK = (By.CSS_SELECTOR, "a[href='/projects']")
 CLUSTERS_LINK = (By.CSS_SELECTOR, "a[href='/clusters']")
+MONITORING_LINK = (By.CSS_SELECTOR, "a[href='/monitor']")
 USER_ROLES_LINK = (By.CSS_SELECTOR, "a[href='/settings/team/members']")
 USER_PROFILE_ITEM = (By.CSS_SELECTOR, ".sidebar-links img[src*='https://ui-avatars.com']")
 PROFILE_LINK = (By.CSS_SELECTOR, "a[href='/settings/profile']")
@@ -84,6 +85,12 @@ class SidePanel(BasePage):
         self.wait_element_present(CLUSTERS_LINK).click()
         from main.pages.clusters.ClustersPage import ClustersPage
         return ClustersPage(self.driver)
+
+    def open_cross_cloud_monitoring_page(self):
+        print("Open 'Cross Cloud Monitoring' page")
+        self.wait_element_present(MONITORING_LINK).click()
+        from main.pages.MonitoringPage import MonitoringPage
+        return MonitoringPage(self.driver)
 
     def open_user_roles_page(self):
         print("Open 'User and Roles' page")
