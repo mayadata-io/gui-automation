@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.mo-alert-danger")
+ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.alert-danger")
 LOADING_CONTAINER = (By.CSS_SELECTOR, ".loading-container")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open")
 CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open button.btn-outline-primary")

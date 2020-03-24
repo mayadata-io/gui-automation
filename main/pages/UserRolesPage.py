@@ -2,7 +2,8 @@ from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 
 INVITE_USER_BUTTON = (By.XPATH, "//button[text()='Invite user']")
-FILTER_CARDS = (By.CSS_SELECTOR, ".card.card-kanban")
+# FILTER_CARDS = (By.CSS_SELECTOR, ".card.card-kanban")
+FILTER_CARDS = (By.CSS_SELECTOR, ".nav.nav-card")
 AVAILABLE_CLUSTERS = (By.CSS_SELECTOR, ".app-contents table tbody tr")
 
 

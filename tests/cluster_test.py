@@ -2,6 +2,7 @@ import allure
 import pytest
 
 from main.Platform import Platform
+from main.common import Config
 from main.common.Utils import Utils
 
 
@@ -10,15 +11,15 @@ class TestCluster:
     @allure.testcase("To verify self connected cluster is shown for Admin user")
     def test_verify_self_connected_cluster_shown_admin_user(self, driver, url):
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .open_clusters_page() \
-            .verify_cluster_present("DemoCluster", "Active")
+            .verify_cluster_present(Config.get("app", "cluster_name"), "Active")
 
     @pytest.mark.gacc01
     @allure.testcase("To verify cluster name should not be less than 6 character and special characters not allowed")
     def test_verify_cluster_name_field(self, driver, url):
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .open_clusters_page() \
             .click_connect_new_cluster_button() \
             .enter_cluster_name("clust") \
@@ -30,7 +31,7 @@ class TestCluster:
     def test_verify_cluster_connection_link_generation(self, driver, url):
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .open_clusters_page() \
             .click_connect_new_cluster_button() \
             .enter_cluster_name(prefix + "Test") \
@@ -43,9 +44,9 @@ class TestCluster:
     @allure.testcase("To verify self connected cluster should not get disconnected")
     def test_verify_popup_disconnect_message(self, driver, url):
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .open_clusters_page() \
-            .click_delete_icon_for_cluster("DemoCluster-qlyuw") \
+            .click_delete_icon_for_cluster(Config.get("app", "cluster_name")) \
             .verify_cluster_delete_warning_message()
 
     @pytest.mark.gacc01
@@ -53,7 +54,7 @@ class TestCluster:
     def test_verify_cluster_disconnect_function(self, driver, url):
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .open_clusters_page() \
             .click_connect_new_cluster_button() \
             .enter_cluster_name(prefix + "Test") \
