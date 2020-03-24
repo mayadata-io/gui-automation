@@ -16,7 +16,7 @@ class MonitoringPage(BasePage):
         print("Switch to 'Graph' container")
         frame_by = (By.CSS_SELECTOR, DASHBOARD_FRAME)
         self.wait_element_visible(frame_by)
-        self.sleep(10)
+        self.sleep(15)
         self.switch_to_frame(DASHBOARD_FRAME)
         return MonitoringPage(self.driver)
 

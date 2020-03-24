@@ -93,6 +93,10 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email("mykola.rus@putsbox.com") \
+            .select_role("ProjectMember") \
+            .click_send_invite_button() \
             .switch_to_filter_tab("All users") \
             .verify_user_present(Config.get("app", "admin_user"), "ProjectOwner") \
             .switch_to_filter_tab("Pending invites") \

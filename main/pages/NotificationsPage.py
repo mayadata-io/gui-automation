@@ -11,7 +11,7 @@ class NotificationsPage(BasePage):
 
     def verify_records_present(self):
         print("Make sure records present")
-        self.sleep(5)
+        self.sleep(10)
         volumes = self.wait_elements_visible(AVAILABLE_RECORDS)
         size = len(volumes)
 

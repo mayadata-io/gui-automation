@@ -19,7 +19,7 @@ class DashboardPage(BasePage):
 
     def switch_to_graph_container(self):
         print("Switch to 'Graph' container")
-        self.sleep(10)
+        self.sleep(15)
         self.wait_element_visible(DASHBOARD_CONTENT)
         self.switch_to_frame(DASHBOARD_FRAME)
         return DashboardPage(self.driver)
@@ -77,7 +77,7 @@ class DashboardPage(BasePage):
             text = card.text
             if name in text:
                 card.find_element_by_css_selector(ALERT_LINK).click()
-                self.sleep(5)
+                self.sleep(10)
                 break
 
         return AlertsPage(self.driver)
