@@ -67,19 +67,11 @@ class TestDashboard:
 
     @pytest.mark.dashboard
     @allure.testcase("To verify the k8s version for different active and offline clusters in DOP")
-    def test_verify_status_shown_for_each_cluster(self, driver, url):
+    def test_verify_k8_version_shown_for_each_cluster(self, driver, url):
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
             .verify_kub_version_shown_for_active_offline_clusters()
-
-    @pytest.mark.dashboard
-    @allure.testcase("Cluster dashboard should show the status of all the cluster connected to DOP")
-    def test_verify_status_shown_for_each_cluster(self, driver, url):
-        Platform(driver).launch(url) \
-            .login_as_admin() \
-            .open_clusters_page() \
-            .verify_status_shown_for_each_cluster()
 
     @pytest.mark.dashboard
     @allure.testcase("To verify that disconnect text present for delete icon and the pop up message")
@@ -203,6 +195,31 @@ class TestDashboard:
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_alerts_page() \
             .verify_alerts_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("To verify OpenEBS dashboard")
+    def test_verify_openebs_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_ebs_page() \
+            .click_control_plane_button() \
+            .verify_header_text_equals("Control Plane") \
+            .verify_records_present() \
+            .click_pools_button() \
+            .verify_header_text_equals("cStor Pool Clusters (CSPC)") \
+            .click_volumes_button() \
+            .verify_header_text_equals("Volumes grouped by applications") \
+            .verify_records_present()
+
+    @pytest.mark.dashboard
+    @allure.testcase("Dmaas dashboard should show list of schedules and list of restores")
+    def test_verify_dmaas_dashboard(self, driver, url):
+        Platform(driver).launch(url) \
+            .login("Administrator", "password") \
+            .open_dmaas_page() \
+            .verify_header_text_equals("Data-Motion schedules")
 
     @pytest.mark.gaal01
     @allure.testcase("To verify volume monitoring graphs are shown in cross cloud monitoring dashboard")
