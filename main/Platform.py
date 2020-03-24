@@ -14,7 +14,7 @@ class Platform(BasePage):
     def launch(self, url):
         print("Open '%s' application" % url)
         time.sleep(2)
-        self.driver.get(url + "/login")
+        self.driver.get(url.replace('https', 'http') + "/login")
         time.sleep(5)
 
         try:

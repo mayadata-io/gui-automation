@@ -10,7 +10,7 @@ class TestAuth:
     @allure.testcase("To verify Administrator login")
     def test_verify_admin_login(self, driver, url):
         Platform(driver).launch(url) \
-            .login("Administrator", "password") \
+            .login_as_admin() \
             .verify_user_profile_item_present()
 
     @pytest.mark.gaau01

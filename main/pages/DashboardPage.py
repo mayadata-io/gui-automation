@@ -19,8 +19,8 @@ class DashboardPage(BasePage):
 
     def switch_to_graph_container(self):
         print("Switch to 'Graph' container")
-        self.wait_element_visible(DASHBOARD_CONTENT)
         self.sleep(10)
+        self.wait_element_visible(DASHBOARD_CONTENT)
         self.switch_to_frame(DASHBOARD_FRAME)
         return DashboardPage(self.driver)
 

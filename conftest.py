@@ -5,26 +5,30 @@ import pytest
 from pathlib import Path
 from selenium import webdriver
 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(ROOT_DIR, 'config.ini')
+
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
-    parser.addoption("--url", action="store", default="http://35.194.37.169", help="url")
+    parser.addoption("--url", action="store", default="http://35.239.42.145", help="url")
+    parser.addoption("--hub", action="store", default="35.224.47.66", help="hub")
+    parser.addoption("--environment", action="store", default="localhost", help="environment")
 
 
 @pytest.fixture(scope="function")
 def driver(request):
     print("\n" + request.function.__name__ + " started")
-
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(root_dir, 'config.ini')
-
     config = configparser.ConfigParser()
-    config.read(config_path)
-    hub = config.get('driver', 'hub')
-    port = config.get('driver', 'port')
+    config.read(CONFIG_PATH)
+
+    machine = request.config.getoption("--environment")
+    hub = request.config.getoption("--hub")
+    if ("localhost" in machine) is True:
+        hub = config.get('driver', 'hub')
 
     browser = webdriver.Remote(
-            command_executor="http://" + hub + ":" + port + "/wd/hub",
+            command_executor="http://" + hub + ":4444/wd/hub",
             desired_capabilities={
                 "browserName": request.config.getoption("--driver")
             })

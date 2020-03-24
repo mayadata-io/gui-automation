@@ -92,6 +92,20 @@ class ClustersPage(BasePage):
 
         return ClustersPage(self.driver)
 
+    def verify_kub_version_shown_for_active_offline_clusters(self):
+        print("Verify K8s version is shown for each cluster")
+        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+
+        for cluster in my_clusters:
+            cluster_text = cluster.text
+            if("Active" in cluster_text or "Offline" in cluster_text) is True:
+                assert ("-gke." in cluster_text) is True, "K8s version is missed"
+            else:
+                assert ("-gke." in cluster_text) is False, "K8s version is present"
+
+        return ClustersPage(self.driver)
+
     def verify_delete_text_shown_for_each_disconnect_icon(self):
         print("Verify delete text is shown for each disconnect icon")
         self.wait_element_visible(SORT_CLUSTERS_BUTTON)
