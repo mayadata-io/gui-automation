@@ -12,6 +12,7 @@ ALERT_LINK = ".cluster-name"
 DISCONNECT_ICON = ".table-action_link"
 DISCONNECT_WARNING_MESSAGE = (By.XPATH, "//div[@class='modal-header']")
 DISCONNECT_BUTTON = (By.XPATH, "//button[@class='btn btn-danger']")
+SKIP_CLUSTER_CONFIG_BUTTON = (By.CSS_SELECTOR, ".modal-container.modal-dialog button.btn-primary.btn-flat")
 
 
 class ClustersPage(BasePage):
@@ -35,9 +36,15 @@ class ClustersPage(BasePage):
                 is_exists = True
                 my_cluster.find_element_by_css_selector(CLUSTER_NAME_LABEL).click()
                 self.sleep(10)
+
                 break
 
         assert is_exists is True, "Cluster is absent"
+        try:
+            self.wait_element_visible(SKIP_CLUSTER_CONFIG_BUTTON).click()
+        except Exception:
+            print("Modal dialog is absent")
+
         return ClusterOverviewPage(self.driver)
 
     def verify_cluster_present(self, name, status):
