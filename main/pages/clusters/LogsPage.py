@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from main.pages.BasePage import BasePage
+from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 
 LOGS_FRAME = "iframe[src*='/kibana/app/kibana?projectid']"
 LOADING_MESSAGE = (By.ID, "kbn_loading_message")
@@ -20,5 +20,10 @@ class LogsPage(BasePage):
 
     def verify_logs_diagram_present(self):
         print("Make sure 'Logs' diagram present")
-        self.wait_element_present(LOGS_DIAGRAM)
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
+            self.switch_to_logs_frame()
+            self.wait_element_present(LOGS_DIAGRAM)
+
         return LogsPage(self.driver)

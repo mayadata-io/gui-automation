@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from main.pages.BasePage import BasePage
+from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 from main.pages.clusters.ClusterOverviewPage import ClusterOverviewPage
 from main.pages.clusters.ConnectClusterPage import ConnectClusterPage
 
@@ -75,7 +75,6 @@ class ClustersPage(BasePage):
 
     def verify_number_of_clusters_equals(self, number):
         print("Make sure number of clusters equals to '%s'" % number)
-        is_exists = False
         self.wait_element_visible(SORT_CLUSTERS_BUTTON)
         my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
         size = len(my_clusters)
@@ -101,15 +100,18 @@ class ClustersPage(BasePage):
 
     def verify_kub_version_shown_for_active_offline_clusters(self):
         print("Verify K8s version is shown for each cluster")
-        self.wait_element_visible(SORT_CLUSTERS_BUTTON)
-        my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
+            self.wait_element_visible(SORT_CLUSTERS_BUTTON)
+            my_clusters = self.wait_elements_visible(AVAILABLE_CLUSTERS)
 
-        for cluster in my_clusters:
-            cluster_text = cluster.text
-            if("Active" in cluster_text or "Offline" in cluster_text) is True:
-                assert ("-gke." in cluster_text) is True, "K8s version is missed"
-            else:
-                assert ("-gke." in cluster_text) is False, "K8s version is present"
+            for cluster in my_clusters:
+                cluster_text = cluster.text
+                if("Active" in cluster_text or "Offline" in cluster_text) is True:
+                    assert ("-gke." in cluster_text) is True, "K8s version is missed"
+                else:
+                    assert ("-gke." in cluster_text) is False, "K8s version is present"
 
         return ClustersPage(self.driver)
 

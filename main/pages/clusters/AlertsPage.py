@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from main.pages.BasePage import BasePage
+from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 
 # VIEW_ORDER_BUTTON = (By.XPATH, "//span[contains(text(), 'Alert period')]/following-sibling::button")
 VIEW_ORDER_BUTTON = (By.XPATH, "//span[contains(text(), 'Time period')]/following-sibling::button")
@@ -13,8 +13,13 @@ class AlertsPage(BasePage):
     def verify_alerts_present(self):
         print("Make sure alerts present")
         self.wait_element_visible(VIEW_ORDER_BUTTON)
-        volumes = self.wait_elements_visible(AVAILABLE_ALERTS)
-        size = len(volumes)
 
-        assert size > 0, "Number of alerts is wrong"
+        try:
+            if self.is_element_present(EMPTY_CARD_CONTAINER):
+                self.verify_empty_card_container_text_equals("No new alerts yet!")
+        except Exception:
+            volumes = self.wait_elements_visible(AVAILABLE_ALERTS)
+            size = len(volumes)
+            assert size > 0, "Number of alerts is wrong"
+
         return AlertsPage(self.driver)

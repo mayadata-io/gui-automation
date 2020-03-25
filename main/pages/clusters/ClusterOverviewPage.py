@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+
+from main.pages.BasePage import EMPTY_CARD_CONTAINER
 from main.pages.SidePanel import SidePanel
 
 COMPONENT_SEARCH_FIELD = (By.CSS_SELECTOR, ".input-search-icon_wrapper")
@@ -17,28 +19,38 @@ class ClusterOverviewPage(SidePanel):
 
     def switch_to_graph_container(self):
         print("Switch to 'Graph' container")
-        frame_by = (By.CSS_SELECTOR, DASHBOARD_FRAME)
-        self.wait_element_visible(frame_by)
-        self.sleep(10)
-        self.switch_to_frame(DASHBOARD_FRAME)
+        try:
+            if self.is_element_present(EMPTY_CARD_CONTAINER):
+                self.verify_empty_card_container_text_equals("Looks like OpenEBS is not installed on your cluster!")
+
+        except Exception:
+            frame_by = (By.CSS_SELECTOR, DASHBOARD_FRAME)
+            self.wait_element_visible(frame_by)
+            self.sleep(10)
+            self.switch_to_frame(DASHBOARD_FRAME)
+
         return ClusterOverviewPage(self.driver)
 
     def verify_graph_present(self, name):
         print("Make sure graph '%s' present" % name)
-        self.wait_element_visible(GRAFANA_APP)
-        graphs = self.wait_elements_visible(ANALYTIC_GRAPHS)
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
 
-        for graph in graphs:
-            text = graph.text
-            if name in text:
-                is_exists = True
-                is_graph_displayed = graph.find_element_by_css_selector(GRAPH_PANEL).is_displayed()
-                is_graph_legend_displayed = graph.find_element_by_css_selector(GRAPH_LEGEND).is_displayed()
+        except Exception:
+            self.wait_element_visible(GRAFANA_APP)
+            graphs = self.wait_elements_visible(ANALYTIC_GRAPHS)
 
-                assert is_exists is True, "Graph is absent"
-                assert is_graph_displayed is True, "Graph content is absent"
-                assert is_graph_legend_displayed is True, "Graph legend is absent"
-                break
+            for graph in graphs:
+                text = graph.text
+                if name in text:
+                    is_exists = True
+                    is_graph_displayed = graph.find_element_by_css_selector(GRAPH_PANEL).is_displayed()
+                    is_graph_legend_displayed = graph.find_element_by_css_selector(GRAPH_LEGEND).is_displayed()
+
+                    assert is_exists is True, "Graph is absent"
+                    assert is_graph_displayed is True, "Graph content is absent"
+                    assert is_graph_legend_displayed is True, "Graph legend is absent"
+                    break
 
         return ClusterOverviewPage(self.driver)
 

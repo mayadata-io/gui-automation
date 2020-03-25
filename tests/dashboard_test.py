@@ -171,7 +171,6 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_monitor_page() \
-            .verify_volumes_present() \
             .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva") \
             .switch_to_metrics_frame() \
             .verify_graph_present("Storage capacity") \
@@ -187,7 +186,6 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_logs_page() \
-            .switch_to_logs_frame() \
             .verify_logs_diagram_present()
 
     @pytest.mark.gaal01
