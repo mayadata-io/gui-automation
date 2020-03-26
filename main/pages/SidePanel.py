@@ -48,6 +48,7 @@ class SidePanel(BasePage):
     def open_volumes_page(self):
         print("Open 'Volumes' page")
         self.wait_element_present(VOLUMES_LINK).click()
+        self.sleep(3)
         from main.pages.clusters.VolumesPage import VolumesPage
         return VolumesPage(self.driver)
 
@@ -65,6 +66,12 @@ class SidePanel(BasePage):
 
     def open_logs_page(self):
         print("Open 'Logs' page")
+        try:
+            from main.pages.clusters.ClustersPage import SKIP_CLUSTER_CONFIG_BUTTON
+            self.wait_element_visible(SKIP_CLUSTER_CONFIG_BUTTON).click()
+        except Exception:
+            print("Modal dialog is absent")
+
         self.wait_element_present(LOGS_LINK).click()
         from main.pages.clusters.LogsPage import LogsPage
         return LogsPage(self.driver)

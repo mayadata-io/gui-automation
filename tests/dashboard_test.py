@@ -3,6 +3,7 @@ import pytest
 
 from main.Platform import Platform
 from main.common import Config
+from main.common.Utils import Utils
 
 
 class TestDashboard:
@@ -76,16 +77,23 @@ class TestDashboard:
     @pytest.mark.dashboard
     @allure.testcase("To verify that disconnect text present for delete icon and the pop up message")
     def test_verify_disconnect_text_shown_for_each_delete_icon(self, driver, url):
+        prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
             .verify_delete_text_shown_for_each_disconnect_icon() \
             .click_delete_icon_for_cluster(Config.get("app", "cluster_name")) \
-            .verify_modal_dialog_text_equals("Are you sure you want to disconnect %s cluster?" % Config.get("app", "cluster_name")) \
+            .verify_modal_dialog_text_equals("Are you sure you want to disconnect OpenEBSDirector cluster?") \
             .click_cancel_button_in_modal_dialog() \
             .open_clusters_page() \
-            .click_delete_icon_for_cluster("clusterTest") \
-            .verify_modal_dialog_text_equals("Are you sure you want to disconnect clusterTest-fblwd cluster?")
+            .click_connect_new_cluster_button() \
+            .enter_cluster_name(prefix + "Test") \
+            .click_connect_button() \
+            .verify_cluster_connection_link_present() \
+            .click_disconnect_cluster_link() \
+            .open_clusters_page() \
+            .click_delete_icon_for_cluster(prefix + "Test") \
+            .verify_modal_dialog_text_equals("Are you sure you want to disconnect %s" % (prefix + "Test"))
 
     @pytest.mark.dashboard
     @allure.testcase("To verify User and Roles dashboard view")
@@ -171,7 +179,6 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_monitor_page() \
-            .verify_volumes_present() \
             .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva") \
             .switch_to_metrics_frame() \
             .verify_graph_present("Storage capacity") \
@@ -187,7 +194,6 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_logs_page() \
-            .switch_to_logs_frame() \
             .verify_logs_diagram_present()
 
     @pytest.mark.gaal01
@@ -208,14 +214,7 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_ebs_page() \
-            .click_control_plane_button() \
-            .verify_header_text_equals("Control Plane") \
-            .verify_records_present() \
-            .click_pools_button() \
-            .verify_header_text_equals("cStor Pool Clusters (CSPC)") \
-            .click_volumes_button() \
-            .verify_header_text_equals("Volumes grouped by applications") \
-            .verify_records_present()
+            .verify_open_ebs_page()
 
     @pytest.mark.dashboard
     @allure.testcase("Dmaas dashboard should show list of schedules and list of restores")

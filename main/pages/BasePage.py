@@ -7,11 +7,16 @@ ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.alert-danger")
 LOADING_CONTAINER = (By.CSS_SELECTOR, ".loading-container")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open")
 CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open button.btn-outline-primary")
+EMPTY_CARD_CONTAINER = (By.CSS_SELECTOR, ".card_zero_result")
 
 
 class BasePage(object):
     def __init__(self, driver):
         self.driver = driver
+
+    def is_element_present(self, *locator):
+        self.driver.implicitly_wait(10)
+        return WebDriverWait(self.driver, 10).until(ec.element_to_be_clickable(*locator)).is_displayed()
 
     def wait_element_present(self, *locator):
         self.driver.implicitly_wait(10)
@@ -29,9 +34,12 @@ class BasePage(object):
         return WebDriverWait(self.driver, 30).until(ec.presence_of_all_elements_located(*locator))
 
     def wait_element_invisible(self, *locator):
-        self.driver.implicitly_wait(10)
-        WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
-        return WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(*locator))
+        try:
+            self.driver.implicitly_wait(10)
+            WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
+            WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(*locator))
+        except Exception:
+            print("Element is not visible")
 
     def switch_to_frame(self, *locator):
         self.driver.implicitly_wait(10)
@@ -80,3 +88,11 @@ class BasePage(object):
 
         from main.pages.SidePanel import SidePanel
         return SidePanel(self.driver)
+
+    def verify_empty_card_container_text_equals(self, message):
+        print("Make sure message in empty card container equals to '%s'" % message)
+        text = self.wait_element_visible(EMPTY_CARD_CONTAINER).text
+        is_message_correct = message in text
+
+        assert is_message_correct is True, "Message in modal dialog is wrong"
+        return BasePage(self.driver)
