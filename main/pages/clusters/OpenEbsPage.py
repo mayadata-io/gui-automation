@@ -17,8 +17,7 @@ class OpenEbsPage(BasePage):
 
     def verify_open_ebs_page(self):
         try:
-            if self.is_element_present(EMPTY_CARD_CONTAINER):
-                IS_EMPTY_PAGE = True
+            self.wait_element_visible(EMPTY_CARD_CONTAINER)
         except Exception:
             self.click_control_plane_button()
             self.verify_header_text_equals("Control Plane")
