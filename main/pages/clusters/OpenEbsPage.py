@@ -1,14 +1,12 @@
 from selenium.webdriver.common.by import By
-
-from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
+from main.pages.BasePage import BasePage
 
 CONTROL_PLANE_TAB = (By.CSS_SELECTOR, "a[href$='/controlplanes']")
 POOLS_TAB = (By.CSS_SELECTOR, "a[href$='resources/pools']")
 VOLUMES_TAB = (By.CSS_SELECTOR, "a[href*='resources/applications']")
 HEADER_TITLE = (By.CSS_SELECTOR, ".section-header_title")
 AVAILABLE_RECORDS = (By.CSS_SELECTOR, "table.table tbody tr")
-
-IS_EMPTY_PAGE = False
+EMPTY_PAGE_CONTENT = (By.CSS_SELECTOR, ".mr-4 img[src*='aws']")
 
 
 class OpenEbsPage(BasePage):
@@ -17,7 +15,7 @@ class OpenEbsPage(BasePage):
 
     def verify_open_ebs_page(self):
         try:
-            self.wait_element_visible(EMPTY_CARD_CONTAINER)
+            self.wait_element_visible(EMPTY_PAGE_CONTENT)
         except Exception:
             self.click_control_plane_button()
             self.verify_header_text_equals("Control Plane")
