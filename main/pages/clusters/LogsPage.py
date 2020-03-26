@@ -13,17 +13,14 @@ class LogsPage(BasePage):
 
     def switch_to_logs_frame(self):
         print("Switch to 'Logs' container")
-        self.sleep(10)
+        self.sleep(30)
         self.switch_to_frame(LOGS_FRAME)
         self.wait_element_invisible(LOADING_MESSAGE)
         return LogsPage(self.driver)
 
     def verify_logs_diagram_present(self):
         print("Make sure 'Logs' diagram present")
-        try:
-            self.is_element_present(EMPTY_CARD_CONTAINER)
-        except Exception:
-            self.switch_to_logs_frame()
-            self.wait_element_present(LOGS_DIAGRAM)
+        self.switch_to_logs_frame()
+        self.wait_element_present(LOGS_DIAGRAM)
 
         return LogsPage(self.driver)

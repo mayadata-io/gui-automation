@@ -34,9 +34,12 @@ class BasePage(object):
         return WebDriverWait(self.driver, 30).until(ec.presence_of_all_elements_located(*locator))
 
     def wait_element_invisible(self, *locator):
-        self.driver.implicitly_wait(10)
-        WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
-        return WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(*locator))
+        try:
+            self.driver.implicitly_wait(10)
+            WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
+            WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(*locator))
+        except Exception:
+            print("Element is not visible")
 
     def switch_to_frame(self, *locator):
         self.driver.implicitly_wait(10)
@@ -88,7 +91,7 @@ class BasePage(object):
 
     def verify_empty_card_container_text_equals(self, message):
         print("Make sure message in empty card container equals to '%s'" % message)
-        text = self.wait_element_visible(MODAL_DIALOG).text
+        text = self.wait_element_visible(EMPTY_CARD_CONTAINER).text
         is_message_correct = message in text
 
         assert is_message_correct is True, "Message in modal dialog is wrong"

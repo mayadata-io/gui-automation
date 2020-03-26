@@ -30,8 +30,7 @@ class MonitorPage(BasePage):
     def verify_volume_present(self, name, status, cas_type):
         print("Make sure volume '%s' present" % name)
         try:
-            if self.is_element_present(EMPTY_CARD_CONTAINER):
-                IS_EMPTY_PAGE = True
+            self.is_element_present(EMPTY_CARD_CONTAINER)
         except Exception:
             is_exists = False
             self.wait_element_visible(SEARCH_FIELD)
@@ -46,14 +45,18 @@ class MonitorPage(BasePage):
 
     def switch_to_metrics_frame(self):
         print("Switch to 'Metrics' container")
-        if IS_EMPTY_PAGE is False:
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
             self.sleep(10)
             self.switch_to_frame(METRICS_FRAME)
         return MonitorPage(self.driver)
 
     def verify_graph_present(self, name):
         print("Make sure graph '%s' present" % name)
-        if IS_EMPTY_PAGE is False:
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
             is_exists = False
             self.wait_element_visible(DASHBOARD_CONTAINER)
             titles = self.wait_elements_visible(GRAPHS_TITLES)

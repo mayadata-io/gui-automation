@@ -12,6 +12,8 @@ GRAPH_LEGEND = "div[class*='-legend']"
 POOLS_CARDS = (By.CSS_SELECTOR, ".card.col")
 CLUSTER_OVERVIEW_RECORDS = (By.CSS_SELECTOR, ".cluster-overview-table tr")
 
+IS_EMPTY_PAGE = False
+
 
 class ClusterOverviewPage(SidePanel):
     def __init__(self, driver):
@@ -19,8 +21,9 @@ class ClusterOverviewPage(SidePanel):
 
     def switch_to_graph_container(self):
         print("Switch to 'Graph' container")
+        self.sleep(5)
         try:
-            if self.is_element_present(EMPTY_CARD_CONTAINER):
+            if self.wait_element_visible(EMPTY_CARD_CONTAINER):
                 self.verify_empty_card_container_text_equals("Looks like OpenEBS is not installed on your cluster!")
 
         except Exception:

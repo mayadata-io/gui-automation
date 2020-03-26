@@ -48,6 +48,7 @@ class SidePanel(BasePage):
     def open_volumes_page(self):
         print("Open 'Volumes' page")
         self.wait_element_present(VOLUMES_LINK).click()
+        self.sleep(3)
         from main.pages.clusters.VolumesPage import VolumesPage
         return VolumesPage(self.driver)
 

@@ -5,8 +5,6 @@ from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 SEARCH_FIELD = (By.CSS_SELECTOR, ".input-search")
 AVAILABLE_VOLUMES = (By.CSS_SELECTOR, "table.table-volume tbody tr")
 
-IS_EMPTY_PAGE = False
-
 
 class VolumesPage(BasePage):
     def __init__(self, driver):
@@ -14,13 +12,12 @@ class VolumesPage(BasePage):
 
     def verify_volumes_present(self):
         print("Make sure volumes records present")
-        self.wait_element_visible(SEARCH_FIELD)
-
         try:
             if self.is_element_present(EMPTY_CARD_CONTAINER):
                 self.verify_empty_card_container_text_equals("No volumes found")
-                IS_EMPTY_PAGE = True
+
         except Exception:
+            self.wait_element_visible(SEARCH_FIELD)
             volumes = self.wait_elements_visible(AVAILABLE_VOLUMES)
             size = len(volumes)
             assert size > 0, "Number of volumes is wrong"
@@ -29,7 +26,10 @@ class VolumesPage(BasePage):
 
     def verify_volume_present(self, name, status, cas_type, storage_class):
         print("Make sure volume '%s' present" % name)
-        if IS_EMPTY_PAGE is False:
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+
+        except Exception:
             is_exists = False
             self.wait_element_visible(SEARCH_FIELD)
             my_clusters = self.wait_elements_visible(AVAILABLE_VOLUMES)
