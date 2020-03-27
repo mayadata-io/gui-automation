@@ -8,6 +8,10 @@ CONTINUE_BUTTON = (By.CSS_SELECTOR, ".onboarding-content input.btn")
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
 CLOSE_BUTTON = (By.XPATH, "//h5[text()='Connect to Director OnPrem']/preceding::span[contains(@class, 'mi')]")
+EMAIL_FIELD = (By.CSS_SELECTOR, "input[type='email']")
+COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
+ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
+PHONE_FIELD = (By.CSS_SELECTOR, "input[type='tel']")
 
 
 class OnboardingPage(BasePage):
@@ -21,14 +25,34 @@ class OnboardingPage(BasePage):
 
     def verify_onboarding_page_title_equals(self, title):
         print("Make sure 'Onboarding' page title equals '%s'" % title)
+        self.sleep(5)
         actual_title = self.wait_element_present(ONBOARDING_HEADER).text
-
         assert title in actual_title, "Header is wrong"
         return OnboardingPage(self.driver)
 
     def click_continue_button(self):
         print("Click 'Continue' link")
         self.wait_element_present(CONTINUE_BUTTON).click()
+        return OnboardingPage(self.driver)
+
+    def enter_email(self, email):
+        print("Enter '%s' into 'Email' field" % email)
+        self.wait_element_present(EMAIL_FIELD).send_keys(email)
+        return OnboardingPage(self.driver)
+
+    def enter_company_name(self, company):
+        print("Enter '%s' into 'Company name' field" % company)
+        self.wait_element_present(COMPANY_FIELD).send_keys(company)
+        return OnboardingPage(self.driver)
+
+    def enter_role(self, role):
+        print("Enter '%s' into 'Role' field" % role)
+        self.wait_element_present(ROLE_FIELD).send_keys(role)
+        return OnboardingPage(self.driver)
+
+    def enter_phone_number(self, phone):
+        print("Enter '%s' into 'Phone' field" % phone)
+        self.wait_element_present(PHONE_FIELD).send_keys(phone)
         return OnboardingPage(self.driver)
 
     def enter_project_name(self, projectname):

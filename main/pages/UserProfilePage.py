@@ -9,11 +9,12 @@ COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
 ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
 PHONE_FIELD = (By.XPATH, "//label[text()='Phone']/following-sibling::input")
 CHANGE_PASSWORD_BUTTON = (By.XPATH, "//button[text()='Change Password']")
-
+UPDATE_PROFILE_BUTTON = (By.XPATH, "//input[@value='Update profile']")
 CURRENT_PASSWORD_FIELD = (By.XPATH, "//div[text()='Current password']/input")
 NEW_PASSWORD_FIELD = (By.XPATH, "//div[text()='New password']/input")
 RETYPE_PASSWORD_FIELD = (By.XPATH, "//div[text()='Retype password']/input")
 UPDATE_PASSWORD_BUTTON = (By.XPATH, "//input[@value='Change Password']")
+ERROR_HEADER = (By.XPATH, "//div[@class='jnoty-content']")
 
 
 class UserProfilePage(BasePage):
@@ -68,6 +69,14 @@ class UserProfilePage(BasePage):
             "Phone is wrong. Expected: %r; Actual: %r" % phone % actual_phone
         return UserProfilePage(self.driver)
 
+    def verify_error_message(self, error):
+        print("Make sure 'Error' message equals to '%s'" % error)
+        actual_error = self.wait_element_present(ERROR_HEADER).text
+
+        assert error in actual_error, \
+            "First and Last name for Admin user can't be updated"
+        return UserProfilePage(self.driver)
+
     def click_change_password_button(self):
         print("Click 'Change Password' button")
         self.wait_element_present(CHANGE_PASSWORD_BUTTON).click()
@@ -93,6 +102,42 @@ class UserProfilePage(BasePage):
         self.wait_element_present(UPDATE_PASSWORD_BUTTON).click()
         time.sleep(2)
 
+        return UserProfilePage(self.driver)
+
+    def click_update_profile_button(self):
+        print("Click 'Update Profile' button")
+        self.wait_element_present(UPDATE_PROFILE_BUTTON).click()
+        time.sleep(2)
+        return UserProfilePage(self.driver)
+
+    def enter_first_name(self, firstName):
+        print("Enter '%s' into 'First Name' field" % firstName)
+        self.wait_element_present(FIRST_NAME_FIELD).send_keys(firstName)
+        return UserProfilePage(self.driver)
+
+    def enter_last_name(self, lastName):
+        print("Enter '%s' into 'Last Name' field" % lastName)
+        self.wait_element_present(LAST_NAME_FIELD).send_keys(lastName)
+        return UserProfilePage(self.driver)
+
+    def enter_email_field(self, email):
+        print("Enter '%s' into 'Email' field" % email)
+        self.wait_element_present(EMAIL_FIELD).send_keys(email)
+        return UserProfilePage(self.driver)
+
+    def enter_company_field(self, company):
+        print("Enter '%s' into 'Company' field" % company)
+        self.wait_element_present(COMPANY_FIELD).send_keys(company)
+        return UserProfilePage(self.driver)
+
+    def enter_role_field(self, role):
+        print("Enter '%s' into 'Role' field" % role)
+        self.wait_element_present(ROLE_FIELD).send_keys(role)
+        return UserProfilePage(self.driver)
+
+    def enter_phone_field(self, phone):
+        print("Enter '%s' into 'Phone' field" % phone)
+        self.wait_element_present(PHONE_FIELD).send_keys(phone)
         return UserProfilePage(self.driver)
 
     def side_panel(self):
