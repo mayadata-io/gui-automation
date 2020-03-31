@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from main.Platform import Platform
@@ -8,8 +7,9 @@ from main.common.Utils import Utils
 
 class TestDashboard:
     @pytest.mark.gada01
-    @allure.testcase("To verify graphs are shown in Home dashboards")
     def test_verify_graphs_shown_home_dashboards(self, driver, url):
+        print("To verify graphs are shown in Home dashboards")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -20,8 +20,9 @@ class TestDashboard:
             .verify_graph_present("Throughput of all clusters")
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify active clusters and other clusters lists are shown in home dashboard")
     def test_verify_clusters_shown_home_dashboards(self, driver, url):
+        print("To verify active clusters and other clusters lists are shown in home dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -31,16 +32,18 @@ class TestDashboard:
             .verify_clusters_inactive()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify in Home dashboards project team members are shown")
     def test_verify_project_team_members_shown(self, driver, url):
+        print("To verify in Home dashboards project team members are shown")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
             .verify_team_member_present(Config.get("app", "admin_user"), "ProjectOwner")
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify alerts are shown and clickable for Active clusters in Home dashboard")
     def test_verify_alerts_clickable_for_active_clusters(self, driver, url):
+        print("To verify alerts are shown and clickable for Active clusters in Home dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -49,8 +52,9 @@ class TestDashboard:
             .verify_view_order_button_present()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify the cluster search functionality")
     def test_verify_cluster_search_functionality(self, driver, url):
+        print("To verify the cluster search functionality")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -59,24 +63,27 @@ class TestDashboard:
             .verify_number_of_clusters_equals(1)
 
     @pytest.mark.dashboard
-    @allure.testcase("Cluster dashboard should show the status of all the cluster connected to DOP")
     def test_verify_status_shown_for_each_cluster(self, driver, url):
+        print("Cluster dashboard should show the status of all the cluster connected to DOP")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
             .verify_status_shown_for_each_cluster()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify the k8s version for different active and offline clusters in DOP")
     def test_verify_k8_version_shown_for_each_cluster(self, driver, url):
+        print("To verify the k8s version for different active and offline clusters in DOP")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
             .verify_kub_version_shown_for_active_offline_clusters()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify that disconnect text present for delete icon and the pop up message")
     def test_verify_disconnect_text_shown_for_each_delete_icon(self, driver, url):
+        print("To verify that disconnect text present for delete icon and the pop up message")
+
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login_as_admin() \
@@ -96,8 +103,9 @@ class TestDashboard:
             .verify_modal_dialog_text_equals("Are you sure you want to disconnect %s" % (prefix + "Test"))
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify User and Roles dashboard view")
     def test_verify_user_roles_dashboard_view(self, driver, url):
+        print("To verify User and Roles dashboard view")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_user_roles_page() \
@@ -111,8 +119,9 @@ class TestDashboard:
             .verify_user_present("mykola.rus@putsbox.com", "ProjectMember")
 
     @pytest.mark.gada02
-    @allure.testcase("To verify Overview dashboard")
     def test_verify_overview_dashboard(self, driver, url):
+        print("To verify Overview dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -130,8 +139,9 @@ class TestDashboard:
             .verify_graph_present("Throughput of all volumes")
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify Application dashboard")
     def test_verify_application_dashboard(self, driver, url):
+        print("To verify Application dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -140,8 +150,9 @@ class TestDashboard:
             .verify_applications_present()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify Pools dashboard")
     def test_verify_pools_dashboard(self, driver, url):
+        print("To verify Pools dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -150,8 +161,9 @@ class TestDashboard:
             .verify_pools_page_loaded()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify Volumes dashboard")
     def test_verify_volumes_dashboard(self, driver, url):
+        print("To verify Volumes dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -161,8 +173,9 @@ class TestDashboard:
             .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
 
     @pytest.mark.gato01
-    @allure.testcase("To verify Topology dashboard")
     def test_verify_topology_dashboard(self, driver, url):
+        print("To verify Topology dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -172,8 +185,9 @@ class TestDashboard:
             .verify_connectivity_diagram_present()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify Monitor dashboard")
     def test_verify_monitor_dashboard(self, driver, url):
+        print("To verify Monitor dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -187,8 +201,9 @@ class TestDashboard:
             .verify_graph_present("Throughput of all volumes")
 
     @pytest.mark.galo01
-    @allure.testcase("To verify Logs dashboard")
     def test_verify_logs_dashboard(self, driver, url):
+        print("To verify Logs dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -197,8 +212,9 @@ class TestDashboard:
             .verify_logs_diagram_present()
 
     @pytest.mark.gaal01
-    @allure.testcase("To verify Alerts dashboard")
     def test_verify_alerts_dashboard(self, driver, url):
+        print("To verify Alerts dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -207,8 +223,9 @@ class TestDashboard:
             .verify_alerts_present()
 
     @pytest.mark.dashboard
-    @allure.testcase("To verify OpenEBS dashboard")
     def test_verify_openebs_dashboard(self, driver, url):
+        print("To verify OpenEBS dashboard")
+
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
@@ -217,16 +234,18 @@ class TestDashboard:
             .verify_open_ebs_page()
 
     @pytest.mark.dashboard
-    @allure.testcase("Dmaas dashboard should show list of schedules and list of restores")
     def test_verify_dmaas_dashboard(self, driver, url):
+        print("Dmaas dashboard should show list of schedules and list of restores")
+
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_dmaas_page() \
             .verify_header_text_equals("Data-Motion schedules")
 
     @pytest.mark.gaal01
-    @allure.testcase("To verify volume monitoring graphs are shown in cross cloud monitoring dashboard")
     def test_verify_volume_monitoring_graphs_cross_cloud_monitoring_dashboard(self, driver, url):
+        print("To verify volume monitoring graphs are shown in cross cloud monitoring dashboard")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_cross_cloud_monitoring_page() \

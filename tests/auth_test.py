@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from main.Platform import Platform
@@ -7,15 +6,17 @@ from main.common.Utils import Utils
 
 class TestAuth:
     @pytest.mark.gaau01
-    @allure.testcase("To verify Administrator login")
     def test_verify_admin_login(self, driver, url):
+        print("To verify Administrator login")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .verify_user_profile_item_present()
 
     @pytest.mark.gaau01
-    @allure.testcase("To verify signup functionality in Local Auth")
     def test_verify_signup_func_in_local_auth(self, driver, url):
+        print("To verify signup functionality in Local Auth")
+
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .click_create_account_link() \
@@ -28,8 +29,9 @@ class TestAuth:
             .verify_onboarding_page_title_equals("Update your profile")
 
     @pytest.mark.gaau01
-    @allure.testcase("To verify error message is shown if wrong password is provided")
     def test_verify_error_message_shown_for_wrong_password(self, driver, url):
+        print("To verify error message is shown if wrong password is provided")
+
         Platform(driver).launch(url) \
             .enter_email('Administrator') \
             .enter_password("paaaaaaaassword") \
@@ -37,8 +39,9 @@ class TestAuth:
             .verify_alert_present("The email address or password you entered is incorrect.")
 
     @pytest.mark.gaau01
-    @allure.testcase("To verify error message is shown if wrong email ID is provided")
     def test_verify_error_message_shown_for_wrong_email(self, driver, url):
+        print("To verify error message is shown if wrong email ID is provided")
+
         Platform(driver).launch(url) \
             .enter_email('Administratorrrrr') \
             .enter_password("password") \
@@ -46,8 +49,9 @@ class TestAuth:
             .verify_alert_present("The email address or password you entered is incorrect.")
 
     @pytest.mark.gaau01
-    @allure.testcase("Password for local authentication should be alpha numeric supported")
     def test_password_field(self, driver, url):
+        print("Password for local authentication should be alpha numeric supported")
+
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .click_create_account_link() \
@@ -59,8 +63,9 @@ class TestAuth:
             .verify_alert_present("Password must be a mix of letters of different case, numbers and symbols of atleast 8 and utmost 20 characters")
 
     @pytest.mark.gaau01
-    @allure.testcase("To verify unique Email ID for each user")
     def test_verify_unique_email_for_each_user(self, driver, url):
+        print("To verify unique Email ID for each user")
+
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .click_create_account_link() \
@@ -76,8 +81,9 @@ class TestAuth:
             .verify_onboarding_page_title_equals("Update your profile")
 
     @pytest.mark.gaau01
-    @allure.testcase("To verify the Change password functionality for local auth account")
     def test_verify_change_pwd_local_auth_account(self, driver, url):
+        print("To verify the Change password functionality for local auth account")
+
         prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .click_create_account_link() \
@@ -108,8 +114,9 @@ class TestAuth:
     # TODO:below test case is marked as 'authentication' because it will change admin password which is used
     # in multiple test cases as entry point
     @pytest.mark.auth
-    @allure.testcase("To verify the Change password functionality for Administrator account")
     def test_verify_change_pwd_admin_auth_account(self, driver, url):
+        print("To verify the Change password functionality for Administrator account")
+
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_user_profile_page() \

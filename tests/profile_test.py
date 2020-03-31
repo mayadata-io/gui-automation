@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from main.Platform import Platform
@@ -8,8 +7,9 @@ from main.common.Utils import Utils
 class TestProfile:
 
     @pytest.mark.profile
-    @allure.testcase("To verify profile can be updated just after signup ")
     def test_verify_profile_update_after_signup(self, driver, url):
+        print("To verify profile can be updated just after signup ")
+
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
@@ -29,8 +29,9 @@ class TestProfile:
             .verify_onboarding_page_title_equals("We have created a project for you!")
 
     @pytest.mark.profile
-    @allure.testcase("To verify the profile info is same as whatever provided during onboarding time")
     def test_verify_profile_details_same_with_onboarding_profile_details(self, driver, url):
+        print("To verify the profile info is same as whatever provided during onboarding time")
+
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
@@ -63,8 +64,9 @@ class TestProfile:
             .verify_phone_equals(phone)
 
     @pytest.mark.profile
-    @allure.testcase("To verify first and last name can be modified for local Auth user")
     def test_verify_first_and_last_name_update_in_profile_details(self, driver, url):
+        print("To verify first and last name can be modified for local Auth user")
+
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
@@ -100,8 +102,9 @@ class TestProfile:
             .verify_last_name_equals(prefix + "auto" + "Last")
 
     @pytest.mark.profile
-    @allure.testcase("To verify company,Role and phone can be modified for local Auth user.")
     def test_verify_company_role_phone_update_in_profile_details(self, driver, url):
+        print("To verify company,Role and phone can be modified for local Auth user.")
+
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
@@ -139,8 +142,9 @@ class TestProfile:
             .verify_phone_equals(phone + "9")
 
     @pytest.mark.profile
-    @allure.testcase("To verify First and last Name cannot be modified for local Auth Admin user")
     def test_verify_admin_first_and_last_name_update_fail(self, driver, url):
+        print("To verify First and last Name cannot be modified for local Auth Admin user")
+
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_user_profile_page() \
@@ -151,8 +155,9 @@ class TestProfile:
 
     # There is an issue with DOP 1.8 regarding below test case, fix will be in 1.9 version
     @pytest.mark.profile
-    @allure.testcase("To verify Email id  can be modified for any user")
     def test_verify_email_update(self, driver, url):
+        print("To verify Email id  can be modified for any user")
+
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
