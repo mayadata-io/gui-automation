@@ -6,7 +6,7 @@ REFRESH_BUTTON = (By.CSS_SELECTOR, "button.btn.navbar-button.navbar-button--refr
 VOLUME_INFO = (By.ID, "volume-info")
 DASHBOARD_CONTAINER = (By.CSS_SELECTOR, ".dashboard-container")
 GRAPHS_TITLES = (By.CSS_SELECTOR, ".panel-container .panel-title")
-REPORT_BUTTON =(By.CSS_SELECTOR, "a[href*='/reporter/']")
+REPORT_BUTTON = (By.CSS_SELECTOR, "a[href*='/reporter/']")
 
 
 class VolumeTiledViewDashboardPage(BasePage):

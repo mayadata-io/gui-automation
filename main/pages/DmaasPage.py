@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 
 HEADER_TITLE = (By.CSS_SELECTOR, ".section-header_title")
+SCHEDULE_HREF = (By.CSS_SELECTOR, "a[href*='/dmaas/schedules/']")
 
 
 class DmaasPage(BasePage):
@@ -13,6 +14,11 @@ class DmaasPage(BasePage):
         print("Make sure header text equals to '%s'" % header)
         text = self.wait_element_visible(HEADER_TITLE).text
         is_header_correct = header in text
-
         assert is_header_correct is True, "Header is wrong"
         return DmaasPage(self.driver)
+
+    def open_schedules_page(self):
+        print("Click on schedules href")
+        self.wait_element_present(SCHEDULE_HREF).click()
+        from main.pages.dmaas.SchedulesPage import SchedulesPage
+        return SchedulesPage(self.driver)

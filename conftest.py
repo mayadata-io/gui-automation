@@ -11,7 +11,7 @@ CONFIG_PATH = os.path.join(ROOT_DIR, 'config.ini')
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
-    parser.addoption("--url", action="store", default="http://35.239.42.145", help="url")
+    parser.addoption("--url", action="store", default="http://34.218.238.101", help="url")
     parser.addoption("--hub", action="store", default="35.224.47.66", help="hub")
     parser.addoption("--environment", action="store", default="localhost", help="environment")
 
