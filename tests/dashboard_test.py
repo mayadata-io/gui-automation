@@ -167,6 +167,7 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_monitor_page() \
             .open_topology_page() \
             .switch_to_topology_container() \
             .verify_connectivity_diagram_present()
@@ -193,6 +194,7 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_monitor_page() \
             .open_logs_page() \
             .verify_logs_diagram_present()
 
