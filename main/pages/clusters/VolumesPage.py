@@ -28,7 +28,7 @@ class VolumesPage(BasePage):
         print("Make sure volume '%s' present" % name)
         try:
             self.is_element_present(EMPTY_CARD_CONTAINER)
-
+            self.verify_empty_card_container_text_equals("No volumes found")
         except Exception:
             is_exists = False
             self.wait_element_visible(SEARCH_FIELD)
