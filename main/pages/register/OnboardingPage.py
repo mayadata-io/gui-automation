@@ -7,7 +7,7 @@ PROJECT_NAME_FIELD = (By.XPATH, "//label[text()='Rename your project']/following
 CONTINUE_BUTTON = (By.CSS_SELECTOR, ".onboarding-content input.btn")
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
-CLOSE_BUTTON = (By.XPATH, "//h5[text()='Connect to Director OnPrem']/preceding::span[contains(@class, 'mi')]")
+CLOSE_BUTTON = (By.XPATH, "//h5[contains(text(), 'Connect to Director')]/preceding::span[contains(@class, 'mi')]")
 EMAIL_FIELD = (By.CSS_SELECTOR, "input[type='email']")
 COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
 ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
