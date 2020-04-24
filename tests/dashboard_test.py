@@ -105,6 +105,7 @@ class TestDashboard:
             .enter_email("mykola.rus@putsbox.com") \
             .select_role("ProjectMember") \
             .click_send_invite_button() \
+            .open_user_roles_page() \
             .switch_to_filter_tab("All users") \
             .verify_user_present(Config.get("app", "admin_user"), "ProjectOwner") \
             .switch_to_filter_tab("Pending invites") \

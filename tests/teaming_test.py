@@ -298,7 +298,6 @@ class TestTeaming:
             .open_user_role_profile_page() \
             .update_user_role("ProjectAdmin") \
             .verify_updated_user_role("ProjectMember") \
-            .delete_user()
             # .verify_error_message("Changerole Error", "Only [ProjectOwner] can change role.") \
 
     @pytest.mark.teaming

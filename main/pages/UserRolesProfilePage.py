@@ -52,3 +52,4 @@ class UserRolesProfilePage(BasePage):
         self.sleep(5)
         from main.pages.UserRolesPage import UserRolesPage
         return UserRolesPage(self.driver)
+
