@@ -36,7 +36,8 @@ class TestCluster:
             .click_connect_new_cluster_button() \
             .enter_cluster_name(prefix + "Test") \
             .click_connect_button() \
-            .verify_cluster_connection_link_present()
+            .verify_cluster_connection_link_present() \
+            .click_disconnect_cluster_link() \
 
     # Below test case needs to be discussed because self connected cluster is getting disconnected
     # and one active self connected cluster needed for other test case

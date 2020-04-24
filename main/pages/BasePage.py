@@ -96,3 +96,8 @@ class BasePage(object):
 
         assert is_message_correct is True, "Message in modal dialog is wrong"
         return BasePage(self.driver)
+
+    def verify_email_present(self, email):
+        from main.common import EmailWrapper
+        data = EmailWrapper.get_email(email)
+        assert "test" in data
