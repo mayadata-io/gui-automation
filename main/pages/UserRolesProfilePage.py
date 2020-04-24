@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
+from main.pages.SidePanel import SidePanel
 
 DELETE_USER_BUTTON = (By.CSS_SELECTOR, ".btn.btn-link.text-danger")
 AVAILABLE_ROLE = (By.XPATH, "//button[@id='dropdownMenuButton']")
@@ -9,7 +10,7 @@ ERROR_TITLE = (By.XPATH, "//span[@class='jnoty-title']")
 ERROR_MESSAGE = (By.XPATH, "//div[@class='jnoty-message']")
 
 
-class UserRolesProfilePage(BasePage):
+class UserRolesProfilePage(SidePanel):
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -52,3 +53,4 @@ class UserRolesProfilePage(BasePage):
         self.sleep(5)
         from main.pages.UserRolesPage import UserRolesPage
         return UserRolesPage(self.driver)
+
