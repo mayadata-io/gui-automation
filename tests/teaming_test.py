@@ -36,7 +36,8 @@ class TestTeaming:
             .logout() \
             .login(prefix + "_test@putsbox.com", "123qweA!") \
             .open_invitations_page() \
-            .verify_received_invitations("DefaultProject", "ProjectMember", "Administrator")
+            .verify_received_invitations("DefaultProject", "ProjectMember", "Administrator") \
+            .logout()
 
     @pytest.mark.teaming
     def test_verify_view_pending_users(self, driver, url):
@@ -221,7 +222,8 @@ class TestTeaming:
             .open_user_role_profile_page() \
             .update_user_role("ProjectAdmin") \
             .verify_updated_user_role("ProjectAdmin") \
-            .delete_user()
+            .delete_user() \
+            .verify_user_absent(prefix + "test" + " " + prefix + "auto")
 
     @pytest.mark.teaming
     def test_verify_user_role_update_by_non_project_owner(self, driver, url):
@@ -298,6 +300,7 @@ class TestTeaming:
             .open_user_role_profile_page() \
             .update_user_role("ProjectAdmin") \
             .verify_updated_user_role("ProjectMember") \
+            .delete_user()
             # .verify_error_message("Changerole Error", "Only [ProjectOwner] can change role.") \
 
     @pytest.mark.teaming
@@ -415,7 +418,15 @@ class TestTeaming:
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_alerts_page() \
             .verify_alerts_present() \
-            .acknowledge_alert()
+            .acknowledge_alert() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .delete_user() \
+
 
     @pytest.mark.teaming
     def test_verify_project_read_admin_access(self, driver, url):
@@ -453,7 +464,15 @@ class TestTeaming:
             .verify_edit_icon_invisible("DefaultProject") \
             .select_project("DefaultProject") \
             .open_clusters_page() \
-            .verify_connect_new_cluster_button_invisible()
+            .verify_connect_new_cluster_button_invisible() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .delete_user() \
+
 
     @pytest.mark.teaming
     def test_verify_project_member_access(self, driver, url):
@@ -489,4 +508,11 @@ class TestTeaming:
             .click_accept_invitation("DefaultProject", "ProjectMember", "Administrator") \
             .open_projects_page() \
             .verify_edit_icon_invisible("DefaultProject") \
-            .verify_project_not_click_able("DefaultProject")
+            .verify_project_not_click_able("DefaultProject") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .delete_user() \

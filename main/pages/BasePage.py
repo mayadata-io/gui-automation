@@ -2,12 +2,15 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.common.action_chains import ActionChains
 
 ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.alert-danger")
 LOADING_CONTAINER = (By.CSS_SELECTOR, ".loading-container")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open")
 CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open button.btn-outline-primary")
 EMPTY_CARD_CONTAINER = (By.CSS_SELECTOR, ".card_zero_result")
+USER_PROFILE_ITEM = (By.CSS_SELECTOR, ".sidebar-links img[src*='https://ui-avatars.com']")
+LOGOUT_LINK = (By.CSS_SELECTOR, "a[href='/logout']")
 
 
 class BasePage(object):
@@ -101,3 +104,18 @@ class BasePage(object):
         from main.common import EmailWrapper
         data = EmailWrapper.get_email(email)
         assert "test" in data
+
+    def move_to_element(self, locator):
+        element = self.wait_element_visible(locator)
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element)
+        # perform the operation on the element
+        actions.perform()
+
+    def logout(self):
+        print("Logout")
+        self.move_to_element(USER_PROFILE_ITEM)
+        self.wait_element_present(USER_PROFILE_ITEM).click()
+        self.wait_element_present(LOGOUT_LINK).click()
+        from main.pages.LoginPage import LoginPage
+        return LoginPage(self.driver)

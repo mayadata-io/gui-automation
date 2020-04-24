@@ -144,6 +144,7 @@ class SidePanel(BasePage):
 
     def logout(self):
         print("Logout")
+        self.move_to_element(USER_PROFILE_ITEM)
         self.wait_element_present(USER_PROFILE_ITEM).click()
         self.wait_element_present(LOGOUT_LINK).click()
         from main.pages.LoginPage import LoginPage

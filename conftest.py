@@ -11,7 +11,7 @@ CONFIG_PATH = os.path.join(ROOT_DIR, 'config.ini')
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
-    parser.addoption("--url", action="store", default="http://18.194.254.169:30380", help="url")
+    parser.addoption("--url", action="store", default="http://34.218.238.101", help="url")
     parser.addoption("--hub", action="store", default="selenium-grid-aws-505804605.eu-north-1.elb.amazonaws.com", help="hub")
     parser.addoption("--environment", action="store", default="remote", help="environment")
 
@@ -27,12 +27,12 @@ def driver(request):
     if ("localhost" in machine) is True:
         hub = config.get('driver', 'hub')
 
-    # browser = webdriver.Remote(
-    #         command_executor="http://" + hub + ":4444/wd/hub",
-    #         desired_capabilities={
-    #             "browserName": request.config.getoption("--driver")
-    #         })
-    browser = webdriver.Chrome(executable_path='/home/rohan/Downloads/chromedriver')
+    browser = webdriver.Remote(
+            command_executor="http://" + hub + ":4444/wd/hub",
+            desired_capabilities={
+                "browserName": request.config.getoption("--driver")
+            })
+    
     browser.implicitly_wait(30)
     browser.maximize_window()
 
