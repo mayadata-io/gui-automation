@@ -220,7 +220,8 @@ class TestTeaming:
             .find_user(prefix + "test" + " " + prefix + "auto") \
             .open_user_role_profile_page() \
             .update_user_role("ProjectAdmin") \
-            .verify_updated_user_role("ProjectAdmin")
+            .verify_updated_user_role("ProjectAdmin") \
+            .delete_user()
 
     @pytest.mark.teaming
     def test_verify_user_role_update_by_non_project_owner(self, driver, url):
@@ -296,7 +297,8 @@ class TestTeaming:
             .find_user(prefix_2 + "test" + " " + prefix_2 + "auto") \
             .open_user_role_profile_page() \
             .update_user_role("ProjectAdmin") \
-            .verify_updated_user_role("ProjectMember")
+            .verify_updated_user_role("ProjectMember") \
+            .delete_user()
             # .verify_error_message("Changerole Error", "Only [ProjectOwner] can change role.") \
 
     @pytest.mark.teaming
