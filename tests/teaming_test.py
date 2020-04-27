@@ -67,6 +67,7 @@ class TestTeaming:
             .click_send_invite_button() \
             .open_user_roles_page() \
             .switch_to_filter_tab("Pending invites") \
+            .find_user(prefix + "_test@putsbox.com") \
             .verify_user_present(prefix + "_test@putsbox.com", "Active")
 
     @pytest.mark.teaming
@@ -137,6 +138,7 @@ class TestTeaming:
             .login_as_admin() \
             .open_user_roles_page() \
             .switch_to_filter_tab("Pending invites") \
+            .find_user(prefix + "_test@putsbox.com") \
             .verify_user_present(prefix + "_test@putsbox.com", "Rejected")
 
     @pytest.mark.teaming
@@ -177,9 +179,8 @@ class TestTeaming:
             .login_as_admin() \
             .open_user_roles_page() \
             .switch_to_filter_tab("All users") \
-            .verify_user_present(prefix + "test" + " " + prefix + "auto", "ProjectMember") \
-            .switch_to_filter_tab("All users") \
             .find_user(prefix + "test" + " " + prefix + "auto") \
+            .verify_user_present(prefix + "test" + " " + prefix + "auto", "ProjectMember") \
             .open_user_role_profile_page() \
             .delete_user()
 
