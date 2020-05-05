@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
-from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
+from main.pages.BasePage import EMPTY_CARD_CONTAINER
+from main.pages.SidePanel import SidePanel
 
 SEARCH_FIELD = (By.CSS_SELECTOR, "input[placeholder='Find a volume']")
 AVAILABLE_VOLUMES = (By.CSS_SELECTOR, "table.table tr")
@@ -11,7 +12,7 @@ VOLUME_ANALYTICS = (By.CSS_SELECTOR, ".mi.mi-frequency.mi-1x")
 IS_EMPTY_PAGE = False
 
 
-class MonitorPage(BasePage):
+class MonitorPage(SidePanel):
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -32,6 +33,7 @@ class MonitorPage(BasePage):
         print("Make sure volume '%s' present" % name)
         try:
             self.is_element_present(EMPTY_CARD_CONTAINER)
+            self.verify_empty_card_container_text_equals("Looks like OpenEBS is not installed on your cluster!")
         except Exception:
             is_exists = False
             self.wait_element_visible(SEARCH_FIELD)

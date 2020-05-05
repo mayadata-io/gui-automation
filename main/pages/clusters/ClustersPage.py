@@ -160,3 +160,8 @@ class ClustersPage(BasePage):
         print("Enter '%s' into 'Search' field" % password)
         self.wait_element_present(SEARCH_FIELD).send_keys(password)
         return ClustersPage(self.driver)
+
+    def verify_connect_new_cluster_button_invisible(self):
+        print("Make sure that 'Connect a new cluster' button invisible")
+        self.wait_element_invisible(CONNECT_NEW_CLUSTER)
+        return ClustersPage(self.driver)

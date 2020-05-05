@@ -105,6 +105,7 @@ class TestDashboard:
             .enter_email("mykola.rus@putsbox.com") \
             .select_role("ProjectMember") \
             .click_send_invite_button() \
+            .open_user_roles_page() \
             .switch_to_filter_tab("All users") \
             .verify_user_present(Config.get("app", "admin_user"), "ProjectOwner") \
             .switch_to_filter_tab("Pending invites") \
@@ -167,6 +168,7 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_monitor_page() \
             .open_topology_page() \
             .switch_to_topology_container() \
             .verify_connectivity_diagram_present()
@@ -193,6 +195,7 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_monitor_page() \
             .open_logs_page() \
             .verify_logs_diagram_present()
 

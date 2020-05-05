@@ -1,14 +1,17 @@
 from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 from main.pages.UserProfilePage import UserProfilePage
+from main.pages.InvitationsPage import InvitationsPage
 
-PROJECT_LINK = (By.CSS_SELECTOR, ".sidebar-header-item-project_name")
+PROJECT_LINK = (By.CSS_SELECTOR, ".sidebar-project-icon")
+MANAGE_PROJECTS_LINK = (By.CSS_SELECTOR, "a[href='/projects']")
 DASHBOARD_LINK = (By.CSS_SELECTOR, "a[href='/dashboard']")
 CLUSTERS_LINK = (By.CSS_SELECTOR, "a[href='/clusters']")
 MONITORING_LINK = (By.CSS_SELECTOR, "a[href='/monitor']")
 USER_ROLES_LINK = (By.CSS_SELECTOR, "a[href='/settings/team/members']")
 USER_PROFILE_ITEM = (By.CSS_SELECTOR, ".sidebar-links img[src*='https://ui-avatars.com']")
 PROFILE_LINK = (By.CSS_SELECTOR, "a[href='/settings/profile']")
+INVITES_LINK = (By.CSS_SELECTOR, "a[href='/invitations']")
 LOGOUT_LINK = (By.CSS_SELECTOR, "a[href='/logout']")
 APPLICATIONS_LINK = (By.CSS_SELECTOR, "a[href*='/applications']")
 POOLS_LINK = (By.CSS_SELECTOR, "a[href*='/pools']")
@@ -32,6 +35,14 @@ class SidePanel(BasePage):
         self.sleep(15)
         from main.pages.DashboardPage import DashboardPage
         return DashboardPage(self.driver)
+
+    def open_projects_page(self):
+        print("Open 'Projects' page")
+        self.wait_element_present(PROJECT_LINK).click()
+        self.wait_element_present(MANAGE_PROJECTS_LINK).click()
+        self.sleep(5)
+        from main.pages.ProjectsPage import ProjectsPage
+        return ProjectsPage(self.driver)
 
     def open_applications_page(self):
         print("Open 'Applications' page")
@@ -121,10 +132,19 @@ class SidePanel(BasePage):
         print("Open 'User profile' page")
         self.wait_element_present(USER_PROFILE_ITEM).click()
         self.wait_element_present(PROFILE_LINK).click()
+        self.sleep(10)
         return UserProfilePage(self.driver)
+
+    def open_invitations_page(self):
+        print("Open 'Invitations' page")
+        self.wait_element_present(USER_PROFILE_ITEM).click()
+        self.wait_element_present(INVITES_LINK).click()
+        self.sleep(5)
+        return InvitationsPage(self.driver)
 
     def logout(self):
         print("Logout")
+        self.move_to_element(USER_PROFILE_ITEM)
         self.wait_element_present(USER_PROFILE_ITEM).click()
         self.wait_element_present(LOGOUT_LINK).click()
         from main.pages.LoginPage import LoginPage
