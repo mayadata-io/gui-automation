@@ -29,6 +29,7 @@ class VolumesPage(BasePage):
         is_exist = False
         for volume in volumes:
             text = volume.text
+            print(text)
             if volume_name in text and volume_type in text:
                 is_exist = True
                 break

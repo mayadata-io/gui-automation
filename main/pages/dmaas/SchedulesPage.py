@@ -24,15 +24,18 @@ class SchedulesPage(BasePage):
         text = self.wait_element_visible(RESTORE_LIST).text
         print(text)
         is_exists = False
-        count = 1
-        while count > 0:
+        count = 0
+        while count < 500:
             if status in text:
                 is_exists = True
                 break
+            elif "Failed" in text:
+                break
             else:
+                self.sleep(5)
                 count = count + 1
                 text = self.wait_element_visible(RESTORE_LIST).text
-        assert is_exists is True, "Status of backup is not completed"
+        assert is_exists is True, "Status of Restore is not completed"
         return SchedulesPage(self.driver)
 
 

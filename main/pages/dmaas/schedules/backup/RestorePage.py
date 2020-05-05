@@ -17,7 +17,7 @@ class RestorePage(BasePage):
         print("Select Restore cluster '%s'" % name)
         select = self.wait_element_present(SELECT_CLUSTER)
         for option in select.find_elements_by_tag_name('option'):
-            if option.text in name:
+            if name in option.text:
                 option.click()
                 break
         return RestorePage(self.driver)

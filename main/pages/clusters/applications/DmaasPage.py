@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+
+from main.common import Config
 from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 
 NEW_SCHEDULE_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary")
@@ -6,12 +8,13 @@ CLOUD_PROVIDER = (By.CSS_SELECTOR, ".tab-chooser")
 CLOUD_PROVIDER_AVATAR = ".tab-chooser-logo"
 ADD_CLOUD_CREDENTIAL = (By.CSS_SELECTOR, "button.btn.btn-outline-primary.btn-pill.btn-lg")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-content.b-d")
-TITLE_FIELD = (By.ID, "credential-title")
-USERNAME_FIELD = (By.ID, "credential-Accesskey-id")
-PASSWORD_FIELD = (By.ID, "credential-secretkey")
+CREDENTIAL_TITLE = (By.ID, "credential-title")
+CREDENTIAL_ACCESS_KEY_ID = (By.ID, "credential-Accesskey-id")
+CREDENTIAL_SECRET_KEY = (By.ID, "credential-secretkey")
 CANCEL_BUTTON =(By.XPATH, "//button[@class='btn btn-outline-primary']")
 SAVE_BUTTON = (By.XPATH, "//input[@value='Save']")
-SELECT_PROVIDER_CREDENTIALS = (By.XPATH, "//div[@class='form-group w-50']//select[@class='form-control']")
+SELECT_PROVIDER_CREDENTIALS = (By.XPATH, "//div[@class='mr-5']//div[@class='form-group']")
+SELECT_AWS_REGION = (By.XPATH, "//div[@class='form-group w-25']//select[@class='form-control']")
 MINIO_URL_FIELD = (By.XPATH, "//input[@placeholder='http://minio.example.com']")
 MINIO_HREF = (By.XPATH, "//a[contains(text(),'Get credential for Minio')]")
 SELECT_INTERVAL_FIELD = (By.XPATH, "//div[@class='form-group']//select[@class='form-control']")
@@ -25,7 +28,7 @@ SELECT_TIME_OK_BUTTON = (By.XPATH, "//button[@class='btn btn-primary btn-sm']")
 SELECT_CALENDER = (By.XPATH, "//div[@class='calendar-day-month-picker_wrapper']//ol")
 SCHEDULE_NOW_BUTTON = (By.XPATH , "//input[@value='Schedule now']")
 SCHEDULE_LIST = (By.CSS_SELECTOR, ".text-hyperlink")
-# SCHEDULE_NAME = ".text-hyperlink"
+SCHEDULE_STATUS = (By.CSS_SELECTOR, ".cluster-name.text-capitalize")
 SCHEDULE_REMOVE_ICON = (By.CSS_SELECTOR, ".mi.mi-trash.mi-1x")
 SCHEDULE_RESTORE_ICON = (By.CSS_SELECTOR, ".mi.mi-cloud-reload.mi-1x")
 SCHEDULE_DELETE_BUTTON = (By.CSS_SELECTOR, ".btn.btn-danger")
@@ -34,6 +37,8 @@ SCHEDULE_HREF = (By.XPATH, "//span[contains(text(),'sch-')]")
 LIST_OF_BACKUPS = (By.XPATH, "//table[@class='table table-sm']//tbody")
 BACKUP_TABLE = (By.CSS_SELECTOR, "table.table.table-sm tbody tr")
 BACK_BUTTON = (By.CSS_SELECTOR, ".mi.mi-arrow-left-curve.mi-1x")
+MODAL_TITLE = (By.XPATH, "//h5[@class='modal-title']")
+MODAL_YES_BUTTON = (By.XPATH, "//button[@class='btn btn-primary']")
 
 
 class DmaasPage(BasePage):
@@ -44,17 +49,17 @@ class DmaasPage(BasePage):
 
     def enter_title(self, title):
         print("Enter '%s' into 'Title' field" % title)
-        self.wait_element_present(TITLE_FIELD).send_keys(title)
+        self.wait_element_present(CREDENTIAL_TITLE).send_keys(title)
         return DmaasPage(self.driver)
 
     def enter_username(self, username):
-        print("Enter '%s' into 'Username' field" % username)
-        self.wait_element_present(USERNAME_FIELD).send_keys(username)
+        print("Enter username")
+        self.wait_element_present(CREDENTIAL_ACCESS_KEY_ID).send_keys(username)
         return DmaasPage(self.driver)
 
     def enter_password(self, password):
-        print("Enter '%s' into 'Password' field" % password)
-        self.wait_element_present(PASSWORD_FIELD).send_keys(password)
+        print("Enter password")
+        self.wait_element_present(CREDENTIAL_SECRET_KEY).send_keys(password)
         return DmaasPage(self.driver)
 
     def click_save_button(self):
@@ -70,7 +75,7 @@ class DmaasPage(BasePage):
 
     def click_add_cloud_credential_button(self):
         print("Click 'Add Cloud Credential' button")
-        self.wait_element_visible(MINIO_HREF)
+        # self.wait_element_visible(MINIO_HREF)
         self.wait_element_present(ADD_CLOUD_CREDENTIAL).click()
         return DmaasPage(self.driver)
 
@@ -100,6 +105,16 @@ class DmaasPage(BasePage):
         select = self.wait_element_present(SELECT_PROVIDER_CREDENTIALS)
         for option in select.find_elements_by_tag_name('option'):
             if option.text in name:
+                option.click()
+                break
+        self.sleep(10)
+        return DmaasPage(self.driver)
+
+    def select_region(self, region):
+        print("Select AWS region'%s' from list" % region)
+        select = self.wait_element_present(SELECT_AWS_REGION)
+        for option in select.find_elements_by_tag_name('option'):
+            if option.text in region:
                 option.click()
                 break
         self.sleep(10)
@@ -140,7 +155,7 @@ class DmaasPage(BasePage):
     def click_schedule_now_button(self):
         print("Click 'Schedule now' button")
         self.wait_element_present(SCHEDULE_NOW_BUTTON).click()
-        self.sleep(10)
+        self.sleep(5)
         return DmaasPage(self.driver)
 
     def verify_dmass_schedule_present(self):
@@ -154,7 +169,6 @@ class DmaasPage(BasePage):
                 is_exists = True
                 break
         assert is_exists is True, "Schedule is absent"
-        self.sleep(10)
         return DmaasPage(self.driver)
 
     def verify_dmass_schedule_absent(self):
@@ -186,7 +200,7 @@ class DmaasPage(BasePage):
 
     def verify_status_of_backups(self, status):
         print("Make sure that that status is '%s'" % status)
-        self.sleep(90)
+        self.sleep(10)
         try:
             self.is_element_present(EMPTY_CARD_CONTAINER)
             print("Backup list is not generated.")
@@ -194,13 +208,18 @@ class DmaasPage(BasePage):
             text = self.wait_element_visible(LIST_OF_BACKUPS).text
             print(text)
             is_exists = False
-            count = 1
-            while count > 0:
+            count = 0
+            while count < 300:
                 if status in text:
                     is_exists = True
                     break
                 else:
+                    self.sleep(5)
                     count = count + 1
+                    if "PartiallyFailed" in text:
+                        print("backup is partially failed")
+                        is_exists = False
+                        break
                     text = self.wait_element_visible(LIST_OF_BACKUPS).text
             assert is_exists is True, "Status of backup is not completed"
         return DmaasPage(self.driver)
@@ -255,8 +274,18 @@ class DmaasPage(BasePage):
                 break
         return DmaasPage(self.driver)
 
-    def click_dmaas_schedule(self):
+    def click_dmaas_schedule(self, status):
         print("Click on '%s' dmaas schedule" % DmaasPage.new_schedule_name)
+        text = self.wait_element_visible(SCHEDULE_STATUS).text
+        count = 0
+        while count < 30:
+            if status in text:
+                break
+            else:
+                self.sleep(2)
+                count = count + 1
+                text = self.wait_element_visible(SCHEDULE_STATUS).text
+        self.sleep(30)
         self.wait_element_present(SCHEDULE_HREF).click()
         return DmaasPage(self.driver)
 
@@ -276,4 +305,29 @@ class DmaasPage(BasePage):
     def click_back_button(self):
         print("Click on back button")
         self.wait_element_present(BACK_BUTTON).click()
+        return DmaasPage(self.driver)
+
+    def confirm_aws_schedule(self):
+        print("Click on 'Yes sure' button to to schedule new AWS backup")
+        try:
+            self.wait_element_visible(MODAL_TITLE)
+            self.wait_element_present(MODAL_YES_BUTTON).click()
+        except Exception:
+            print("No modal box second time")
+            pass
+        return DmaasPage(self.driver)
+
+    def set_cloud_credential(self, name, title):
+        print("Add '%s' cloud credential" % name)
+        self.enter_title(title)
+        if name == 'AWS':
+            self.enter_username(Config.get_value("default", "user"))
+            self.enter_password(Config.get_value("default", "pwd"))
+        elif name == 'MINIO':
+            self.enter_username(Config.get_value("minio", "user"))
+            self.enter_password(Config.get_value("minio", "pwd"))
+        else:
+            self.enter_username(Config.get_value("default", "user"))
+            self.enter_password(Config.get_value("default", "pwd"))
+        self.click_save_button()
         return DmaasPage(self.driver)
