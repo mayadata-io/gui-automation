@@ -107,7 +107,6 @@ def _capture_screenshot(driver, path, name):
 @pytest.fixture(scope="module")
 def url(request):
     return request.config.getoption("--url")
-<<<<<<< HEAD
 
 
 @pytest.fixture(scope="module")
@@ -118,5 +117,4 @@ def minio(request):
 @pytest.fixture(scope="module")
 def region(request):
     return request.config.getoption("--region")
-=======
->>>>>>> 098e3ca7dd30ad5613d9631753205bc30707462b
+
