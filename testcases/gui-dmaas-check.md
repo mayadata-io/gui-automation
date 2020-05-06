@@ -86,7 +86,7 @@
 * Login using credentials
 * Click on dmaas.
 * Click on the schedule.
-*  Click on restore button of a successful backup
+* Click on restore button of a successful backup
 * Select the destination cluster
 
 #### &nbsp;&nbsp;&nbsp;Expected Output
