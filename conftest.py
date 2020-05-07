@@ -7,6 +7,7 @@ from selenium import webdriver
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(ROOT_DIR, 'config.ini')
+CRED_PATH = os.path.join(ROOT_DIR, 'cred.ini')
 
 
 def pytest_addoption(parser):
@@ -14,6 +15,9 @@ def pytest_addoption(parser):
     parser.addoption("--url", action="store", default="http://34.218.238.101", help="url")
     parser.addoption("--hub", action="store", default="selenium-grid-aws-505804605.eu-north-1.elb.amazonaws.com", help="hub")
     parser.addoption("--environment", action="store", default="remote", help="environment")
+    parser.addoption("--minio", action="store", default="http://18.219.250.237:32701", help="minio")
+    parser.addoption("--region", action="store", default="us-west-2", help="region")
+
 
 
 @pytest.fixture(scope="function")
@@ -32,7 +36,7 @@ def driver(request):
             desired_capabilities={
                 "browserName": request.config.getoption("--driver")
             })
-    
+
     browser.implicitly_wait(30)
     browser.maximize_window()
 
@@ -103,3 +107,14 @@ def _capture_screenshot(driver, path, name):
 @pytest.fixture(scope="module")
 def url(request):
     return request.config.getoption("--url")
+
+
+@pytest.fixture(scope="module")
+def minio(request):
+    return request.config.getoption("--minio")
+
+
+@pytest.fixture(scope="module")
+def region(request):
+    return request.config.getoption("--region")
+

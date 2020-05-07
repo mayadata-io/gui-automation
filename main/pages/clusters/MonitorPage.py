@@ -7,6 +7,7 @@ AVAILABLE_VOLUMES = (By.CSS_SELECTOR, "table.table tr")
 METRICS_FRAME = "iframe[src*='openebs_Volume=All']"
 DASHBOARD_CONTAINER = (By.CSS_SELECTOR, ".dashboard-container")
 GRAPHS_TITLES = (By.CSS_SELECTOR, ".panel-container .panel-title")
+VOLUME_ANALYTICS = (By.CSS_SELECTOR, ".mi.mi-frequency.mi-1x")
 
 IS_EMPTY_PAGE = False
 
@@ -36,10 +37,27 @@ class MonitorPage(SidePanel):
         except Exception:
             is_exists = False
             self.wait_element_visible(SEARCH_FIELD)
+            volumes = self.wait_elements_visible(AVAILABLE_VOLUMES)
+            for volume in volumes:
+                text = volume.text
+                if name in text and status in text and cas_type in text:
+                    is_exists = True
+                    break
+            assert is_exists is True, "Volume is absent"
+        return MonitorPage(self.driver)
+
+    def verify_volume_present(self, name, status, capacity, application, namespace, replicas, cas_type):
+        print("Make sure volume '%s' present" % name)
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
+            is_exists = False
+            self.wait_element_visible(SEARCH_FIELD)
             my_clusters = self.wait_elements_visible(AVAILABLE_VOLUMES)
             for my_cluster in my_clusters:
                 text = my_cluster.text
-                if name in text and status in text and cas_type in text:
+                if name in text and status in text and capacity in text and application in text \
+                        and namespace in text and replicas in text and cas_type in text:
                     is_exists = True
                     break
             assert is_exists is True, "Volume is absent"
@@ -71,3 +89,21 @@ class MonitorPage(SidePanel):
 
             assert is_exists is True, "Graph is absent"
         return MonitorPage(self.driver)
+
+    def click_volume_analytics(self, name):
+        print("Click 'volume analytics' for volume name '%s' " %name)
+        try:
+            self.is_element_present(EMPTY_CARD_CONTAINER)
+        except Exception:
+            is_exists = False
+            self.wait_element_visible(SEARCH_FIELD)
+            volumes = self.wait_elements_visible(AVAILABLE_VOLUMES)
+            for volume in volumes:
+                text = volume.text
+                if name in text:
+                    is_exists = True
+                    self.wait_element_present(VOLUME_ANALYTICS).click()
+                    break
+            assert is_exists is True, "Volume is absent"
+        from main.pages.clusters.monitor.VolumeTiledViewDashboardPage import VolumeTiledViewDashboardPage
+        return VolumeTiledViewDashboardPage(self.driver)
