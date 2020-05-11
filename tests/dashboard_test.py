@@ -176,12 +176,26 @@ class TestDashboard:
     @pytest.mark.dashboard
     @allure.testcase("To verify Monitor dashboard")
     def test_verify_monitor_dashboard(self, driver, url):
+        prefix = Utils.random_string(6)
+        phone = Utils.random_number(10)
         Platform(driver).launch(url) \
-            .login_as_admin() \
+            .login_as_oep_user("oep.user@mayadata.io", "OEPuser@123") \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .enter_company_name(prefix + "Putbox") \
+            .enter_role(prefix + "Automation") \
+            .enter_phone_number(phone) \
+            .click_continue_button() \
+            .verify_onboarding_page_title_equals("We have created a project for you!") \
+            .enter_project_name("") \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "Active") \
             .open_monitor_page() \
-            .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva") \
+            .verify_volume_present("csi-vol", "Healthy", "cStor") \
             .switch_to_metrics_frame() \
             .verify_graph_present("Storage capacity") \
             .verify_graph_present("Total capacity of all volumes") \

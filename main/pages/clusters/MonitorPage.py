@@ -46,22 +46,22 @@ class MonitorPage(SidePanel):
             assert is_exists is True, "Volume is absent"
         return MonitorPage(self.driver)
 
-    def verify_volume_present(self, name, status, capacity, application, namespace, replicas, cas_type):
-        print("Make sure volume '%s' present" % name)
-        try:
-            self.is_element_present(EMPTY_CARD_CONTAINER)
-        except Exception:
-            is_exists = False
-            self.wait_element_visible(SEARCH_FIELD)
-            my_clusters = self.wait_elements_visible(AVAILABLE_VOLUMES)
-            for my_cluster in my_clusters:
-                text = my_cluster.text
-                if name in text and status in text and capacity in text and application in text \
-                        and namespace in text and replicas in text and cas_type in text:
-                    is_exists = True
-                    break
-            assert is_exists is True, "Volume is absent"
-        return MonitorPage(self.driver)
+    # def verify_volume_present(self, name, status, capacity, application, namespace, replicas, cas_type):
+    #     print("Make sure volume '%s' present" % name)
+    #     try:
+    #         self.is_element_present(EMPTY_CARD_CONTAINER)
+    #     except Exception:
+    #         is_exists = False
+    #         self.wait_element_visible(SEARCH_FIELD)
+    #         my_clusters = self.wait_elements_visible(AVAILABLE_VOLUMES)
+    #         for my_cluster in my_clusters:
+    #             text = my_cluster.text
+    #             if name in text and status in text and capacity in text and application in text \
+    #                     and namespace in text and replicas in text and cas_type in text:
+    #                 is_exists = True
+    #                 break
+    #         assert is_exists is True, "Volume is absent"
+    #     return MonitorPage(self.driver)
 
     def switch_to_metrics_frame(self):
         print("Switch to 'Metrics' container")
