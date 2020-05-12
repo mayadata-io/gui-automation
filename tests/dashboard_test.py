@@ -181,12 +181,13 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_monitor_page() \
-            .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva") \
-            .switch_to_metrics_frame() \
-            .verify_graph_present("Storage capacity") \
-            .verify_graph_present("Total capacity of all volumes") \
-            .verify_graph_present("IOPS of all volumes") \
-            .verify_graph_present("Throughput of all volumes")
+            .verify_volumes_present()
+            # .verify_volume_present("csi-vol", "Healthy", "cStor")
+            # .switch_to_metrics_frame() \
+            # .verify_graph_present("Storage capacity") \
+            # .verify_graph_present("Total capacity of all volumes") \
+            # .verify_graph_present("IOPS of all volumes") \
+            # .verify_graph_present("Throughput of all volumes")
 
     @pytest.mark.galo01
     @allure.testcase("To verify Logs dashboard")

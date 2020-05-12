@@ -49,6 +49,14 @@ class LoginPage(BasePage):
         self.click_login_button()
         return SidePanel(self.driver)
 
+    def login_as_oep_user(self, email, password):
+        print("Click 'Login' button")
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login_button()
+        from main.pages.register.OnboardingPage import OnboardingPage
+        return OnboardingPage(self.driver)
+
     def click_create_account_link(self):
         print("Click 'Create account' link")
         self.wait_element_present(CREATE_ACCOUNT_BUTTON).click()

@@ -149,7 +149,6 @@ class TestProfile:
             .click_update_profile_button() \
             .verify_error_message("Please fill in all required fields")
 
-    # There is an issue with DOP 1.8 regarding below test case, fix will be in 1.9 version
     @pytest.mark.profile
     @allure.testcase("To verify Email id  can be modified for any user")
     def test_verify_email_update(self, driver, url):
@@ -183,3 +182,25 @@ class TestProfile:
             .logout() \
             .login(prefix + "_test@putsbox.com" + prefix, "123qweA!") \
             .open_user_profile_page()
+
+    # Complete OEP user profile which got created through API. Below test is covered in dashboard test test_verify_monitor_dashboard
+    @pytest.mark.profile
+    @allure.testcase("To verify profile completion for ORP user.")
+    def test_verify_oep_user_profile_completion_(self, driver, url):
+        prefix = Utils.random_string(6)
+        phone = Utils.random_number(10)
+        Platform(driver).launch(url) \
+            .login_as_oep_user("oep.user@mayadata.io", "OEPuser@123") \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .enter_company_name(prefix + "Putbox") \
+            .enter_role(prefix + "Automation") \
+            .enter_phone_number(phone) \
+            .click_continue_button() \
+            .verify_onboarding_page_title_equals("We have created a project for you!") \
+            .enter_project_name("") \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout()

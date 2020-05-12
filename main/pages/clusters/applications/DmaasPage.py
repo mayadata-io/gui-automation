@@ -4,7 +4,8 @@ from main.common import Config
 from main.pages.BasePage import BasePage, EMPTY_CARD_CONTAINER
 
 NEW_SCHEDULE_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary")
-CLOUD_PROVIDER = (By.CSS_SELECTOR, ".tab-chooser")
+# CLOUD_PROVIDER = (By.CSS_SELECTOR, ".tab-chooser")
+CLOUD_PROVIDER = (By.CSS_SELECTOR, ".chooser-card")
 CLOUD_PROVIDER_AVATAR = ".tab-chooser-logo"
 ADD_CLOUD_CREDENTIAL = (By.CSS_SELECTOR, "button.btn.btn-outline-primary.btn-pill.btn-lg")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-content.b-d")
