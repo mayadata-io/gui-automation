@@ -323,13 +323,13 @@ class DmaasPage(BasePage):
         print("Add '%s' cloud credential" % name)
         self.enter_title(title)
         if name == 'AWS':
-            self.enter_username(Config.get_value("default", "user"))
-            self.enter_password(Config.get_value("default", "pwd"))
+            self.enter_username(Config.get_value("default", "aws_access_key_id"))
+            self.enter_password(Config.get_value("default", "aws_secret_access_key"))
         elif name == 'MINIO':
             self.enter_username(Config.get_value("minio", "user"))
             self.enter_password(Config.get_value("minio", "pwd"))
         else:
-            self.enter_username(Config.get_value("default", "user"))
-            self.enter_password(Config.get_value("default", "pwd"))
+            self.enter_username(Config.get_value("aws_access_key_id", "user"))
+            self.enter_password(Config.get_value("aws_secret_access_key", "pwd"))
         self.click_save_button()
         return DmaasPage(self.driver)
