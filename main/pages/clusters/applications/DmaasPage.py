@@ -155,6 +155,7 @@ class DmaasPage(BasePage):
 
     def click_schedule_now_button(self):
         print("Click 'Schedule now' button")
+        self.sleep(10)
         self.wait_element_present(SCHEDULE_NOW_BUTTON).click()
         self.sleep(5)
         return DmaasPage(self.driver)
