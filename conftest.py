@@ -16,7 +16,7 @@ def pytest_addoption(parser):
     parser.addoption("--hub", action="store", default="selenium-grid-aws-505804605.eu-north-1.elb.amazonaws.com", help="hub")
     parser.addoption("--environment", action="store", default="remote", help="environment")
     parser.addoption("--minio", action="store", default="http://18.219.250.237:32701", help="minio")
-    parser.addoption("--region", action="store", default="ap-northeast-1", help="region")
+    parser.addoption("--region", action="store", default="eu-central-1", help="region")
 
 
 @pytest.fixture(scope="function")
