@@ -155,7 +155,7 @@ class DmaasPage(BasePage):
 
     def click_schedule_now_button(self):
         print("Click 'Schedule now' button")
-        self.sleep(10)
+        self.sleep(5)
         self.wait_element_present(SCHEDULE_NOW_BUTTON).click()
         self.sleep(5)
         return DmaasPage(self.driver)
@@ -329,7 +329,7 @@ class DmaasPage(BasePage):
             self.enter_username(Config.get_value("minio", "user"))
             self.enter_password(Config.get_value("minio", "pwd"))
         else:
-            self.enter_username(Config.get_value("aws_access_key_id", "user"))
-            self.enter_password(Config.get_value("aws_secret_access_key", "pwd"))
+            self.enter_username(Config.get_value("default", "aws_access_key_id"))
+            self.enter_password(Config.get_value("default", "aws_secret_access_key"))
         self.click_save_button()
         return DmaasPage(self.driver)
