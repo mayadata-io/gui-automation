@@ -416,7 +416,6 @@ class TestDmaas:
     @pytest.mark.dmaasJivaAws
     @allure.testcase("Restore  Jiva dmaas schedule")
     def test_verify_restore_jiva_aws_dmaas_schedule(self, driver, url, region):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -430,8 +429,8 @@ class TestDmaas:
             .click_new_schedule_button() \
             .select_cloud_provider("AWS") \
             .click_add_cloud_credential_button() \
-            .set_cloud_credential("AWS", prefix + "aws") \
-            .select_provider_credential(prefix + "aws") \
+            .set_cloud_credential("AWS", "aws-cred") \
+            .select_provider_credential("aws-cred") \
             .select_region(region) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -455,7 +454,6 @@ class TestDmaas:
     @pytest.mark.dmaasHostpathAws
     @allure.testcase("Restore hostptah dmaas schedule")
     def test_verify_restore_hostpath_aws_dmaas_schedule(self, driver, url, region):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -468,9 +466,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("AWS") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("AWS",  prefix + "aws") \
-            .select_provider_credential(prefix + "aws") \
+            .select_provider_credential("aws-cred") \
             .select_region(region) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -494,7 +490,6 @@ class TestDmaas:
     @pytest.mark.dmaasCstorAws
     @allure.testcase("Restore cStor dmaas schedule")
     def test_verify_restore_cstor_aws_dmaas_schedule(self, driver, url, region):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -507,9 +502,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("AWS") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("AWS", prefix + "aws") \
-            .select_provider_credential(prefix + "aws") \
+            .select_provider_credential("aws-cred") \
             .select_region(region) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -533,7 +526,6 @@ class TestDmaas:
     @pytest.mark.dmaasDeviceAws
     @allure.testcase("Restore device dmaas schedule")
     def test_verify_restore_device_aws_dmaas_schedule(self, driver, url, region):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -546,9 +538,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("AWS") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("AWS", prefix + "aws") \
-            .select_provider_credential(prefix + "aws") \
+            .select_provider_credential("aws-cred") \
             .select_region(region) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -574,7 +564,6 @@ class TestDmaas:
     @pytest.mark.dmaasJivaMinio
     @allure.testcase("Restore  Jiva dmaas schedule")
     def test_verify_restore_jiva_minio_dmaas_schedule(self, driver, url, minio):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -588,8 +577,8 @@ class TestDmaas:
             .click_new_schedule_button() \
             .select_cloud_provider("MINIO") \
             .click_add_cloud_credential_button() \
-            .set_cloud_credential("MINIO", prefix + "minio") \
-            .select_provider_credential(prefix + "minio") \
+            .set_cloud_credential("MINIO", "minio-cred") \
+            .select_provider_credential("minio-cred") \
             .enter_minio_url(minio) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -613,7 +602,6 @@ class TestDmaas:
     @pytest.mark.dmaasHostpathMinio
     @allure.testcase("Restore hostptah dmaas schedule")
     def test_verify_restore_hostpath_minio_dmaas_schedule(self, driver, url, minio):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -626,9 +614,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("MINIO") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("MINIO", prefix + "minio") \
-            .select_provider_credential(prefix + "minio") \
+            .select_provider_credential("minio-cred") \
             .enter_minio_url(minio) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -652,7 +638,6 @@ class TestDmaas:
     @pytest.mark.dmaasCstorMinio
     @allure.testcase("Restore cStor dmaas schedule")
     def test_verify_restore_cstor_minio_dmaas_schedule(self, driver, url, minio):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -665,9 +650,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("MINIO") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("MINIO", prefix + "minio") \
-            .select_provider_credential(prefix + "minio") \
+            .select_provider_credential("minio-cred") \
             .enter_minio_url(minio) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -691,7 +674,6 @@ class TestDmaas:
     @pytest.mark.dmaasDeviceMinio
     @allure.testcase("Restore device dmaas schedule")
     def test_verify_restore_device_minio_dmaas_schedule(self, driver, url, minio):
-        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -704,9 +686,7 @@ class TestDmaas:
             .click_dmass_button() \
             .click_new_schedule_button() \
             .select_cloud_provider("MINIO") \
-            .click_add_cloud_credential_button() \
-            .set_cloud_credential("MINIO", prefix + "minio") \
-            .select_provider_credential(prefix + "minio") \
+            .select_provider_credential("minio-cred") \
             .enter_minio_url(minio) \
             .select_interval("Hourly") \
             .select_minutes("05") \
@@ -726,3 +706,13 @@ class TestDmaas:
             .enter_schedule() \
             .open_schedules_page() \
             .verify_restore_status("Success")
+
+    # Test case for deleting schedules
+    @pytest.mark.dmaasDelete
+    @allure.testcase("Delete Dmaas schedules")
+    def test_verify_dmaas_schedules_deletion(self, driver, url):
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .login("oep.user@mayadata.io", "OEPuser@123") \
+            .open_dmaas_page() \
+            .delete_dmaas_schedules("minio-deployment", "-minio")
