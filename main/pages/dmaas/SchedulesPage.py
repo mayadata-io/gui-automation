@@ -25,7 +25,7 @@ class SchedulesPage(BasePage):
         print(text)
         is_exists = False
         count = 0
-        while count < 500:
+        while count < 120:
             if status in text:
                 is_exists = True
                 break
