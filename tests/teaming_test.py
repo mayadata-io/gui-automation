@@ -499,7 +499,7 @@ class TestTeaming:
     #         .verify_edit_icon_invisible("DefaultProject") \
     #         .verify_project_not_click_able("DefaultProject")
 
-    @pytest.mark.teaming
+    @pytest.mark.teamingUserInvite
     def test_verify_project_admin_user_invite(self, driver, url):
         print("ProjectOwner can invite users as ProjectAdmin role in Project.")
         prefix = Utils.random_string(6)
@@ -532,7 +532,7 @@ class TestTeaming:
             .verify_received_invitations("DefaultProject", "ProjectAdmin", "Administrator") \
             .click_accept_invitation("DefaultProject", "ProjectAdmin", "Administrator")
 
-    @pytest.mark.teaming
+    @pytest.mark.teamingUserInvite
     def test_verify_project_member_user_invite(self, driver, url):
         print("ProjectOwner can invite users as ProjectMember role in Project.")
         prefix = Utils.random_string(6)
@@ -565,7 +565,7 @@ class TestTeaming:
             .verify_received_invitations("DefaultProject", "ProjectMember", "Administrator") \
             .click_accept_invitation("DefaultProject", "ProjectMember", "Administrator")
 
-    @pytest.mark.teaming
+    @pytest.mark.teamingUserInvite
     def test_verify_project_read_admin_user_invite(self, driver, url):
         print("ProjectOwner can invite users as ProjectReadAdmin role in Project.")
         prefix = Utils.random_string(6)
@@ -597,3 +597,261 @@ class TestTeaming:
             .open_invitations_page() \
             .verify_received_invitations("DefaultProject", "ProjectReadAdmin", "Administrator") \
             .click_accept_invitation("DefaultProject", "ProjectReadAdmin", "Administrator")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_project_member_user_role_update_to_admin_by_project_owner(self, driver, url):
+        print("To validate ProjectMember user role update to ProjectAdmin by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectMember") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectMember", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectMember", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectMember", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectAdmin") \
+            .verify_updated_user_role("ProjectAdmin")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_read_admin_user_role_update_to_admin_by_project_owner(self, driver, url):
+        print("To validate ProjectReadAdmin user role update to ProjectAdmin by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectReadAdmin") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectAdmin") \
+            .verify_updated_user_role("ProjectAdmin")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_admin_user_role_update_to_project_member_by_project_owner(self, driver, url):
+        print("To validate ProjectAdmin user role update to ProjectMember by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectAdmin") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectAdmin", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectAdmin", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectAdmin", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectMember") \
+            .verify_updated_user_role("ProjectMember")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_read_admin_user_role_update_to_project_member_by_project_owner(self, driver, url):
+        print("To validate ProjectReadAdmin user role update to ProjectMember by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectReadAdmin") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectReadAdmin", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectMember") \
+            .verify_updated_user_role("ProjectMember")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_admin_user_role_update_to_read_admin_by_project_owner(self, driver, url):
+        print("To validate ProjectAdmin user role update to ProjectReadAdmin by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectAdmin") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectAdmin", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectAdmin", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectAdmin", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectReadAdmin") \
+            .verify_updated_user_role("ProjectReadAdmin")
+
+    @pytest.mark.teamingRoleUpdate
+    def test_verify_project_member_user_role_update_to_read_admin_by_project_owner(self, driver, url):
+        print("To validate ProjectMember user role update to ProjectReadAdmin by project owner")
+        prefix = Utils.random_string(6)
+        Platform(driver).launch(url) \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .click_invite_button() \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .select_profile() \
+            .select_role("ProjectMember") \
+            .click_send_invite_button() \
+            .logout() \
+            .login(prefix + "_test@putsbox.com", "123qweA!") \
+            .open_invitations_page() \
+            .verify_received_invitations("DefaultProject", "ProjectMember", "Administrator") \
+            .click_accept_invitation("DefaultProject", "ProjectMember", "Administrator") \
+            .open_projects_page() \
+            .verify_project_present("DefaultProject", "ProjectMember", "Administrator") \
+            .logout() \
+            .login_as_admin() \
+            .open_user_roles_page() \
+            .switch_to_filter_tab("All users") \
+            .find_user(prefix + "test" + " " + prefix + "auto") \
+            .open_user_role_profile_page() \
+            .update_user_role("ProjectReadAdmin") \
+            .verify_updated_user_role("ProjectReadAdmin")
