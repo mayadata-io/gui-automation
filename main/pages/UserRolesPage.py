@@ -61,7 +61,10 @@ class UserRolesPage(BasePage):
     def switch_to_filter_tab(self, name):
         print("Switch to '%s' filter tab" % name)
         is_exists = False
-        self.wait_element_visible(INVITE_USER_BUTTON)
+        try:
+            self.wait_element_visible(INVITE_USER_BUTTON)
+        except Exception:
+            self.wait_element_invisible(INVITE_USER_BUTTON)
         items = self.wait_elements_visible(FILTER_CARDS)
 
         for item in items:
