@@ -7,7 +7,8 @@ PROJECT_NAME_FIELD = (By.XPATH, "//label[text()='Rename your project']/following
 CONTINUE_BUTTON = (By.CSS_SELECTOR, ".onboarding-content input.btn")
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
-CLOSE_BUTTON = (By.XPATH, "//h5[contains(text(), 'Connect to Director')]/preceding::span[contains(@class, 'mi')]")
+# CLOSE_BUTTON = (By.XPATH, "//h5[contains(text(), 'Connect to Director')]/preceding::span[contains(@class, 'mi')]")
+CLOSE_BUTTON = (By.XPATH, "//i[@class='mi mi-x mi-1x']")
 EMAIL_FIELD = (By.CSS_SELECTOR, "input[type='email']")
 COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
 ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
@@ -75,7 +76,6 @@ class OnboardingPage(BasePage):
         try:
             self.wait_elements_visible(CLOSE_BUTTON)[1].click()
         except Exception:
-            self.sleep(5)
             self.wait_elements_visible(CLOSE_BUTTON)[0].click()
 
         return SidePanel(self.driver)
