@@ -24,7 +24,7 @@ class ClusterOverviewPage(SidePanel):
         self.sleep(5)
         try:
             if self.wait_element_visible(EMPTY_CARD_CONTAINER):
-                self.verify_empty_card_container_text_equals("Looks like OpenEBS is not installed on your cluster!")
+                self.verify_empty_card_container_text_equals("Looks like OpenEBS is not installed in this Cluster.")
 
         except Exception:
             frame_by = (By.CSS_SELECTOR, DASHBOARD_FRAME)

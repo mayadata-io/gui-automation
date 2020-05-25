@@ -123,7 +123,7 @@ class ClustersPage(BasePage):
         for cluster in my_clusters:
             status = cluster.find_element_by_css_selector(DISCONNECT_ICON)
             title = status.get_attribute("tooltip")
-            print(title)
+            # print(title)
             is_title_correct = "Disconnect" in title
 
             assert is_title_correct is True, "Title text is wrong"

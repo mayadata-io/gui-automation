@@ -7,7 +7,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 ALERT_CONTAINER = (By.CSS_SELECTOR, ".alert.alert-danger")
 LOADING_CONTAINER = (By.CSS_SELECTOR, ".loading-container")
 MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open")
-CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open button.btn-outline-primary")
+# CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".modal-overlay.show.modal-open button.btn-outline-primary")
+CANCEL_BUTTON_MODAL_DIALOG = (By.CSS_SELECTOR, ".btn.btn-primary.btn-flat")
 EMPTY_CARD_CONTAINER = (By.CSS_SELECTOR, ".card_zero_result")
 USER_PROFILE_ITEM = (By.CSS_SELECTOR, ".sidebar-links img[src*='https://ui-avatars.com']")
 LOGOUT_LINK = (By.CSS_SELECTOR, "a[href='/logout']")
@@ -81,7 +82,6 @@ class BasePage(object):
         print("Make sure message in modal dialog equals to '%s'" % message)
         text = self.wait_element_visible(MODAL_DIALOG).text
         is_message_correct = message in text
-
         assert is_message_correct is True, "Message in modal dialog is wrong"
         return BasePage(self.driver)
 

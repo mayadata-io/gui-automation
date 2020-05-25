@@ -5,7 +5,8 @@ CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-siblin
 VALIDATION_MESSAGE = (By.CSS_SELECTOR, ".font-italic.text-danger")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
 CONNECT_CLUSTER_LINK = (By.XPATH, "//textarea[@class='ember-text-area form-control copy-block-text ember-view']")
-DISCONNECT_CLUSTER_LINK = (By.XPATH, "//span[@class='mi mi-x mi-1x float-right text-white']")
+# DISCONNECT_CLUSTER_LINK = (By.XPATH, "//span[@class='mi mi-x mi-1x float-right text-white']")
+DISCONNECT_CLUSTER_LINK = (By.XPATH, "//i[@class='mi mi-x mi-1x']")
 
 
 class ConnectClusterPage(BasePage):
