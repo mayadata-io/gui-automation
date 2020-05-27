@@ -25,6 +25,7 @@ class OpenEbsPage(BasePage):
             self.click_volumes_button()
             self.verify_header_text_equals("Volumes grouped by applications")
             self.verify_records_present()
+        return OpenEbsPage(self.driver)
 
     def click_control_plane_button(self):
         print("Click 'Control plane' tab")
@@ -62,4 +63,18 @@ class OpenEbsPage(BasePage):
         size = len(volumes)
 
         assert size > 0, "Number of records is wrong"
+        return OpenEbsPage(self.driver)
+
+    def verify_openebs_components_version(self, version):
+        print("Make sure that components version is '%s'" % version)
+        self.sleep(5)
+        is_exists = True
+        self.verify_header_text_equals("Control Plane")
+        components = self.wait_elements_visible(AVAILABLE_RECORDS)
+        print(len(components))
+        for component in components:
+            if version not in component.text:
+                is_exists = False
+                break
+        assert is_exists is True, "OpenEbs component version mis match"
         return OpenEbsPage(self.driver)
