@@ -2,11 +2,12 @@
 
 set -e
 GUID="$1"
+REGION="$2"
 
 echo '#### AWS CONFIG ####'
 mkdir -p ~/.aws
 cp $AWS_CREDS ~/.aws/credentials
-sed 's|region = us-west-2|region = eu-north-1|' -i ~/.aws/config
+sed 's|region = us-west-2|region = '${REGION}'|' -i ~/.aws/config
 # tests_count=`find . -type f -name '*_test.py' -exec grep -e 'def test_' '{}' \; | wc -l`
 tests_count=30
 echo "Number of GUI test scripts: $tests_count"
