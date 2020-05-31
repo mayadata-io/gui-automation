@@ -1,7 +1,6 @@
 configparser==4.0.2
 selenium==3.141.0
-allure-pytest==2.8.10
-pytest==5.3.5
+pytest==5.4.2
 pytest-parallel==0.1.0
 pytest-rerunfailures==8.0
 pytest-html==2.1.0

@@ -4,9 +4,8 @@ from setuptools import setup
 VERSION = '1.0'
 
 install_requires = [
-    'pytest>=5.3.5',
+    'pytest>=5.4.2',
     'pytest-rerunfailures>=4.1',
-    'allure-pytest>=2.8.10',
     'allure-python-commons>=2.8.10'
 ]
 

@@ -414,8 +414,8 @@ class TestDmaas:
     # AWS based test cases
 
     @pytest.mark.dmaasJivaAws
-    @allure.testcase("Restore  Jiva dmaas schedule")
     def test_verify_restore_jiva_aws_dmaas_schedule(self, driver, url, region):
+        print("Restore  Jiva dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -452,8 +452,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasHostpathAws
-    @allure.testcase("Restore hostptah dmaas schedule")
     def test_verify_restore_hostpath_aws_dmaas_schedule(self, driver, url, region):
+        print("Restore hostptah dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -488,8 +488,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasCstorAws
-    @allure.testcase("Restore cStor dmaas schedule")
     def test_verify_restore_cstor_aws_dmaas_schedule(self, driver, url, region):
+        print("Restore cStor dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -524,8 +524,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasDeviceAws
-    @allure.testcase("Restore device dmaas schedule")
     def test_verify_restore_device_aws_dmaas_schedule(self, driver, url, region):
+        print("Restore device dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -562,8 +562,8 @@ class TestDmaas:
     # MINIO based test cases
 
     @pytest.mark.dmaasJivaMinio
-    @allure.testcase("Restore  Jiva dmaas schedule")
     def test_verify_restore_jiva_minio_dmaas_schedule(self, driver, url, minio):
+        print("Restore  Jiva dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -600,8 +600,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasHostpathMinio
-    @allure.testcase("Restore hostptah dmaas schedule")
     def test_verify_restore_hostpath_minio_dmaas_schedule(self, driver, url, minio):
+        print("Restore hostptah dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -636,8 +636,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasCstorMinio
-    @allure.testcase("Restore cStor dmaas schedule")
     def test_verify_restore_cstor_minio_dmaas_schedule(self, driver, url, minio):
+        print("Restore cStor dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -672,8 +672,8 @@ class TestDmaas:
             .verify_restore_status("Success")
 
     @pytest.mark.dmaasDeviceMinio
-    @allure.testcase("Restore device dmaas schedule")
     def test_verify_restore_device_minio_dmaas_schedule(self, driver, url, minio):
+        print("Restore device dmaas schedule")
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
@@ -709,8 +709,8 @@ class TestDmaas:
 
     # Test case for deleting schedules
     @pytest.mark.dmaasDelete
-    @allure.testcase("Delete Dmaas schedules")
     def test_verify_dmaas_schedules_deletion(self, driver, url):
+        print("Delete Dmaas schedules")
         prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \

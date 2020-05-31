@@ -3,15 +3,14 @@ import pytest
 
 from main.Platform import Platform
 from main.common.Utils import Utils
-from main.common import Config
 
 
 class TestOpenEbs:
 
     # Complete OEP user profile which got created through API and verify OpenEbs components version
     @pytest.mark.openebs
-    @allure.testcase("To verify profile completion for ORP user and OpenEbs components version check.")
     def test_verify_openebs_components_version(self, driver, url):
+        print("To verify profile completion for ORP user and OpenEbs components version check.")
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
         Platform(driver).launch(url) \
