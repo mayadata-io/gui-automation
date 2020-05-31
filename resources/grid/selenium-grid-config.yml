@@ -4,11 +4,11 @@ Parameters:
   
   ClusterName:
     Type: String
-    Default: 'grid--release'
+    Default: 'selenium-grid-cluster'
     Description: Cluster name.
   LogName:
     Type: String
-    Default: 'grid-aws-ci-release'
+    Default: 'selenium-grid-log'
     Description: Cluster name.
   ContainerCpu:
     Type: Number
@@ -52,26 +52,22 @@ Parameters:
 #    Type: String
 #    Default: 'vpc-04f4f13983ea7442f'
 #    Description: Vpc ID
-
-  # PublicLoadBalancer:
-  #   Type: String
-  #   Default: 'selenium-grid-aws-505804605.eu-north-1.elb.amazonaws.com'
-  #   Description: Name of load balancer
-    
-  # PublicLoadBalancerArn:
-  #   Type: String
-  #   Default: 'arn:aws:elasticloadbalancing:eu-north-1:385569096892:loadbalancer/app/selenium-grid-aws/6ec9471dbbd7ba29'
-  #   Description: ARN of Public Load Balancer
-    
-  # TargetGroupArn:
-  #   Type: String
-  #   Default: 'arn:aws:elasticloadbalancing:eu-north-1:385569096892:targetgroup/selenium-grid-aws-tg/8fc1c4a89abbe510'
-  #   Description: ARN of Target Group
-  
-#  SecurityGroup
     
 Conditions:
   HasCustomRole: !Not [ !Equals [!Ref 'Role', ''] ]
+
+Mappings:
+  SubnetConfig:
+    VPC:
+      CIDR: '10.0.0.0/16'
+    PublicOne:
+      CIDR: '10.0.0.0/24'
+    PublicTwo:
+      CIDR: '10.0.1.0/24'
+    PrivateOne:
+      CIDR: '10.0.2.0/24'
+    PrivateTwo:
+      CIDR: '10.0.3.0/24'
 
 Resources:
   VPC:
@@ -146,50 +142,6 @@ Resources:
     Properties:
       SubnetId: !Ref PublicSubnetTwo
       RouteTableId: !Ref PublicRouteTable
-  NatGatewayOne:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      # AllocationId: !GetAtt NatGatewayOneAttachment.AllocationId
-      AllocationId:
-        Ref: 'ElasticIpOne'
-      SubnetId: !Ref PublicSubnetOne
-  NatGatewayTwo:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      AllocationId:
-        Ref: 'ElasticIpTwo'
-      # AllocationId: !GetAtt NatGatewayTwoAttachment.AllocationId
-      SubnetId: !Ref PublicSubnetTwo
-  PrivateRouteTableOne:
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref 'VPC'
-  PrivateRouteOne:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref PrivateRouteTableOne
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGatewayOne
-  PrivateRouteTableOneAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref PrivateRouteTableOne
-      SubnetId: !Ref PrivateSubnetOne
-  PrivateRouteTableTwo:
-    Type: AWS::EC2::RouteTable
-    Properties:
-      VpcId: !Ref 'VPC'
-  PrivateRouteTwo:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref PrivateRouteTableTwo
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGatewayTwo
-  PrivateRouteTableTwoAssociation:
-    Type: AWS::EC2::SubnetRouteTableAssociation
-    Properties:
-      RouteTableId: !Ref PrivateRouteTableTwo
-      SubnetId: !Ref PrivateSubnetTwo
   FargateContainerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
