@@ -87,7 +87,7 @@ class DashboardPage(BasePage):
         print("Make sure all clusters are inactive")
         self.wait_element_visible(DASHBOARD_CONTENT)
         try:
-            self.is_element_present(EMPTY_CARD_CONTAINER)
+            self.wait_elements_visible(EMPTY_CARD_CONTAINER)
             print("No Inactive cluster")
         except Exception:
             cards = self.wait_elements_visible(CLUSTER_CARDS)
