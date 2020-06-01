@@ -127,19 +127,3 @@ class TestAuth:
     #         .side_panel() \
     #         .logout() \
     #         .login("Administrator", "Password@123")
-
-    @pytest.mark.auth
-    def test_verify_change_pwd_admin_auth_account(self, driver, url):
-        print("To verify the Change password functionality for Administrator account")
-
-        Platform(driver).launch(url) \
-            .login("Administrator", "password") \
-            .open_user_profile_page() \
-            .click_change_password_button() \
-            .enter_current_password("password") \
-            .enter_new_password("Password@123") \
-            .enter_retype_password("Password@123") \
-            .click_update_password_button() \
-            .side_panel() \
-            .logout() \
-            .login("Administrator", "Password@123")
