@@ -65,13 +65,27 @@ class TestAuth:
     @pytest.mark.auth
     def test_verify_unique_email_for_each_user(self, driver, url):
         print("To verify unique Email ID for each user")
-
-        prefix = Utils.random_string(5)
+        prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
             .enter_last_name(prefix + "auto") \
-            .enter_email("automatio_test@putsbox.com") \
+            .enter_email(prefix + "_test@putsbox.com") \
+            .enter_password("123qweA!") \
+            .click_signup_button() \
+            .wait_onboarding_page_loaded() \
+            .verify_onboarding_page_title_equals("Update your profile") \
+            .click_continue_button() \
+            .enter_project_name(prefix) \
+            .click_continue_button() \
+            .enter_cluster_name(prefix) \
+            .click_connect_button() \
+            .click_close_button() \
+            .logout() \
+            .click_create_account_link() \
+            .enter_first_name(prefix + "test") \
+            .enter_last_name(prefix + "auto") \
+            .enter_email(prefix + "_test@putsbox.com") \
             .enter_password("123qweA!") \
             .click_signup_button_for_validation() \
             .verify_error_message_present("Please use a different email as this email is already taken") \
@@ -83,7 +97,6 @@ class TestAuth:
     @pytest.mark.auth
     def test_verify_change_pwd_local_auth_account(self, driver, url):
         print("To verify the Change password functionality for local auth account")
-
         prefix = Utils.random_string(6)
         Platform(driver).launch(url) \
             .click_create_account_link() \
