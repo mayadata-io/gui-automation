@@ -11,6 +11,7 @@ NAVIGATION_ITEMS = (By.CSS_SELECTOR, ".nav-item")
 CLUSTER_CARDS = (By.CSS_SELECTOR, ".card-body")
 ALERT_LINK = "a[href*='/alerts']"
 TEAM_MEMBERS = (By.CSS_SELECTOR, "div[class='content-section'] table tr")
+EMPTY_CARD_CONTAINER = (By.XPATH, "//img[@src='/ui/latest/assets/images/illustration/no-cluster.svg']")
 
 
 class DashboardPage(BasePage):
@@ -85,11 +86,15 @@ class DashboardPage(BasePage):
     def verify_clusters_inactive(self):
         print("Make sure all clusters are inactive")
         self.wait_element_visible(DASHBOARD_CONTENT)
-        cards = self.wait_elements_visible(CLUSTER_CARDS)
-        for card in cards:
-            text = card.text
-            is_inactive = "Inactive" in text or "Offline" in text
-            assert is_inactive is True, "Cluster is active"
+        try:
+            self.wait_elements_visible(EMPTY_CARD_CONTAINER)
+            print("No Inactive cluster")
+        except Exception:
+            cards = self.wait_elements_visible(CLUSTER_CARDS)
+            for card in cards:
+                text = card.text
+                is_inactive = "Inactive" in text or "Offline" in text
+                assert is_inactive is True, "Cluster is active"
 
         return DashboardPage(self.driver)
 
