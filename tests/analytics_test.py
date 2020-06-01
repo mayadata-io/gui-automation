@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from main.Platform import Platform
