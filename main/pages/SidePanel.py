@@ -149,3 +149,9 @@ class SidePanel(BasePage):
         self.wait_element_present(LOGOUT_LINK).click()
         from main.pages.LoginPage import LoginPage
         return LoginPage(self.driver)
+
+    def verify_user_login_wait_time(self, time):
+        print("Make sure 'User profile' side panel link present")
+        self.driver.set_page_load_timeout(time)
+        self.wait_elements_visible(USER_PROFILE_ITEM)
+        return SidePanel(self.driver)
