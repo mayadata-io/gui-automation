@@ -26,7 +26,7 @@ class LoginPage(BasePage):
         return LoginPage(self.driver)
 
     def enter_password(self, password):
-        print("Enter '%s' into 'Email' field" % password)
+        print("Enter '%s' into 'Password' field" % password)
         self.wait_element_present(PASSWORD_FIELD).send_keys(password)
         return LoginPage(self.driver)
 

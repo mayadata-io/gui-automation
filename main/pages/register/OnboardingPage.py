@@ -77,5 +77,8 @@ class OnboardingPage(BasePage):
             self.wait_elements_visible(CLOSE_BUTTON)[1].click()
         except Exception:
             self.wait_elements_visible(CLOSE_BUTTON)[0].click()
-
         return SidePanel(self.driver)
+
+    # def side_panel(self):
+    #     from main.pages.SidePanel import SidePanel
+    #     return SidePanel(self.driver)
