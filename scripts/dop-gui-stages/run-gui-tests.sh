@@ -7,8 +7,9 @@ URL="$3"
 THREADS="$4"
 REGION="$5"
 
-output=`aws cloudformation describe-stacks --stack-name $GUID --region $REGION --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
+output=`aws cloudformation describe-stacks --stack-name $GUID --region ${REGION} --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
 grid=`echo $output | awk {'print $2'}`
+echo $grid
 
 ######################
 ##   Running test  ##
