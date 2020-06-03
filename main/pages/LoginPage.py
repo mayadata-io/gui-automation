@@ -9,6 +9,7 @@ EMAIL_FIELD = (By.ID, "signinEmail")
 PASSWORD_FIELD = (By.ID, "signinPassword")
 LOGIN_BUTTON = (By.CSS_SELECTOR, "button.btn.btn-primary.btn-block.btn-lg")
 CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "a.login-signup-link")
+USERNAME_PLACEHOLDER = (By.XPATH, "//input[@placeholder='Email / Username']")
 
 
 class LoginPage(BasePage):
@@ -61,3 +62,8 @@ class LoginPage(BasePage):
         print("Click 'Create account' link")
         self.wait_element_present(CREATE_ACCOUNT_BUTTON).click()
         return CreateAccountPage(self.driver)
+
+    def verify_username_placeholder(self):
+        print("verify username/Email placeholder ")
+        self.wait_element_visible(USERNAME_PLACEHOLDER)
+        return LoginPage(self.driver)

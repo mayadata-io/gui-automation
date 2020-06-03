@@ -136,6 +136,13 @@ class TestAuth:
     #         .logout() \
     #         .login("Administrator", "Password@123")
 
+ 
+    @pytest.mark.auth
+    def test_verify_admin_login(self, driver, url):
+        print("To verify username placeholder")
+        Platform(driver).launch(url) \
+            .verify_username_placeholder()
+
     @pytest.mark.localUserAuth
     def test_verify_signup_func_in_local_user_auth(self, driver, url):
         print("To verify signup functionality in Local Auth")
@@ -165,3 +172,4 @@ class TestAuth:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .verify_user_login_wait_time("5")
+        
