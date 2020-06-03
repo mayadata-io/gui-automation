@@ -7,15 +7,9 @@ URL="$3"
 THREADS="$4"
 REGION="$5"
 
-echo '#### AWS CONFIG ####'
-mkdir -p ~/.aws
-cp $AWS_CREDS ~/.aws/credentials
-sed 's|region = us-west-2|region = '${REGION}'|' -i ~/.aws/config
-
-output=`aws cloudformation describe-stacks --stack-name $GUID --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
+output=`aws cloudformation describe-stacks --stack-name $GUID --region $REGION --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
 grid=`echo $output | awk {'print $2'}`
 
-cd ../..
 ######################
 ##   Running test  ##
 ######################
