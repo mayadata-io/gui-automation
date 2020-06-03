@@ -11,8 +11,10 @@ echo '#### AWS CONFIG ####'
 mkdir -p ~/.aws
 cp $AWS_CREDS ~/.aws/credentials
 
+echo '#### Output AWS Selenium Grid stack ####'
 output=`aws cloudformation describe-stacks --stack-name $GUID --region $REGION --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
 grid=`echo $output | awk {'print $2'}`
+echo 'Selenium Grid: ' $grid
 
 ######################
 ##   Running test  ##
