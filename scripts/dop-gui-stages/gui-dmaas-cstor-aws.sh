@@ -18,5 +18,5 @@ cd ../..
 ##   Running test  ##
 ######################
 python3.7 -m pip install -r requirements.txt
-#Running tests with auth marker
-python3.7 -m pytest -m auth --url $URL --environment remote --hub $grid -v -n 5 --reruns 1 --html=./results/report.html
+#Running tests with dashboard marker
+python3.7 -m pytest -m dashboard --url $URL --environment remote --hub $grid -v -n 5 --reruns 1 --html=./results/report.html
