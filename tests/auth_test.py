@@ -140,3 +140,9 @@ class TestAuth:
     #         .side_panel() \
     #         .logout() \
     #         .login("Administrator", "Password@123")
+
+    @pytest.mark.authPlaceholder
+    def test_verify_admin_login(self, driver, url):
+        print("To verify username placeholder")
+        Platform(driver).launch(url) \
+            .verify_username_placeholder()
