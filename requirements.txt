@@ -5,4 +5,3 @@ pytest-parallel==0.1.0
 pytest-rerunfailures==9.0
 pytest-html==2.1.0
 requests==2.23.0
-pytest-xdist==1.32.0

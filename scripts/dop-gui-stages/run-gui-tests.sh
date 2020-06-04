@@ -21,4 +21,4 @@ echo 'Selenium Grid: ' $grid
 ######################
 python3.7 -m pip install -r requirements.txt
 #Running tests with apropriate marker
-python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v -n $THREADS --reruns 1 --html=./results/report.html
+python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
