@@ -4,7 +4,7 @@ set -e
 GUID="$1"
 REGION="$2"
 
-if [ $REGION = "eu-north-1" ];then
+if [[ $GUID == *"e2e-aws"* ]]; then
 	echo '#### AWS CONFIG ####'
 	mkdir -p ~/.aws
 	cp $AWS_CREDS ~/.aws/credentials
