@@ -8,9 +8,10 @@ THREADS="$4"
 REGION="$5"
 
 echo '#### AWS CONFIG ####'
-mkdir -p ~/.aws
-cp $AWS_CREDS ~/.aws/credentials
-
+if [[ $GUID == *"e2e-aws"* ]]; then
+	mkdir -p ~/.aws
+	cp $AWS_CREDS ~/.aws/credentials
+fi
 echo '#### Output AWS Selenium Grid stack ####'
 output=`aws cloudformation describe-stacks --stack-name $GUID --region $REGION --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
 grid=`echo $output | awk {'print $2'}`
