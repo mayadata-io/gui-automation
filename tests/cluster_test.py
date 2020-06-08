@@ -17,7 +17,7 @@ class TestCluster:
 
     @pytest.mark.cluster
     def test_verify_cluster_name_field(self, driver, url):
-        print("To verify cluster name should not be less than 6 character and special characters not allowed")
+        print("To verify cluster name should not be less than 5 character and special characters not allowed")
 
         Platform(driver).launch(url) \
             .login_as_admin() \
@@ -25,7 +25,7 @@ class TestCluster:
             .click_connect_new_cluster_button() \
             .enter_cluster_name("clust") \
             .click_connect_button() \
-            .verify_error_message_present("Cluster name should be greater than 6 and less than 25 characters and should not contain any special characters.")
+            .verify_error_message_present("Cluster name should be greater than 5 and less than 25 characters and should not contain any special characters.")
 
     @pytest.mark.cluster
     def test_verify_cluster_connection_link_generation(self, driver, url):
