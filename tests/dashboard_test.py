@@ -170,8 +170,8 @@ class TestDashboard:
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
             .open_volumes_page() \
-            .verify_volumes_present() \
-            .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
+            .verify_volumes_present()
+            # .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
 
     @pytest.mark.dashboard
     def test_verify_topology_dashboard(self, driver, url):
@@ -229,7 +229,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_openebs_dashboard(self, driver, url):
         print("To verify OpenEBS dashboard")
-
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \

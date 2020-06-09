@@ -7,7 +7,7 @@ VOLUMES_TAB = (By.CSS_SELECTOR, "a[href*='resources/applications']")
 HEADER_TITLE = (By.CSS_SELECTOR, ".section-header_title")
 AVAILABLE_RECORDS = (By.CSS_SELECTOR, "table.table tbody tr")
 EMPTY_PAGE_CONTENT = (By.CSS_SELECTOR, ".mr-4 img[src*='aws']")
-
+EMPTY_CARD_CONTAINER = (By.XPATH, "//img[@src='/ui/latest/assets/images/illustration/error-404.svg']")
 
 class OpenEbsPage(BasePage):
     def __init__(self, driver):
@@ -21,7 +21,7 @@ class OpenEbsPage(BasePage):
             self.verify_header_text_equals("Control Plane")
             self.verify_records_present()
             self.click_pools_button()
-            self.verify_header_text_equals("cStor Pool Clusters (CSPC)")
+            self.verify_header_text_equals("cStor Pool Clusters")
             self.click_volumes_button()
             self.verify_header_text_equals("Volumes grouped by applications")
             self.verify_records_present()
@@ -59,10 +59,13 @@ class OpenEbsPage(BasePage):
     def verify_records_present(self):
         print("Make sure records present")
         self.sleep(5)
-        volumes = self.wait_elements_visible(AVAILABLE_RECORDS)
-        size = len(volumes)
-
-        assert size > 0, "Number of records is wrong"
+        try:
+            self.wait_elements_visible(EMPTY_CARD_CONTAINER)
+            print("No Volumes found")
+        except Exception:
+            volumes = self.wait_elements_visible(AVAILABLE_RECORDS)
+            size = len(volumes)
+            assert size > 0, "Number of records is wrong"
         return OpenEbsPage(self.driver)
 
     def verify_openebs_components_version(self, version):
@@ -71,7 +74,6 @@ class OpenEbsPage(BasePage):
         is_exists = True
         self.verify_header_text_equals("Control Plane")
         components = self.wait_elements_visible(AVAILABLE_RECORDS)
-        print(len(components))
         for component in components:
             if version not in component.text:
                 is_exists = False
