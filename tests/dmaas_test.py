@@ -715,3 +715,41 @@ class TestDmaas:
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_dmaas_page() \
             .delete_dmaas_schedules("minio-deployment", "-minio")
+
+    # Non restic test
+    @pytest.mark.dmaasCstorMinioNonRestic
+    def test_verify_restore_cstor_minio_non_restic_dmaas_schedule(self, driver, url, minio):
+        print("Restore cStor dmaas schedule")
+        Platform(driver).launch(url) \
+            .login("administrator", "password") \
+            .open_clusters_page() \
+            .open_cluster_details("OpenEBSDirector", "Active") \
+            .open_applications_page() \
+            .search_application("minio-deployment") \
+            .click_on_application("minio-deployment", "Deployment", "test") \
+            .verify_application_type("minio-deployment", "Deployment") \
+            .verify_volume_cas_type("minio-pv", "cStor") \
+            .click_dmass_button() \
+            .click_new_schedule_button() \
+            .click_cstor_based_backup() \
+            .select_cloud_provider("MINIO") \
+            .select_provider_credential("demo-cred") \
+            .enter_minio_url(minio) \
+            .select_interval("Hourly") \
+            .select_minutes("05") \
+            .select_hour("03") \
+            .click_schedule_now_button() \
+            .confirm_aws_schedule() \
+            .verify_dmass_schedule_present() \
+            .search_dmaas_schedule() \
+            .click_dmaas_schedule("Active") \
+            .verify_status_of_backups("Completed") \
+            .click_on_restore_dmaas_schedule_icon() \
+            .select_restore_cluster("dmaasRestore") \
+            .click_start_restore_button() \
+            .click_restore_link() \
+            .open_dmaas_page() \
+            .find_schedule() \
+            .enter_schedule() \
+            .open_schedules_page() \
+            .verify_restore_status("Success")
