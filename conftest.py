@@ -69,9 +69,12 @@ def pytest_runtest_makereport(item):
             name = _get_formatted_test_name(report.nodeid)
             file_name = os.path.join(report_dir, name)
 
-            if 'driver' in item.fixturenames:
-                driver = item.funcargs['driver']
-                _capture_screenshot(driver, report_dir, name)
+            try:
+                if 'driver' in item.fixturenames:
+                    driver = item.funcargs['driver']
+                    _capture_screenshot(driver, report_dir, name)
+            except Exception as e:
+                print('Exception while screen-shot creation: {}'.format(e))
 
             if file_name:
                 html = '<a><img src="screenshots/%s.png" alt="screenshot" style="width:600px;height:228px;" ' \

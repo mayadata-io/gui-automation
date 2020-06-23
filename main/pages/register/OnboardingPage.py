@@ -3,11 +3,10 @@ from main.pages.BasePage import BasePage
 from main.pages.SidePanel import SidePanel
 
 ONBOARDING_HEADER = (By.CSS_SELECTOR, ".onboarding-content-header_title")
-PROJECT_NAME_FIELD = (By.XPATH, "//label[text()='Rename your project']/following-sibling::span/input")
+PROJECT_NAME_FIELD = (By.XPATH, "//label[text()='Name your project']/following-sibling::span/input")
 CONTINUE_BUTTON = (By.CSS_SELECTOR, ".onboarding-content input.btn")
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
-# CLOSE_BUTTON = (By.XPATH, "//h5[contains(text(), 'Connect to Director')]/preceding::span[contains(@class, 'mi')]")
 CLOSE_BUTTON = (By.XPATH, "//i[@class='mi mi-x mi-1x']")
 EMAIL_FIELD = (By.CSS_SELECTOR, "input[type='email']")
 COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
