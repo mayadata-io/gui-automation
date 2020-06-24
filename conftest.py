@@ -75,6 +75,7 @@ def pytest_runtest_makereport(item):
                     _capture_screenshot(driver, report_dir, name)
             except Exception as e:
                 print('Exception while screen-shot creation: {}'.format(e))
+
             if file_name:
                 html = '<a><img src="screenshots/%s.png" alt="screenshot" style="width:600px;height:228px;" ' \
                        'onclick="window.open(this.src)" align="right"/></a>'%name
