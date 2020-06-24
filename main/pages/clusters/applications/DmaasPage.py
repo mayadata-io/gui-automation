@@ -40,7 +40,7 @@ BACKUP_TABLE = (By.CSS_SELECTOR, "table.table.table-sm tbody tr")
 BACK_BUTTON = (By.CSS_SELECTOR, ".mi.mi-arrow-left-curve.mi-1x")
 MODAL_TITLE = (By.XPATH, "//h5[@class='modal-title']")
 MODAL_YES_BUTTON = (By.XPATH, "//button[@class='btn btn-primary']")
-
+CSTOR_SLIDER = (By.XPATH, "//span[@class='slider round']")
 
 class DmaasPage(BasePage):
     new_schedule_name = ""
@@ -332,4 +332,9 @@ class DmaasPage(BasePage):
             self.enter_username(Config.get_value("default", "aws_access_key_id"))
             self.enter_password(Config.get_value("default", "aws_secret_access_key"))
         self.click_save_button()
+        return DmaasPage(self.driver)
+
+    def click_cstor_based_backup(self):
+        print("Click 'cStor based' slider button")
+        self.wait_element_present(CSTOR_SLIDER).click()
         return DmaasPage(self.driver)
