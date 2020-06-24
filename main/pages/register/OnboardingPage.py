@@ -4,6 +4,7 @@ from main.pages.SidePanel import SidePanel
 
 ONBOARDING_HEADER = (By.CSS_SELECTOR, ".onboarding-content-header_title")
 PROJECT_NAME_FIELD = (By.XPATH, "//label[text()='Rename your project']/following-sibling::span/input")
+# //label[text()='Name your project']/following-sibling::span/input
 CONTINUE_BUTTON = (By.CSS_SELECTOR, ".onboarding-content input.btn")
 CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
