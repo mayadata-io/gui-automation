@@ -599,7 +599,7 @@ class TestDmaas:
             .verify_restore_status("Success")
 
         @pytest.mark.dmaasJivaMysql
-        def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, minio):
+        def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, region):
             print("Restore  Jiva dmaas schedule")
             Platform(driver).launch(url) \
                 .login("oep.user@mayadata.io", "OEPuser@123") \
@@ -612,11 +612,11 @@ class TestDmaas:
                 .verify_volume_cas_type("mysql-pv-jiva-claim", "Jiva") \
                 .click_dmass_button() \
                 .click_new_schedule_button() \
-                .select_cloud_provider("MINIO") \
+                .select_cloud_provider("AWS") \
                 .click_add_cloud_credential_button() \
-                .set_cloud_credential("MINIO", "minio-cred") \
-                .select_provider_credential("minio-cred") \
-                .enter_minio_url(minio) \
+                .set_cloud_credential("AWS", "aws-cred") \
+                .select_provider_credential("aws-cred") \
+                .select_region(region) \
                 .select_interval("Hourly") \
                 .select_minutes("05") \
                 .select_hour("03") \
