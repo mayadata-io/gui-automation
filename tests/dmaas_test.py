@@ -598,6 +598,44 @@ class TestDmaas:
             .open_schedules_page() \
             .verify_restore_status("Success")
 
+        @pytest.mark.dmaasJivaMysql
+        def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, minio):
+            print("Restore  Jiva dmaas schedule")
+            Platform(driver).launch(url) \
+                .login("oep.user@mayadata.io", "OEPuser@123") \
+                .open_clusters_page() \
+                .open_cluster_details("oep-cluster-cluster2", "Active") \
+                .open_applications_page() \
+                .search_application("wordpress-mysql") \
+                .click_on_application("wordpress-mysql", "Deployment", "jiva-mysql") \
+                .verify_application_type("wordpress-mysql", "Deployment") \
+                .verify_volume_cas_type("mysql-pv-jiva-claim", "Jiva") \
+                .click_dmass_button() \
+                .click_new_schedule_button() \
+                .select_cloud_provider("MINIO") \
+                .click_add_cloud_credential_button() \
+                .set_cloud_credential("MINIO", "minio-cred") \
+                .select_provider_credential("minio-cred") \
+                .enter_minio_url(minio) \
+                .select_interval("Hourly") \
+                .select_minutes("05") \
+                .select_hour("03") \
+                .click_schedule_now_button() \
+                .confirm_aws_schedule() \
+                .verify_dmass_schedule_present() \
+                .search_dmaas_schedule() \
+                .click_dmaas_schedule("Active") \
+                .verify_status_of_backups("Completed") \
+                .click_on_restore_dmaas_schedule_icon() \
+                .select_restore_cluster("oep-cluster-cluster3") \
+                .click_start_restore_button() \
+                .click_restore_link() \
+                .open_dmaas_page() \
+                .find_schedule() \
+                .enter_schedule() \
+                .open_schedules_page() \
+                .verify_restore_status("Success")
+
     @pytest.mark.dmaasHostpathMinio
     def test_verify_restore_hostpath_minio_dmaas_schedule(self, driver, url, minio):
         print("Restore hostptah dmaas schedule")
