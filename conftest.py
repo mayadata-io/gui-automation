@@ -13,7 +13,7 @@ CRED_PATH = os.path.join(ROOT_DIR, 'cred.ini')
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chrome", help="Type in browser type")
     parser.addoption("--url", action="store", default="http://34.218.238.101", help="url")
-    parser.addoption("--hub", action="store", default="10.66.2.5", help="hub")
+    parser.addoption("--hub", action="store", default="106.51.78.18", help="hub")
     parser.addoption("--environment", action="store", default="remote", help="environment")
     parser.addoption("--minio", action="store", default="http://18.219.250.237:32701", help="minio")
     parser.addoption("--region", action="store", default="eu-central-1", help="region")
@@ -30,8 +30,13 @@ def driver(request):
     if ("localhost" in machine) is True:
         hub = config.get('driver', 'hub')
 
+    # browser = webdriver.Remote(
+    #         command_executor="http://" + hub + ":4444/wd/hub",
+    #         desired_capabilities={
+    #             "browserName": request.config.getoption("--driver")
+    #         })
     browser = webdriver.Remote(
-            command_executor="http://" + hub + ":4444/wd/hub",
+            command_executor="http://" + hub + ":6030/wd/hub",
             desired_capabilities={
                 "browserName": request.config.getoption("--driver")
             })
