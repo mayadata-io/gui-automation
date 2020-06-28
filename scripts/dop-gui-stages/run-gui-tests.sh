@@ -3,10 +3,10 @@
 set -e
 GROUP="$1"
 GUID="$2"
-URL="$3"
+#URL="$3"
 THREADS="$4"
 REGION="$5"
-
+URL="http://10.43.10.12"
 #echo '#### AWS CONFIG ####'
 #if [[ $GUID == *"e2e-aws"* ]]; then
 #	mkdir -p ~/.aws
