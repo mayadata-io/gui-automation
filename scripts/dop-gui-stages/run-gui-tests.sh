@@ -36,7 +36,22 @@ if [[ $GUID == *"e2e-konvoy"* ]]; then
   ######################
   ##   Running test  ##
   ######################
+  #Running tests with apropriate marker
   python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
 fi
-
+if [[ $GUID == *"e2e-rancher"* ]]; then
+  URL="http://10.42.2.63"
+  # Test grid connection
+  echo '#### curl http://10.66.2.5:4444 ####'
+  CURL_INT=`curl http://10.66.2.5:4444`
+  echo $CURL_CURL_INT
+  echo '#### Output konvoy Selenium Grid stack ####'
+  grid="10.66.2.5"
+  echo 'Selenium Grid: ' $grid
+  ######################
+  ##   Running test  ##
+  ######################
+  #Running tests with apropriate marker
+  python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+fi
 
