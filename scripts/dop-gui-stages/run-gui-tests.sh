@@ -31,7 +31,7 @@ if [[ $GUID == *"e2e-konvoy"* ]]; then
   CURL_INT=`curl http://10.66.2.5:4444`
   echo $CURL_CURL_INT
   echo '#### Output konvoy Selenium Grid stack ####'
-  grid="http://10.66.2.5"
+  grid="10.66.2.5"
   echo 'Selenium Grid: ' $grid
   ######################
   ##   Running test  ##
