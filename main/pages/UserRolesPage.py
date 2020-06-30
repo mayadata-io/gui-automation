@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 from main.pages.SidePanel import SidePanel
 
-INVITE_USER_BUTTON = (By.XPATH, "//button[text()='Invite user']")
+INVITE_USER_BUTTON = (By.CSS_SELECTOR, "span.mi.mi-add-user")
 EMAIL_FIELD = (By.CSS_SELECTOR, "form.mt-3 input[type='email']")
 ROLE_DROPDOWN = (By.CSS_SELECTOR, "form.mt-3 div.ember-power-select-trigger")
 AVAILABLE_ROLES = (By.CSS_SELECTOR, "ul.ember-power-select-options li")
