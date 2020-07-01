@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 
-CLUSTER_NAME_FIELD = (By.XPATH, "//label[text()='Cluster name']/following-sibling::input")
+CLUSTER_NAME_FIELD = (By.XPATH, "//label[contains(text(),'Cluster name')]/following-sibling::input")
 VALIDATION_MESSAGE = (By.CSS_SELECTOR, ".font-italic.text-danger")
 CONNECT_BUTTON = (By.XPATH, "//input[@value='CONNECT']")
 CONNECT_CLUSTER_LINK = (By.XPATH, "//textarea[@class='ember-text-area form-control copy-block-text ember-view']")
