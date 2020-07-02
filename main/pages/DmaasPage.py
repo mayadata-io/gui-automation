@@ -21,6 +21,7 @@ class DmaasPage(BasePage):
 
     def verify_header_text_equals(self, header):
         print("Make sure header text equals to '%s'" % header)
+        self.sleep(5)
         text = self.wait_element_visible(HEADER_TITLE).text
         is_header_correct = header in text
         assert is_header_correct is True, "Header is wrong"
