@@ -18,7 +18,7 @@ SELECT_PROVIDER_CREDENTIALS = (By.XPATH, "//div[@class='mr-5']//div[@class='form
 SELECT_AWS_REGION = (By.XPATH, "//div[@class='form-group w-25']//select[@class='form-control']")
 MINIO_URL_FIELD = (By.XPATH, "//input[@placeholder='http://minio.example.com']")
 MINIO_HREF = (By.XPATH, "//a[contains(text(),'Get credential for Minio')]")
-SELECT_INTERVAL_FIELD = (By.XPATH, "//div[@class='form-group']//select[@class='form-control']")
+SELECT_INTERVAL_FIELD = (By.XPATH, "//div[@class='mt-0']//select[@class='form-control']")
 SELECT_MINUTE_FIELD = (By.XPATH, "//span[contains(text(),'Minute(s)')]/preceding-sibling::select[1]")
 SELECT_HOUR_FIELD = (By.XPATH, "//span[contains(text(),'Hour')]/preceding-sibling::select[1]")
 SELECT_TIME_FIELD = (By.XPATH, "//input[@placeholder='Select time']")
@@ -33,14 +33,16 @@ SCHEDULE_STATUS = (By.CSS_SELECTOR, ".cluster-name.text-capitalize")
 SCHEDULE_REMOVE_ICON = (By.CSS_SELECTOR, ".mi.mi-trash.mi-1x")
 SCHEDULE_RESTORE_ICON = (By.CSS_SELECTOR, ".mi.mi-cloud-reload.mi-1x")
 SCHEDULE_DELETE_BUTTON = (By.CSS_SELECTOR, ".btn.btn-danger")
-SEARCH_FIELD = (By.XPATH, "//input[@placeholder='Find a Schedule..']")
-SCHEDULE_HREF = (By.XPATH, "//span[contains(text(),'sch-')]")
+SEARCH_FIELD = (By.XPATH, "//input[@placeholder='Find a schedule']")
+SCHEDULE_HREF = (By.XPATH, "//span[contains(., 'sch-')]")
 LIST_OF_BACKUPS = (By.XPATH, "//table[@class='table table-sm']//tbody")
 BACKUP_TABLE = (By.CSS_SELECTOR, "table.table.table-sm tbody tr")
 BACK_BUTTON = (By.CSS_SELECTOR, ".mi.mi-arrow-left-curve.mi-1x")
 MODAL_TITLE = (By.XPATH, "//h5[@class='modal-title']")
 MODAL_YES_BUTTON = (By.XPATH, "//button[@class='btn btn-primary']")
 CSTOR_SLIDER = (By.XPATH, "//span[@class='slider round']")
+RETENTION_COUNT = (By.XPATH, "//input[@id='retention-count']")
+
 
 class DmaasPage(BasePage):
     new_schedule_name = ""
@@ -76,7 +78,6 @@ class DmaasPage(BasePage):
 
     def click_add_cloud_credential_button(self):
         print("Click 'Add Cloud Credential' button")
-        # self.wait_element_visible(MINIO_HREF)
         self.wait_element_present(ADD_CLOUD_CREDENTIAL).click()
         return DmaasPage(self.driver)
 
@@ -105,7 +106,7 @@ class DmaasPage(BasePage):
         print("Select Provider credential '%s'" % name)
         select = self.wait_element_present(SELECT_PROVIDER_CREDENTIALS)
         for option in select.find_elements_by_tag_name('option'):
-            if option.text in name:
+            if name in option.text:
                 option.click()
                 break
         self.sleep(10)
@@ -130,7 +131,7 @@ class DmaasPage(BasePage):
         print("Select Interval '%s'" % name)
         select = self.wait_element_present(SELECT_INTERVAL_FIELD)
         for option in select.find_elements_by_tag_name('option'):
-            if option.text == name:
+            if name in option.text:
                 option.click()
                 break
         return DmaasPage(self.driver)
@@ -139,7 +140,7 @@ class DmaasPage(BasePage):
         print("Select Minute '%s'" % minute)
         select = self.wait_element_present(SELECT_MINUTE_FIELD)
         for option in select.find_elements_by_tag_name('option'):
-            if option.text == minute:
+            if minute in option.text:
                 option.click()
                 break
         return DmaasPage(self.driver)
@@ -148,7 +149,7 @@ class DmaasPage(BasePage):
         print("Select Hour '%s'" % hour)
         select = self.wait_element_present(SELECT_HOUR_FIELD)
         for option in select.find_elements_by_tag_name('option'):
-            if option.text == hour:
+            if hour in option.text:
                 option.click()
                 break
         return DmaasPage(self.driver)
@@ -337,4 +338,9 @@ class DmaasPage(BasePage):
     def click_cstor_based_backup(self):
         print("Click 'cStor based' slider button")
         self.wait_element_present(CSTOR_SLIDER).click()
+        return DmaasPage(self.driver)
+
+    def enter_retention_count(self, count):
+        print("Enter '%s' into 'Backup retention count' field" % count)
+        self.wait_element_present(RETENTION_COUNT).send_keys(count)
         return DmaasPage(self.driver)
