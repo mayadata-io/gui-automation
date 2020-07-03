@@ -38,15 +38,18 @@ if [[ $GUID == *"e2e-konvoy"* ]]; then
   python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
 fi
 if [[ $GUID == *"e2e-rancher"* ]]; then
-  echo '#### Output AWS Selenium Grid stack ####'
-  output=`aws cloudformation describe-stacks --stack-name $GUID --region $REGION --query Stacks[].Outputs[].OutputValue | sed -r 's/"+//g'`
-  grid=`echo $output | awk {'print $2'}`
+  # Test grid connection
+  echo '#### curl http://10.67.2.12:4444 ####'
+  CURL_INT=`curl http://10.67.2.12:4444`
+  echo $CURL_INT
+  echo '#### Output konvoy Selenium Grid stack ####'
+  grid="10.67.2.12"
   echo 'Selenium Grid: ' $grid
 
   ######################
   ##   Running test  ##
   ######################
-  python3.7 -m pip install -r requirements.txt
+
   #Running tests with apropriate marker
   python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
 fi
