@@ -418,7 +418,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "jiva-aws") \
@@ -457,7 +457,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "hostpath-aws") \
@@ -494,7 +494,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "cstor-aws") \
@@ -531,7 +531,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "device-aws") \
@@ -570,7 +570,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "jiva-minio") \
@@ -608,7 +608,7 @@ class TestDmaas:
             Platform(driver).launch(url) \
                 .login("oep.user@mayadata.io", "OEPuser@123") \
                 .open_clusters_page() \
-                .open_cluster_details("oep-cluster-cluster2", "Active") \
+                .open_cluster_details("oep-cluster-cluster2", "active") \
                 .open_applications_page() \
                 .search_application("wordpress-mysql") \
                 .click_on_application("wordpress-mysql", "Deployment", "jiva-mysql") \
@@ -647,7 +647,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "hostpath-minio") \
@@ -683,7 +683,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "cstor-minio") \
@@ -719,7 +719,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deployment") \
             .click_on_application("minio-deployment", "Deployment", "device-minio") \
@@ -766,7 +766,7 @@ class TestDmaas:
         Platform(driver).launch(url) \
             .login("oep.user@mayadata.io", "OEPuser@123") \
             .open_clusters_page() \
-            .open_cluster_details("oep-cluster-cluster2", "Active") \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_applications_page() \
             .search_application("minio-deploy-spc") \
             .click_on_application("minio-deploy-spc", "Deployment", "delete-spc") \
@@ -785,7 +785,7 @@ class TestDmaas:
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \

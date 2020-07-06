@@ -29,7 +29,7 @@ class SchedulesPage(BasePage):
             if status in text:
                 is_exists = True
                 break
-            elif "Failed" in text:
+            elif "failed" in text:
                 break
             else:
                 self.sleep(5)

@@ -91,7 +91,7 @@ class ClustersPage(BasePage):
             status = cluster.find_element_by_css_selector(ALERT_LINK)
             is_displayed = status.is_displayed()
             status_text = status.text
-            is_status_correct = "Active" in status_text or "Inactive" in status_text or "Offline" in status_text
+            is_status_correct = "active" in status_text or "inactive" in status_text or "Offline" in status_text
 
             assert is_status_correct is True, "Status text is wrong"
             assert is_displayed is True, "Status is not shown"
@@ -108,7 +108,7 @@ class ClustersPage(BasePage):
 
             for cluster in my_clusters:
                 cluster_text = cluster.text
-                if("Active" in cluster_text or "Offline" in cluster_text) is True:
+                if("active" in cluster_text and "inactive" not in cluster_text or "offline" in cluster_text) is True:
                     assert ("v1." in cluster_text) is True, "K8s version is missed"
                 else:
                     assert ("v1." in cluster_text) is False, "K8s version is present"
