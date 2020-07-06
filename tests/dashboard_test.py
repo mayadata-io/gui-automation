@@ -59,13 +59,12 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .enter_cluster_name(Config.get("app", "cluster_name")) \
-            .verify_cluster_present(Config.get("app", "cluster_name"), "Active") \
+            .verify_cluster_present(Config.get("app", "cluster_name"), "active") \
             .verify_number_of_clusters_equals(1)
 
     @pytest.mark.dashboard
     def test_verify_status_shown_for_each_cluster(self, driver, url):
         print("Cluster dashboard should show the status of all the cluster connected to DOP")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -74,7 +73,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_k8_version_shown_for_each_cluster(self, driver, url):
         print("To verify the k8s version for different active and offline clusters in DOP")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -90,7 +88,7 @@ class TestDashboard:
             .open_clusters_page() \
             .verify_delete_text_shown_for_each_disconnect_icon() \
             .click_delete_icon_for_cluster(Config.get("app", "cluster_name")) \
-            .verify_modal_dialog_text_equals("Are you sure you want to disconnect OpenEBSDirector cluster?") \
+            .verify_modal_dialog_text_equals("Are you sure you want to disconnect the cluster OpenEBSDirector?") \
             .click_cancel_button_in_modal_dialog() \
             .open_clusters_page() \
             .click_connect_new_cluster_button() \
@@ -100,7 +98,7 @@ class TestDashboard:
             .click_disconnect_cluster_link() \
             .open_clusters_page() \
             .click_delete_icon_for_cluster(prefix + "Test") \
-            .verify_modal_dialog_text_equals("Are you sure you want to disconnect %s" % (prefix + "Test"))
+            .verify_modal_dialog_text_equals("Are you sure you want to disconnect the cluster %s" % (prefix + "Test"))
 
     @pytest.mark.dashboard
     def test_verify_user_roles_dashboard_view(self, driver, url):
@@ -126,7 +124,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .verify_pool_card_present("cSTOR POOLS") \
             .verify_pool_card_present("JIVA POOLS") \
             .verify_pool_card_present("LOCALPV DEVICE POOLS") \
@@ -146,7 +144,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_applications_page() \
             .verify_applications_present()
 
@@ -157,7 +155,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_pools_page() \
             .verify_pools_page_loaded()
 
@@ -168,7 +166,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_volumes_page() \
             .verify_volumes_present()
             # .verify_volume_present("demo-vol1-claim", "Healthy", "Jiva", "openebs-jiva-default")
@@ -180,7 +178,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_monitor_page() \
             .open_topology_page() \
             .switch_to_topology_container() \
@@ -193,7 +191,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_monitor_page() \
             .verify_volumes_present()
             # .verify_volume_present("csi-vol", "Healthy", "cStor")
@@ -210,7 +208,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_monitor_page() \
             .open_logs_page() \
             .verify_logs_diagram_present()
@@ -222,7 +220,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_alerts_page() \
             .verify_alerts_present()
 
@@ -232,7 +230,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_clusters_page() \
-            .open_cluster_details(Config.get("app", "cluster_name"), "Active") \
+            .open_cluster_details(Config.get("app", "cluster_name"), "active") \
             .open_ebs_page() \
             .verify_open_ebs_page()
 

@@ -13,7 +13,7 @@ class TestCluster:
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
-            .verify_cluster_present(Config.get("app", "cluster_name"), "Active")
+            .verify_cluster_present(Config.get("app", "cluster_name"), "active")
 
     @pytest.mark.cluster
     def test_verify_cluster_name_field(self, driver, url):
