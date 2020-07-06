@@ -449,7 +449,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasHostpathAws
     def test_verify_restore_hostpath_aws_dmaas_schedule(self, driver, url, region):
@@ -486,7 +486,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasCstorAws
     def test_verify_restore_cstor_aws_dmaas_schedule(self, driver, url, region):
@@ -523,7 +523,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasDeviceAws
     def test_verify_restore_device_aws_dmaas_schedule(self, driver, url, region):
@@ -560,7 +560,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     # MINIO based test cases
 
@@ -600,7 +600,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
         @pytest.mark.dmaasJivaMysql
         def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, region):
@@ -639,7 +639,7 @@ class TestDmaas:
                 .find_schedule() \
                 .enter_schedule() \
                 .open_schedules_page() \
-                .verify_restore_status("Success")
+                .verify_restore_status("success")
 
     @pytest.mark.dmaasHostpathMinio
     def test_verify_restore_hostpath_minio_dmaas_schedule(self, driver, url, minio):
@@ -675,7 +675,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasCstorMinio
     def test_verify_restore_cstor_minio_dmaas_schedule(self, driver, url, minio):
@@ -711,7 +711,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasDeviceMinio
     def test_verify_restore_device_minio_dmaas_schedule(self, driver, url, minio):
@@ -747,7 +747,7 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
 
     # Test case for deleting schedules
     @pytest.mark.dmaasDelete
@@ -795,4 +795,4 @@ class TestDmaas:
             .find_schedule() \
             .enter_schedule() \
             .open_schedules_page() \
-            .verify_restore_status("Success")
+            .verify_restore_status("success")
