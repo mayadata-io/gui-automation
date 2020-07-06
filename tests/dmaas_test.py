@@ -781,7 +781,6 @@ class TestDmaas:
             .select_interval("Hourly") \
             .select_minutes("05") \
             .select_hour("03") \
-            .enter_retention_count("5") \
             .click_schedule_now_button() \
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
