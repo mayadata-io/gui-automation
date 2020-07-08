@@ -439,7 +439,7 @@ class TestDmaas:
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -476,7 +476,7 @@ class TestDmaas:
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -513,7 +513,7 @@ class TestDmaas:
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -550,7 +550,7 @@ class TestDmaas:
             .confirm_aws_schedule() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -590,7 +590,7 @@ class TestDmaas:
             .click_schedule_now_button() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -629,7 +629,7 @@ class TestDmaas:
                 .confirm_aws_schedule() \
                 .verify_dmass_schedule_present() \
                 .search_dmaas_schedule() \
-                .click_dmaas_schedule("Active") \
+                .click_dmaas_schedule("active") \
                 .verify_status_of_backups("Completed") \
                 .click_on_restore_dmaas_schedule_icon() \
                 .select_restore_cluster("oep-cluster-cluster3") \
@@ -665,7 +665,7 @@ class TestDmaas:
             .click_schedule_now_button() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -701,7 +701,7 @@ class TestDmaas:
             .click_schedule_now_button() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \
@@ -737,7 +737,7 @@ class TestDmaas:
             .click_schedule_now_button() \
             .verify_dmass_schedule_present() \
             .search_dmaas_schedule() \
-            .click_dmaas_schedule("Active") \
+            .click_dmaas_schedule("active") \
             .verify_status_of_backups("Completed") \
             .click_on_restore_dmaas_schedule_icon() \
             .select_restore_cluster("oep-cluster-cluster3") \

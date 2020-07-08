@@ -9,7 +9,6 @@ class TestCluster:
     @pytest.mark.cluster
     def test_verify_self_connected_cluster_shown_admin_user(self, driver, url):
         print("To verify self connected cluster is shown for Admin user")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -18,7 +17,6 @@ class TestCluster:
     @pytest.mark.cluster
     def test_verify_cluster_name_field(self, driver, url):
         print("To verify cluster name should not be less than 5 character and special characters not allowed")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -30,7 +28,6 @@ class TestCluster:
     @pytest.mark.cluster
     def test_verify_cluster_connection_link_generation(self, driver, url):
         print("To verify that connection link getting generated while connecting new cluster.")
-
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login_as_admin() \
@@ -46,7 +43,6 @@ class TestCluster:
     @pytest.mark.cluster
     def test_verify_popup_disconnect_message(self, driver, url):
         print("To verify self connected cluster should not get disconnected")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -56,7 +52,6 @@ class TestCluster:
     @pytest.mark.cluster
     def test_verify_cluster_disconnect_function(self, driver, url):
         print("To verify cluster disconnect functionality")
-
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login_as_admin() \

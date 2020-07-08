@@ -112,3 +112,11 @@ class BasePage(object):
         # perform the operation on the element
         actions.perform()
 
+    def is_element_exist(self, *locator):
+        self.driver.implicitly_wait(10)
+        try:
+            WebDriverWait(self.driver, 60).until(ec.presence_of_element_located(*locator))
+        except Exception:
+            print('No such Element exist')
+            return False
+        return True

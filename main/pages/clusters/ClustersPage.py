@@ -21,7 +21,7 @@ class ClustersPage(BasePage):
 
     def click_connect_new_cluster_button(self):
         print("Click 'Connect a new cluster' button")
-        self.wait_element_present(CONNECT_NEW_CLUSTER).click()
+        self.wait_element_visible(CONNECT_NEW_CLUSTER).click()
         return ConnectClusterPage(self.driver)
 
     def open_cluster_details(self, name, status):

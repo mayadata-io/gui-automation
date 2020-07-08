@@ -203,13 +203,22 @@ class DmaasPage(BasePage):
 
     def verify_status_of_backups(self, status):
         print("Make sure that that status is '%s'" % status)
-        self.sleep(10)
+        wait_count = 0
+        while wait_count < 25:
+            if self.is_element_exist(EMPTY_CARD_CONTAINER):
+                self.sleep(2)
+                wait_count = wait_count + 1
+                self.driver.refresh()
+                self.click_dmaas_schedule("active")
+            else:
+                print("Backup present")
+                break
         try:
+            print(self.is_element_present(EMPTY_CARD_CONTAINER))
             self.is_element_present(EMPTY_CARD_CONTAINER)
-            print("Backup list is not generated.")
+            print("Backup list not generated.")
         except Exception:
             text = self.wait_element_visible(LIST_OF_BACKUPS).text
-            print(text)
             is_exists = False
             count = 0
             while count < 300:
@@ -283,13 +292,12 @@ class DmaasPage(BasePage):
         count = 0
         while count < 30:
             if status in text:
+                self.wait_element_present(SCHEDULE_HREF).click()
                 break
             else:
                 self.sleep(2)
                 count = count + 1
                 text = self.wait_element_visible(SCHEDULE_STATUS).text
-        self.sleep(30)
-        self.wait_element_present(SCHEDULE_HREF).click()
         return DmaasPage(self.driver)
 
     def verify_incremental_backups(self):
