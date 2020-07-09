@@ -204,7 +204,7 @@ class DmaasPage(BasePage):
     def verify_status_of_backups(self, status):
         print("Make sure that that status is '%s'" % status)
         wait_count = 0
-        while wait_count < 25:
+        while wait_count < 50:
             if self.is_element_exist(EMPTY_CARD_CONTAINER):
                 self.sleep(2)
                 wait_count = wait_count + 1
