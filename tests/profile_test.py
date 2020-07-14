@@ -107,6 +107,7 @@ class TestProfile:
 
         prefix = Utils.random_string(6)
         phone = Utils.random_number(10)
+        phone_new = Utils.random_number(10)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -131,7 +132,7 @@ class TestProfile:
             .open_user_profile_page() \
             .enter_company_field(".com") \
             .enter_role_field("_Test") \
-            .enter_phone_field("9") \
+            .enter_phone_field(phone_new) \
             .click_update_profile_button() \
             .side_panel() \
             .logout() \
@@ -139,7 +140,7 @@ class TestProfile:
             .open_user_profile_page() \
             .verify_company_equals(prefix + "Putbox" + ".com") \
             .verify_role_equals(prefix + "Automation" + "_Test") \
-            .verify_phone_equals(phone + "9")
+            .verify_phone_equals(phone_new)
 
     @pytest.mark.profile
     def test_verify_admin_first_and_last_name_update_fail(self, driver, url):

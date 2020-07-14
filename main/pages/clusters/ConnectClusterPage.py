@@ -15,6 +15,7 @@ class ConnectClusterPage(BasePage):
 
     def enter_cluster_name(self, name):
         print("Enter '%s' into 'Cluster name' field" % name)
+        self.sleep(5)
         self.wait_element_present(CLUSTER_NAME_FIELD).send_keys(name)
         return ConnectClusterPage(self.driver)
 
