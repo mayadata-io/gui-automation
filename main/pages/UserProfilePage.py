@@ -137,6 +137,7 @@ class UserProfilePage(BasePage):
 
     def enter_phone_field(self, phone):
         print("Enter '%s' into 'Phone' field" % phone)
+        self.wait_element_present(PHONE_FIELD).clear()
         self.wait_element_present(PHONE_FIELD).send_keys(phone)
         return UserProfilePage(self.driver)
 
