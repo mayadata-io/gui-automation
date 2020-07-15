@@ -602,44 +602,44 @@ class TestDmaas:
             .open_schedules_page() \
             .verify_restore_status("success")
 
-        @pytest.mark.dmaasJivaMysql
-        def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, region):
-            print("Restore  Jiva dmaas schedule")
-            Platform(driver).launch(url) \
-                .login("oep.user@mayadata.io", "OEPuser@123") \
-                .open_clusters_page() \
-                .open_cluster_details("oep-cluster-cluster2", "active") \
-                .open_applications_page() \
-                .search_application("wordpress-mysql") \
-                .click_on_application("wordpress-mysql", "Deployment", "jiva-mysql") \
-                .verify_application_type("wordpress-mysql", "Deployment") \
-                .verify_volume_cas_type("mysql-pv-jiva-claim", "Jiva") \
-                .click_dmass_button() \
-                .click_new_schedule_button() \
-                .select_cloud_provider("AWS") \
-                .click_add_cloud_credential_button() \
-                .set_cloud_credential("AWS", "aws-cred") \
-                .select_provider_credential("aws-cred") \
-                .select_region(region) \
-                .select_interval("Hourly") \
-                .select_minutes("05") \
-                .select_hour("03") \
-                .enter_retention_count("5") \
-                .click_schedule_now_button() \
-                .confirm_aws_schedule() \
-                .verify_dmass_schedule_present() \
-                .search_dmaas_schedule() \
-                .click_dmaas_schedule("active") \
-                .verify_status_of_backups("Completed") \
-                .click_on_restore_dmaas_schedule_icon() \
-                .select_restore_cluster("oep-cluster-cluster3") \
-                .click_start_restore_button() \
-                .click_restore_link() \
-                .open_dmaas_page() \
-                .find_schedule() \
-                .enter_schedule() \
-                .open_schedules_page() \
-                .verify_restore_status("success")
+    @pytest.mark.dmaasJivaMysql
+    def test_verify_restore_jiva_mysql_dmaas_schedule(self, driver, url, region):
+        print("Restore  Jiva dmaas schedule")
+        Platform(driver).launch(url) \
+            .login("oep.user@mayadata.io", "OEPuser@123") \
+            .open_clusters_page() \
+            .open_cluster_details("oep-cluster-cluster2", "active") \
+            .open_applications_page() \
+            .search_application("wordpress-mysql") \
+            .click_on_application("wordpress-mysql", "Deployment", "jiva-mysql") \
+            .verify_application_type("wordpress-mysql", "Deployment") \
+            .verify_volume_cas_type("mysql-pv-jiva-claim", "Jiva") \
+            .click_dmass_button() \
+            .click_new_schedule_button() \
+            .select_cloud_provider("AWS") \
+            .click_add_cloud_credential_button() \
+            .set_cloud_credential("AWS", "aws-cred") \
+            .select_provider_credential("aws-cred") \
+            .select_region(region) \
+            .select_interval("Hourly") \
+            .select_minutes("05") \
+            .select_hour("03") \
+            .enter_retention_count("5") \
+            .click_schedule_now_button() \
+            .confirm_aws_schedule() \
+            .verify_dmass_schedule_present() \
+            .search_dmaas_schedule() \
+            .click_dmaas_schedule("active") \
+            .verify_status_of_backups("Completed") \
+            .click_on_restore_dmaas_schedule_icon() \
+            .select_restore_cluster("oep-cluster-cluster3") \
+            .click_start_restore_button() \
+            .click_restore_link() \
+            .open_dmaas_page() \
+            .find_schedule() \
+            .enter_schedule() \
+            .open_schedules_page() \
+            .verify_restore_status("success")
 
     @pytest.mark.dmaasHostpathMinio
     def test_verify_restore_hostpath_minio_dmaas_schedule(self, driver, url, minio):
