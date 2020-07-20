@@ -49,7 +49,8 @@ class UserRolesPage(BasePage):
 
     def select_profile(self):
         print("Select profile from dropdown" )
-        self.wait_element_present(PROFILE_DROPDOWN).click()
+        self.sleep(5)
+        self.wait_element_visible(PROFILE_DROPDOWN).click()
         return UserRolesPage(self.driver)
 
     def click_send_invite_button(self):
