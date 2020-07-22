@@ -19,8 +19,13 @@ if [[ $GUID == *"e2e-aws"* ]]; then
   ##   Running test  ##
   ######################
   python3.7 -m pip install -r requirements.txt
-  #Running tests with apropriate marker
-  python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+
+  #Running tests with proper marker
+  if [[ $GROUP == *dmaas* ]]; then
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --html=./results/report.html
+  else
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+  fi
 fi
 
 if [[ $GUID == *"e2e-konvoy"* ]]; then
@@ -34,8 +39,12 @@ if [[ $GUID == *"e2e-konvoy"* ]]; then
   ######################
   ##   Running test  ##
   ######################
-  #Running tests with apropriate marker
-  python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+  #Running tests with proper marker
+  if [[ $GROUP == *dmaas* ]]; then
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --html=./results/report.html
+  else
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+  fi
 fi
 if [[ $GUID == *"e2e-rancher"* ]]; then
   # Test grid connection
@@ -50,7 +59,12 @@ if [[ $GUID == *"e2e-rancher"* ]]; then
   ##   Running test  ##
   ######################
 
-  #Running tests with apropriate marker
-  python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+  #Running tests with proper marker
+  if [[ $GROUP == *dmaas* ]]; then
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --html=./results/report.html
+  else
+    python3.7 -m pytest -m $GROUP --url $URL --environment remote --hub $grid -v --tests-per-worker $THREADS --reruns 1 --html=./results/report.html
+  fi
+
 fi
 

@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from main.pages.BasePage import BasePage
 from main.pages.SidePanel import SidePanel
 
@@ -39,7 +40,11 @@ class UserRolesPage(BasePage):
 
     def enter_email(self, email):
         print("Enter '%s' into 'Email' field" % email)
-        self.wait_element_present(EMAIL_FIELD).send_keys(email)
+        # self.wait_element_present(EMAIL_FIELD).send_keys(email)
+        count = 0
+        while count < len(email):
+            self.wait_element_present(EMAIL_FIELD).send_keys(email[count])
+            count = count + 1
         return UserRolesPage(self.driver)
 
     # def enter_user(self, email):
@@ -49,7 +54,6 @@ class UserRolesPage(BasePage):
 
     def select_profile(self):
         print("Select profile from dropdown" )
-        self.sleep(5)
         self.wait_element_visible(PROFILE_DROPDOWN).click()
         return UserRolesPage(self.driver)
 
