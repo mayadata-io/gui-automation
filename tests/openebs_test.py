@@ -29,4 +29,4 @@ class TestOpenEbs:
             .open_clusters_page() \
             .open_cluster_details("oep-cluster-cluster2", "active") \
             .open_ebs_page() \
-            .verify_openebs_components_version("1.12.0-rc1.ee")
+            .verify_openebs_components_version("1.12.0-ee-RC1")
