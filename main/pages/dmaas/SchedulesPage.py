@@ -24,8 +24,9 @@ class SchedulesPage(BasePage):
         text = self.wait_element_visible(RESTORE_LIST).text
         print(text)
         is_exists = False
+        max_wait_time = 180
         count = 0
-        while count < 150:
+        while count < max_wait_time:
             if status in text:
                 is_exists = True
                 break
@@ -35,6 +36,8 @@ class SchedulesPage(BasePage):
                 self.sleep(5)
                 count = count + 1
                 text = self.wait_element_visible(RESTORE_LIST).text
+        if count == max_wait_time:
+            print("Restore time limit exceeded")
         assert is_exists is True, "Status of Restore is not completed"
         return SchedulesPage(self.driver)
 
