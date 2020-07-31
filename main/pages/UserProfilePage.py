@@ -7,7 +7,7 @@ LAST_NAME_FIELD = (By.XPATH, "//label[text()='Last Name']/following-sibling::inp
 EMAIL_FIELD = (By.XPATH, "//label[text()='Email']/following-sibling::input")
 COMPANY_FIELD = (By.XPATH, "//label[text()='Company']/following-sibling::input")
 ROLE_FIELD = (By.XPATH, "//label[text()='Role']/following-sibling::input")
-PHONE_FIELD = (By.XPATH, "//label[text()='Phone']/following-sibling::input")
+PHONE_FIELD = (By.XPATH, "//input[@type='tel']")
 CHANGE_PASSWORD_BUTTON = (By.XPATH, "//button[contains(text(),'Change Password')]")
 UPDATE_PROFILE_BUTTON = (By.XPATH, "//input[@value='Update profile']")
 CURRENT_PASSWORD_FIELD = (By.XPATH, "//div[text()='Current password']/input")
@@ -64,7 +64,6 @@ class UserProfilePage(BasePage):
     def verify_phone_equals(self, phone):
         print("Make sure 'Phone' equals to '%s'" % phone)
         actual_phone = self.wait_element_present(PHONE_FIELD).get_attribute('value')
-
         assert actual_phone == phone, \
             "Phone is wrong. Expected: %r; Actual: %r" % phone % actual_phone
         return UserProfilePage(self.driver)
