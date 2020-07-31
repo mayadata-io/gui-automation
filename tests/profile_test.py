@@ -9,9 +9,8 @@ class TestProfile:
     @pytest.mark.profile
     def test_verify_profile_update_after_signup(self, driver, url):
         print("To verify profile can be updated just after signup ")
-
         prefix = Utils.random_string(6)
-        phone = Utils.random_number(10)
+        phone = Utils.random_number(4)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -24,16 +23,15 @@ class TestProfile:
             .enter_email(prefix + "putsbox.com") \
             .enter_company_name(prefix + "Putbox.com") \
             .enter_role(prefix + "Automation") \
-            .enter_phone_number(phone) \
+            .enter_phone_number("201-555-" + phone) \
             .click_continue_button() \
             .verify_onboarding_page_title_equals("We have created a project for you!")
 
     @pytest.mark.profile
     def test_verify_profile_details_same_with_onboarding_profile_details(self, driver, url):
         print("To verify the profile info is same as whatever provided during onboarding time")
-
         prefix = Utils.random_string(6)
-        phone = Utils.random_number(10)
+        phone = Utils.random_number(4)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -45,7 +43,7 @@ class TestProfile:
             .verify_onboarding_page_title_equals("Update your profile") \
             .enter_company_name(prefix + "Putbox.com") \
             .enter_role(prefix + "Automation") \
-            .enter_phone_number(phone) \
+            .enter_phone_number("201-555-" + phone) \
             .click_continue_button() \
             .verify_onboarding_page_title_equals("We have created a project for you!") \
             .enter_project_name(prefix) \
@@ -61,14 +59,13 @@ class TestProfile:
             .verify_email_equals(prefix + "_test@putsbox.com") \
             .verify_company_equals(prefix + "Putbox.com")\
             .verify_role_equals(prefix + "Automation") \
-            .verify_phone_equals(phone)
+            .verify_phone_equals("201-555-" + phone)
 
     @pytest.mark.profile
     def test_verify_first_and_last_name_update_in_profile_details(self, driver, url):
         print("To verify first and last name can be modified for local Auth user")
-
         prefix = Utils.random_string(6)
-        phone = Utils.random_number(10)
+        phone = Utils.random_number(4)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -80,7 +77,7 @@ class TestProfile:
             .verify_onboarding_page_title_equals("Update your profile") \
             .enter_company_name(prefix + "Putbox.com") \
             .enter_role(prefix + "Automation") \
-            .enter_phone_number(phone) \
+            .enter_phone_number("201-555-" + phone) \
             .click_continue_button() \
             .verify_onboarding_page_title_equals("We have created a project for you!") \
             .enter_project_name(prefix) \
@@ -104,10 +101,9 @@ class TestProfile:
     @pytest.mark.profile
     def test_verify_company_role_phone_update_in_profile_details(self, driver, url):
         print("To verify company,Role and phone can be modified for local Auth user.")
-
         prefix = Utils.random_string(6)
-        phone = Utils.random_number(10)
-        phone_new = Utils.random_number(10)
+        phone = Utils.random_number(4)
+        phone_new = Utils.random_number(4)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -119,7 +115,7 @@ class TestProfile:
             .verify_onboarding_page_title_equals("Update your profile") \
             .enter_company_name(prefix + "Putbox") \
             .enter_role(prefix + "Automation") \
-            .enter_phone_number(phone) \
+            .enter_phone_number("201-555-" + phone) \
             .click_continue_button() \
             .verify_onboarding_page_title_equals("We have created a project for you!") \
             .enter_project_name(prefix) \
@@ -132,7 +128,7 @@ class TestProfile:
             .open_user_profile_page() \
             .enter_company_field(".com") \
             .enter_role_field("_Test") \
-            .enter_phone_field(phone_new) \
+            .enter_phone_field("201-555-" + phone_new) \
             .click_update_profile_button() \
             .side_panel() \
             .logout() \
@@ -140,26 +136,26 @@ class TestProfile:
             .open_user_profile_page() \
             .verify_company_equals(prefix + "Putbox" + ".com") \
             .verify_role_equals(prefix + "Automation" + "_Test") \
-            .verify_phone_equals(phone_new)
+            .verify_phone_equals("201-555-" + phone_new)
 
     @pytest.mark.profile
     def test_verify_admin_first_and_last_name_update_fail(self, driver, url):
         print("To verify First and last Name cannot be modified for local Auth Admin user")
-
+        phone = Utils.random_number(4)
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_user_profile_page() \
             .enter_first_name("First") \
             .enter_last_name("Last") \
+            .enter_phone_field("201-555-" + phone) \
             .click_update_profile_button() \
             .verify_error_message("Please fill in all required fields")
 
     @pytest.mark.profile
     def test_verify_email_update(self, driver, url):
         print("To verify Email id  can be modified for any user")
-
         prefix = Utils.random_string(6)
-        phone = Utils.random_number(10)
+        phone = Utils.random_number(4)
         Platform(driver).launch(url) \
             .click_create_account_link() \
             .enter_first_name(prefix + "test") \
@@ -171,7 +167,7 @@ class TestProfile:
             .verify_onboarding_page_title_equals("Update your profile") \
             .enter_company_name(prefix + "Putbox.com") \
             .enter_role(prefix + "Automation") \
-            .enter_phone_number(phone) \
+            .enter_phone_number("201-555-" + phone) \
             .click_continue_button() \
             .verify_onboarding_page_title_equals("We have created a project for you!") \
             .enter_project_name(prefix) \

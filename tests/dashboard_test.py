@@ -125,7 +125,7 @@ class TestDashboard:
             .login_as_admin() \
             .open_clusters_page() \
             .open_cluster_details(Config.get("app", "cluster_name"), "active") \
-            .verify_pool_card_present("cSTOR POOLS") \
+            .verify_pool_card_present("CSTOR POOLS") \
             .verify_pool_card_present("JIVA POOLS") \
             .verify_pool_card_present("LOCALPV DEVICE POOLS") \
             .verify_pool_card_present("LOCALPV HOSTPATH POOLS") \
