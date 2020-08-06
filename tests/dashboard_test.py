@@ -9,7 +9,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_graphs_shown_home_dashboards(self, driver, url):
         print("To verify graphs are shown in Home dashboards")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -34,7 +33,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_project_team_members_shown(self, driver, url):
         print("To verify in Home dashboards project team members are shown")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -43,7 +41,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_alerts_clickable_for_active_clusters(self, driver, url):
         print("To verify alerts are shown and clickable for Active clusters in Home dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -54,7 +51,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_cluster_search_functionality(self, driver, url):
         print("To verify the cluster search functionality")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -81,7 +77,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_disconnect_text_shown_for_each_delete_icon(self, driver, url):
         print("To verify that disconnect text present for delete icon and the pop up message")
-
         prefix = Utils.random_string(5)
         Platform(driver).launch(url) \
             .login_as_admin() \
@@ -103,7 +98,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_user_roles_dashboard_view(self, driver, url):
         print("To verify User and Roles dashboard view")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_user_roles_page() \
@@ -120,7 +114,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_overview_dashboard(self, driver, url):
         print("To verify Overview dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -140,7 +133,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_application_dashboard(self, driver, url):
         print("To verify Application dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -151,7 +143,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_pools_dashboard(self, driver, url):
         print("To verify Pools dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -162,7 +153,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_volumes_dashboard(self, driver, url):
         print("To verify Volumes dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -174,7 +164,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_topology_dashboard(self, driver, url):
         print("To verify Topology dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -187,7 +176,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_monitor_dashboard(self, driver, url):
         print("To verify Monitor dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -204,7 +192,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_logs_dashboard(self, driver, url):
         print("To verify Logs dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -216,7 +203,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_alerts_dashboard(self, driver, url):
         print("To verify Alerts dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_clusters_page() \
@@ -237,7 +223,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_dmaas_dashboard(self, driver, url):
         print("Dmaas dashboard should show list of schedules and list of restores")
-
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_dmaas_page() \
@@ -246,7 +231,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_volume_monitoring_graphs_cross_cloud_monitoring_dashboard(self, driver, url):
         print("To verify volume monitoring graphs are shown in cross cloud monitoring dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_cross_cloud_monitoring_page() \

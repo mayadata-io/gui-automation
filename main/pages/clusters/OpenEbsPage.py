@@ -21,7 +21,7 @@ class OpenEbsPage(BasePage):
             self.verify_header_text_equals("Control Plane")
             self.verify_records_present()
             self.click_pools_button()
-            self.verify_header_text_equals("cStor Pool Clusters")
+            self.verify_header_text_equals("CStor Pool Clusters")
             self.click_volumes_button()
             self.verify_header_text_equals("Volumes grouped by applications")
             self.verify_records_present()
