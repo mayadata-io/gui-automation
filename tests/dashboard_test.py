@@ -21,7 +21,6 @@ class TestDashboard:
     @pytest.mark.dashboard
     def test_verify_clusters_shown_home_dashboards(self, driver, url):
         print("To verify active clusters and other clusters lists are shown in home dashboard")
-
         Platform(driver).launch(url) \
             .login_as_admin() \
             .open_dashboard_page() \
@@ -226,7 +225,7 @@ class TestDashboard:
         Platform(driver).launch(url) \
             .login("Administrator", "password") \
             .open_dmaas_page() \
-            .verify_header_text_equals("Data-Motion schedules")
+            .verify_header_text_equals("DMaaS")
 
     @pytest.mark.dashboard
     def test_verify_volume_monitoring_graphs_cross_cloud_monitoring_dashboard(self, driver, url):

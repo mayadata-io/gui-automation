@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from main.pages.BasePage import BasePage
 from main.pages.clusters.applications.DmaasPage import DmaasPage as dmass_schedule
 
-HEADER_TITLE = (By.CSS_SELECTOR, ".section-header_title")
+HEADER_TITLE = (By.CSS_SELECTOR, ".outlet-header__top-bar-title")
 SCHEDULE_LIST = (By.CSS_SELECTOR, "a[href*='/dmaas/schedules/']")
 FIND_SCHEDULE_FIELD = (By.XPATH, "//input[@placeholder='Find a Schedule..']")
 EMPTY_CARD_CONTAINER = (By.CSS_SELECTOR, ".card_zero_result")
